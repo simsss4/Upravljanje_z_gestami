@@ -1,28 +1,4 @@
 services:
-  mosquitto:
-    image: eclipse-mosquitto
-    container_name: mosquitto
-    restart: unless-stopped
-    ports:
-      - "1883:1883"
-    volumes:
-      - ./data_mosquitto:/etc/mosquitto
-      - ./data_mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-    networks:
-      - mqtt-net
-
-  producer:
-    image: mqtt_producer
-    container_name: producer
-    restart: unless-stopped
-    build:
-      context: .
-      dockerfile: Dockerfile.producer
-    depends_on:
-      - mosquitto
-    networks:
-      - mqtt-net
-
   consumer:
     image: mqtt_consumer
     container_name: consumer
