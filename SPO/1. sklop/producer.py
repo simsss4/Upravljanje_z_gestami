@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import time
 from datetime import datetime
 
-broker = "mosquitto"
+broker = "172.25.70.243"
 port = 1883
 topic = "/project/data"
 
