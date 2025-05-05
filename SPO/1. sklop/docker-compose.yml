@@ -6,10 +6,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.consumer
-    depends_on:
-      - mosquitto
     networks:
       - mqtt-net
+
 
 networks:
   mqtt-net:
