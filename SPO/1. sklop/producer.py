@@ -4,7 +4,7 @@ from datetime import datetime
 
 broker = "172.25.70.243"
 port = 1883
-topic = "/project/data"
+topic = "/group/data"
 
 def on_connect(client, userdata, flags, reasonCode, properties=None):
     print(f"Connected to MQTT Broker: {reasonCode}")
