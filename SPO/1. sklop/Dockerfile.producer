@@ -1,5 +1,0 @@
-FROM python:latest
-WORKDIR /app
-COPY producer.py .
-RUN pip install 'paho-mqtt>=2.0.0'
-CMD ["python", "-u", "./producer.py"]
