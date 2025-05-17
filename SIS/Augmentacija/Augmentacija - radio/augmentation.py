@@ -112,39 +112,29 @@ def transform(signal, label, augmentation_prob=0.7):
     return {'signal': signal, 'label': label}
 
 def main():
-    """Augment all samples from X_radio.npy and y_radio.npy and save to x_augmented.npy and y_augmented.npy."""
-    # Load the full dataset
-    X_radio = np.load('X_radio.npy')  # Shape: (61, 82, 63)
-    y_radio = np.load('y_radio.npy')  # Shape: (61,)
+    """Demo: Generate 10 augmented gesture signals and save them to disk."""
+    X_radio = np.load('X_radio.npy')
+    y_radio = np.load('y_radio.npy')
     
-    # Lists to store augmented data
     augmented_signals = []
     augmented_labels = []
-    
-    # Augment each sample
-    for idx in range(X_radio.shape[0]):
-        signal = X_radio[idx]  # Shape: (82, 63)
-        label = int(y_radio[idx])  # Integer label (0 to 5)
-        
-        # Apply augmentations
+
+    indices = np.random.choice(len(X_radio), size=10, replace=False)
+
+    for i, idx in enumerate(indices):
+        signal = X_radio[idx]
+        label = int(y_radio[idx])
         result = transform(signal, label)
-        augmented_signal = result['signal']
-        label = result['label']
-        
-        # Append to lists
-        augmented_signals.append(augmented_signal)
-        augmented_labels.append(label)
-        
-        print(f"Augmented sample {idx+1}/{X_radio.shape[0]} for gesture '{GESTURE_LABELS[label]}'")
-    
-    # Convert lists to NumPy arrays
-    x_augmented = np.array(augmented_signals)  # Shape: (61, 82, 63)
-    y_augmented = np.array(augmented_labels)  # Shape: (61,)
-    
-    # Save the augmented data
-    np.save('X_augmented.npy', x_augmented)
-    np.save('y_augmented.npy', y_augmented)
-    print(f"Saved augmented data to 'x_augmented.npy' (shape: {x_augmented.shape}) and 'y_augmented.npy' (shape: {y_augmented.shape})")
+        augmented_signals.append(result['signal'])
+        augmented_labels.append(result['label'])
+        print(f"[{i+1}/10] Augmented gesture: {GESTURE_LABELS[result['label']]}")
+
+    x_aug = np.array(augmented_signals)
+    y_aug = np.array(augmented_labels)
+
+    np.save("demo_X_augmented.npy", x_aug)
+    np.save("demo_y_augmented.npy", y_aug)
+    print("Demo saved: 'demo_X_augmented.npy', 'demo_y_augmented.npy'")
 
 if __name__ == "__main__":
     main()
