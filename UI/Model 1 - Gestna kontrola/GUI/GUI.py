@@ -143,43 +143,39 @@ class GestureGUI:
 
     # Metoda za obdelavo okvirjev, normalizacijo in napoved geste
     def process_gesture(self):
-        if len(self.frames) == 0: # Preveri, ali ni bilo zajetih nobenih okvirjev med snemanjem
+        if len(self.frames) == 0:
             self.label.config(text="No frames captured")
             return
 
-        X = np.zeros((MAX_FRAMES, 63)) # Ustvari tabelo oblike (80,63) z ničlami za shranjevanje podatkov o gestah
-        for i in range(min(len(self.frames), MAX_FRAMES)): # Iterira čez zajete okvirje, do največ MAX_FRAMES (80), da prepreči prekoračitev
-            X[i] = self.frames[i] # Kopira koordinate točk (63) iz zajetega okvirja v ustrezno vrstico tabele X
-        if len(self.frames) < MAX_FRAMES: # Preveri, ali je bilo zajetih manj kot 80 okvirjev
-            X[len(self.frames):] = 0 # Napolni preostale vrstice v X z ničlami, da zagotovi 80 okvirjev (padding)
+        X = np.zeros((MAX_FRAMES, 63))
+        for i in range(min(len(self.frames), MAX_FRAMES)):
+            X[i] = self.frames[i]
+        if len(self.frames) < MAX_FRAMES:
+            X[len(self.frames):] = 0
 
+        # === Apply compute_finger_distances only for Radio and Climate ===
+        if self.current_model in ['Radio', 'Climate']:
+            X = compute_finger_distances(X)
 
-        # Compute finger distances
-        X = compute_finger_distances(X)
+        mean = self.models[self.current_model]['mean']
+        std = self.models[self.current_model]['std']
+        X = (X - mean) / std
 
-        #Normalizacija
-        mean = self.models[self.current_model]['mean'] # Pridobi povprečje za normalizacijo iz nastavitev trenutnega modela
-        std = self.models[self.current_model]['std'] # Pridobi standardni odklon za normalizacijo iz nastavitev trenutnega modela
-        X = (X - mean) / std # Normalizira vhodne podatke z odštevanjem povprečja in deljenjem s standardnim odklonom
+        X = X[np.newaxis, ...]
 
-        X = X[np.newaxis, ...] # Preoblikovanje X iz (80, 63) v (1, 80, 63) za vhod modela
+        model = self.models[self.current_model]['model']
+        pred = model.predict(X, verbose=0)
+        pred_class = np.argmax(pred, axis=1)[0]
+        pred_conf = pred[0, pred_class]
+        gesture = self.models[self.current_model]['classes'][pred_class]
 
-        # Predikcije
-        model = self.models[self.current_model]['model'] # Pridobi objekt modela za trenutni model
-        pred = model.predict(X, verbose=0) # Izvede napoved modela na normaliziranih podatkih X, vrne verjetnosti razreda
-        pred_class = np.argmax(pred, axis=1)[0] # Poišče indeks razreda z najvišjo verjetnostjo za izbor napovedane geste
-        pred_conf = pred[0, pred_class] # Pridobi verjetnost za napovedani razred
-        gesture = self.models[self.current_model]['classes'][pred_class] # Preslika indeks napovedanega iazreda v labelo
-
-        # Preveri, ali so bile zbrane oznake leve/desne roke med snemanjem
         if self.handedness_labels:
-            left_count = self.handedness_labels.count('Left') # Prešteje, koliko okvirjev je označenih kot leva roka
-            right_count = self.handedness_labels.count('Right') # Prešteje, koliko okvirjev je označenih kot desna roka
-            hand = 'Left' if left_count >= right_count else 'Right' # Določi uporabljeno roko
+            left_count = self.handedness_labels.count('Left')
+            right_count = self.handedness_labels.count('Right')
+            hand = 'Left' if left_count >= right_count else 'Right'
         else:
             hand = 'Unknown'
 
-        # Prilagodi izpis glede na trenutni model
         if self.current_model == 'Mirrors':
             display_text = f"{hand} mirror: {gesture} ({pred_conf:.2%})"
         elif self.current_model == 'Windows':
@@ -191,21 +187,20 @@ class GestureGUI:
         else:
             display_text = f"{self.current_model}: {gesture} ({pred_conf:.2%})"
 
-
-        # Ustvari formatiran niz za geste oken
         self.label.config(text=f"Predicted Gesture: {display_text}")
 
-        # Ustvari sliko Matplotlib za risanje poti zapestja
+        # Save wrist trajectory plot (frame[0] is wrist x, y, z)
         plt.figure(figsize=(10, 5))
-        plt.plot(X[0, :, 0], label='Wrist X') # Nariše x-koordinate zapestja (točka 0) čez vse okvirje, označeno kot "Wrist X"
-        plt.plot(X[0, :, 1], label='Wrist Y') # Nariše y-koordinate zapestja čez vse okvirje, označeno kot "Wrist Y"
-        plt.plot(X[0, :, 2], label='Wrist Z') # Nariše z-koordinate zapestja čez vse okvirje, označeno kot "Wrist Z"
+        plt.plot(X[0, :, 0], label='Wrist X')
+        plt.plot(X[0, :, 1], label='Wrist Y')
+        plt.plot(X[0, :, 2], label='Wrist Z')
         plt.title(f'Wrist Trajectory for {gesture} ({self.current_model}, {hand} hand)')
         plt.xlabel('Frame')
         plt.ylabel('Coordinate')
         plt.legend()
         plt.savefig(f'captured_gesture_trajectory_{self.current_model.lower()}_{hand.lower()}.png')
         plt.close()
+
 
     # Metoda za stalno posodabljanje platna z okvirji kamere in obdelavo rok
     def update_video(self):
