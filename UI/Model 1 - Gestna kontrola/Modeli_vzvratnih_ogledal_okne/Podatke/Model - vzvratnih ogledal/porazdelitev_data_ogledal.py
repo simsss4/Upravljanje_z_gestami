@@ -6,45 +6,36 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 
-# Naloži podatke za ogledala
-X = np.load('X_mirrors.npy')
-y = np.load('y_mirrors.npy')
+# Naloži podatke
+x = np.load('x_mirrors.npy')  # vhodni podatki
+y = np.load('y_mirrors.npy')  # oznake
 
-# Informacije o podatkih
-print("X shape:", X.shape)
+# Preveri oblike podatkov
+print("x shape:", x.shape)
 print("y shape:", y.shape)
+
+# Prikaži število primerkov na razred
 unique, counts = np.unique(y, return_counts=True)
-print("Razredi in število primerkov:", dict(zip(unique, counts)))
+print(dict(zip(unique, counts)))
 
-# Delitev na učne, validacijske in testne podatke
-X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
 
-print("Train shape:", X_train.shape, y_train.shape)
-print("Validation shape:", X_val.shape, y_val.shape)
-print("Test shape:", X_test.shape, y_test.shape)
+# Razdeli podatke na učne, validacijske in testne množice
+x_train, x_temp, y_train, y_temp = train_test_split(x, y, test_size=0.2, random_state=42, stratify=y)
+x_val, x_test, y_val, y_test = train_test_split(x_temp, y_temp, test_size=0.5, random_state=42) 
 
-# Ustvari LSTM model
-model = Sequential()
-model.add(LSTM(64, activation='relu', input_shape=(X_train.shape[1], X_train.shape[2]), return_sequences=True))
-model.add(Dropout(0.2))
-model.add(LSTM(64, activation='relu'))
-model.add(Dropout(0.2))
-model.add(Dense(len(np.unique(y)), activation='softmax'))
+# Preveri oblike deljenih podatkov
+print("Train shape:", x_train.shape, y_train.shape)
+print("Validation shape:", x_val.shape, y_val.shape)
+print("Test shape:", x_test.shape, y_test.shape)
 
-model.compile(optimizer=Adam(), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+np.save('x_mirrors_train.npy', x_train)
+np.save('y_mirrors_train.npy', y_train)
+np.save('x_mirrors_val.npy', x_val)
+np.save('y_mirrors_val.npy', y_val)
+np.save('x_mirrors_test.npy', x_test)
+np.save('y_mirrors_test.npy', y_test)
 
-# Treniranje modela
-history = model.fit(X_train, y_train, epochs=20, batch_size=32, validation_data=(X_val, y_val))
 
-# Testiranje
-test_loss, test_accuracy = model.evaluate(X_test, y_test)
-print(f'Test accuracy (ogledala): {test_accuracy * 100:.2f}%')
 
-# Shrani model
-model.save('model_ogledala.keras')
 
-# Povzetek modela
-model = load_model('model_ogledala.keras')
-model.summary()
 

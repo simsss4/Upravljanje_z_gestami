@@ -32,12 +32,12 @@ def process_data(data, max_length=None):
 # Nastavi pot do oken
 data_windows, labels_windows, mapping_windows = load_data_from_directory('data_windows', start_label=0)
 max_length_windows = max(len(d) for d in data_windows)
-x_windows = process_data(data_windows, max_length=max_length_windows)
+X_windows = process_data(data_windows, max_length=max_length_windows)
 y_windows = labels_windows
 
-np.save('x_windows.npy', x_windows)
+np.save('x_windows.npy', X_windows)
 np.save('y_windows.npy', y_windows)
 
 print("WINDOWS label mapping:", mapping_windows)
-print(f"x_windows shape: {x_windows.shape}, y_windows shape: {y_windows.shape}")
+print(f"x_windows shape: {X_windows.shape}, y_windows shape: {y_windows.shape}")
 

@@ -32,11 +32,11 @@ def process_data(data, max_length=None):
 # Nastavi pot do ogledal
 data_mirrors, labels_mirrors, mapping_mirrors = load_data_from_directory('data_mirrors', start_label=0)
 max_length_mirrors = max(len(d) for d in data_mirrors)
-X_mirrors = process_data(data_mirrors, max_length=max_length_mirrors)
+x_mirrors = process_data(data_mirrors, max_length=max_length_mirrors)
 y_mirrors = labels_mirrors
 
-np.save('X_mirrors.npy', X_mirrors)
+np.save('x_mirrors.npy', x_mirrors)
 np.save('y_mirrors.npy', y_mirrors)
 
 print("MIRRORS label mapping:", mapping_mirrors)
-print(f"X_mirrors shape: {X_mirrors.shape}, y_mirrors shape: {y_mirrors.shape}")
+print(f"x_mirrors shape: {x_mirrors.shape}, y_mirrors shape: {y_mirrors.shape}")
