@@ -21,8 +21,8 @@ climate_model = tf.keras.models.load_model('climate_model.keras')
 # Replace these with actual values from your training process
 RADIO_MEAN = 0.1824056036195469
 RADIO_STD = 0.2894906092020188
-CLIMATE_MEAN = 0.2143674777389519
-CLIMATE_STD = 0.30413323740495335
+CLIMATE_MEAN = 0.20537318328833137
+CLIMATE_STD = 0.2955649804045277
 
 # Class names
 RADIO_CLASSES = ['next_station', 'previous_station', 'turn_off_radio', 'turn_on_radio', 'volume_down', 'volume_up']
