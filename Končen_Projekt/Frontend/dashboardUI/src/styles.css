@@ -1,4 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Montserrat';
+    src: url('assets/fonts/Montserrat.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+    font-family: 'Montserrat';
+}
+
+html,
+body {
+    background: #e0e0e0;
+}
