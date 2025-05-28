@@ -9,3 +9,8 @@
 * {
     font-family: 'Montserrat';
 }
+
+html,
+body {
+    background-color: rgb(167, 204, 228);
+}
