@@ -8,6 +8,27 @@
         </nav>
     </div>
 
+    <div class="demo">
+        <button (click)="loadDemoImage()">Demo</button>
+
+        <div class="imgPlaceholder">
+            <p *ngIf="!weather">Kliknite "Demo" za prepoznavo vremena in nalaganje slike.</p>
+
+            <div *ngIf="weather">
+                <p>Prepoznano vreme: {{ weather.type | titlecase }}</p>
+                <img [src]="weather.imageUrl" [alt]="weather.type" class="thumb" (click)="openModal()" />
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isModalOpen" (click)="closeModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <img [src]="weather?.imageUrl" [alt]="weather?.type" />
+            <p>{{ weather?.type | titlecase }}</p>
+            <button (click)="closeModal()">Zapri</button>
+        </div>
+    </div>
+
     <div class="dashboardBox">
         <div class="leftSide">
             <div class="speedometer">
