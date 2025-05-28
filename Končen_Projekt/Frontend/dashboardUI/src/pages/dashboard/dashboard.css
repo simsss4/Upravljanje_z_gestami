@@ -20,7 +20,7 @@ nav {
 .dashboardBox {
     border: 5px solid rgb(36, 36, 36);
     display: flex;
-    background: #2d3453;
+    /* background: #9eaae0; */
     color: white;
     padding: 20px;
     border-radius: 20px;
@@ -187,9 +187,32 @@ nav {
     margin-bottom: 1rem;
 }
 
+.demo button:hover{
+    cursor: pointer;
+}
+
 .imgPlaceholder div{
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     gap: 1rem;
+}
+
+.dashboardBox {
+  transition: background 0.5s ease, color 0.5s ease, filter 0.5s ease;
+}
+
+.dashboardBox.normal {
+  background: #5c805b;
+  color: white;
+}
+
+.dashboardBox.bright {
+  background: #72c46f;
+  color: #ffffff;
+}
+
+.dashboardBox.dim {
+  background: #364735;
+  color: #e6e6e6;
 }

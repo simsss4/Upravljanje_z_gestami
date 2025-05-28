@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="dashboardBox">
+    <div class="dashboardBox" [ngClass]="dashboardTheme">
         <div class="leftSide">
             <div class="speedometer">
                 <div class="speed">80</div>
@@ -49,22 +49,18 @@
             </div>
 
             <div class="alerts">
-                <div class="alert">Alert 1</div>
-                <div class="alert">Alert 2</div>
-                <div class="alert">Alert 3</div>
+                <div class="alert" *ngFor="let alert of alerts">{{ alert }}</div>
             </div>
         </div>
 
         <div class="rightSide">
             <div class="mediaPanel">
                 <div class="radio">96.7 MHz</div>
-                <div class="statusText">Radio Veseljak</div>
+                <div class="statusText">Radio Veseljak - Čebelice</div>
             </div>
 
             <div class="warnings">
-                <div class="alert">Warning 1</div>
-                <div class="alert">Warning 2</div>
-                <div class="alert">Warning 3</div>
+                <div class="alert" *ngFor="let warning of warnings">{{ warning }}</div>
             </div>
 
             <div class="climateControl">
