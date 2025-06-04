@@ -1,5 +1,78 @@
-<nav class="dashboard-menu">
-    <a routerLink="/" class="menu-item">Dashboard</a>
-    <a routerLink="/diagnostika" class="menu-item">Diagnostika</a>
-    <a routerLink="/statistika" class="menu-item">Statisika</a>
-</nav>
+<div class="container">
+    <div class="navbar">
+        <h1>UI PROJEKT</h1>
+        <nav class="dashboard-menu">
+            <a routerLink="/" class="menu-item">Dashboard</a>
+            <a routerLink="/diagnostika" class="menu-item">Diagnostika</a>
+            <a routerLink="/statistika" class="menu-item">Statisika</a>
+        </nav>
+    </div>
+
+    <div class="demo">
+        <button (click)="loadDemoImage()">Demo</button>
+
+        <div class="imgPlaceholder">
+            <p *ngIf="!weather">Kliknite "Demo" za prepoznavo vremena in nalaganje slike.</p>
+
+            <div *ngIf="weather">
+                <p>Prepoznano vreme: {{ weather.type | titlecase }}</p>
+                <img [src]="weather.imageUrl" [alt]="weather.type" class="thumb" (click)="openModal()" />
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" *ngIf="isModalOpen" (click)="closeModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <img [src]="weather?.imageUrl" [alt]="weather?.type" />
+            <p>{{ weather?.type | titlecase }}</p>
+            <button (click)="closeModal()">Zapri</button>
+        </div>
+    </div>
+
+    <div class="dashboardBox" [ngClass]="dashboardTheme">
+        <div class="leftSide">
+            <div class="speedometer">
+                <div class="speed">80</div>
+                <div class="unit">km/h</div>
+                <div class="rpm-label">RPM x1000</div>
+                <div class="rpm-bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div class="temperature">21.5°C</div>
+                <div class="status">READY</div>
+            </div>
+
+            <div class="alerts">
+                <div class="alert" *ngFor="let alert of alerts">{{ alert }}</div>
+            </div>
+        </div>
+
+        <div class="rightSide">
+            <div class="mediaPanel">
+                <div class="radio">96.7 MHz</div>
+                <div class="statusText">Radio Veseljak - Čebelice</div>
+            </div>
+
+            <div class="warnings">
+                <div class="alert" *ngFor="let warning of warnings">{{ warning }}</div>
+            </div>
+
+            <div class="climateControl">
+                <div class="leftTemp">19.5°</div>
+                <div class="rightTemp">21.5°</div>
+            </div>
+            <div class="icons">
+                <span>🎵</span>
+                <span>📱</span>
+                <span>🏠</span>
+            </div>
+        </div>
+    </div>
+
+</div>
