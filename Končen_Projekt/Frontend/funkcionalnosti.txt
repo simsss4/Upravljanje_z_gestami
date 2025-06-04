@@ -1,0 +1,23 @@
+Model 1
+- zapiranje zadnjega levega okna
+- zapiranje zadnjega desnega okna
+- zapiranje sprednjega levega okna
+- zapiranje sprednjega desnega okna
+- odpiranje zadnjega levega okna
+- odpiranje zadnjega desnega okna
+- odpiranje sprednjega levega okna
+- odpiranje sprednjega desnega okna
+
+Model 2
+- Zanana utrujenost: TRUE/FALSE
+
+Model 3
+- Zaznan čas dneva: Dan/Noč
+- Zaznano vreme: Jasno/Deževno/Megleno
+
+
+PLAN DELA:
+- dodati lučke na dashbaord, za funkcije Modela 3 + ikone za warning/alert
+- dodati mock podatke(samo rezultat, mapiran v funkcionalnost) za ostale modele
+- dodati funkcionalnosti ostalih modelov
+- podpreti MQTT
