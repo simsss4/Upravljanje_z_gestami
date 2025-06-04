@@ -3,10 +3,19 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 type WeatherType = 'dan' | 'noč' | 'jasno' | 'deževno' | 'megleno';
+type GestureType = 'leva_roka_gor_odprto' | 'leva_roka_dol_odprto' | 'desna_roka_gor_odprto' | 'desna_roka_dol_odprto' |
+                    'leva_roka_gor_zaprto' | 'leva_roka_dol_zaprto' | 'desna_roka_gor_zaprto' | 'desna_roka_dol_zaprto';
+
+type GestureFunction = 'zapri_levo_okno_spredaj' | 'odpri_levo_okno_spredaj' | 'zapri_desno_okno_spredaj' | 'odpri_desno_okno_spredaj' |
+                    'zapri_levo_okno_zadaj' | 'odpri_levo_okno_zadaj' | 'zapri_desno_okno_zadaj' | 'odpri_desno_okno_zadaj';
 
 interface WeatherData {
   type: WeatherType;
   imageUrl: string;
+}
+interface GestureData {
+  type: GestureType;
+  functionality: GestureFunction;
 }
 
 @Component({
@@ -17,6 +26,7 @@ interface WeatherData {
 })
 export class Dashboard {
   weather?: WeatherData;
+  gesture?: GestureData;
   isModalOpen = false;
   alerts: string[] = [];
   warnings: string[] = [];
@@ -29,6 +39,19 @@ export class Dashboard {
     { type: 'deževno', imageUrl: 'MockWeather/mock_rainy.jpg' },
     { type: 'megleno', imageUrl: 'MockWeather/mock_foggy.png' },
   ];
+
+  private isDriverExhausted: boolean = false;
+
+  private gestureDataMap: GestureData[] = [
+  { type: 'leva_roka_gor_odprto', functionality: 'zapri_levo_okno_spredaj' },
+  { type: 'leva_roka_dol_odprto', functionality: 'odpri_levo_okno_spredaj' },
+  { type: 'desna_roka_gor_odprto', functionality: 'zapri_desno_okno_spredaj' },
+  { type: 'desna_roka_dol_odprto', functionality: 'odpri_desno_okno_spredaj' },
+  { type: 'leva_roka_gor_zaprto', functionality: 'zapri_levo_okno_zadaj' },
+  { type: 'leva_roka_dol_zaprto', functionality: 'odpri_levo_okno_zadaj' },
+  { type: 'desna_roka_gor_zaprto', functionality: 'zapri_desno_okno_zadaj' },
+  { type: 'desna_roka_dol_zaprto', functionality: 'odpri_desno_okno_zadaj' },
+];
 
   private weatherResponses: Record<
     string,
