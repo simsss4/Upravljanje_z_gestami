@@ -32,46 +32,63 @@
 
     <div class="dashboardBox" [ngClass]="dashboardTheme">
         <div class="leftSide">
-            <div class="speedometer">
-                <div class="speed">80</div>
-                <div class="unit">km/h</div>
-                <div class="rpm-label">RPM x1000</div>
-                <div class="rpm-bars">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
+            <div class="speedometer-box">
+                <div class="dashboard-lights">
+                    <div class="dashboard-slot bottom-slot">
+                        <img src="DashboardLights/dnevne_luci1.png" alt="dnevne" class="dashboard-light" id="dnevne"
+                            style="display: none;">
+                        <img src="DashboardLights/kratke_luci1.png" alt="kratke" class="dashboard-light" id="kratke"
+                            style="display: none;">
+                        <img src="DashboardLights/meglenke1.png" alt="meglenke" class="dashboard-light" id="meglenkle"
+                            style="display: none;">
+                    </div>
+                    <div class="dashboard-slot top-slot">
+                        <img src="DashboardLights/alert1.png" alt="alert" class="dashboard-light" *ngIf="showAlertIcon"
+                            [ngClass]="{ 'lit': showAlertIcon }" />
+
+                        <img src="DashboardLights/warning1.png" alt="warning" class="dashboard-light"
+                            *ngIf="showWarningIcon" [ngClass]="{ 'lit': showWarningIcon }" />
+                    </div>
+
                 </div>
-                <div class="temperature">21.5°C</div>
-                <div class="status">READY</div>
+                <div class="speedometer">
+                    <div class="speed">80</div>
+                    <div class="unit">km/h</div>
+                    <div class="rpm-label">RPM x1000</div>
+                    <div class="rpm-bars">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                    <div class="temperature">21.5°C</div>
+                    <div class="status">READY</div>
+                </div>
+                <div class="warning-alert-lights"></div>
             </div>
 
-            <div class="alerts">
+            <div class="alerts" [ngClass]="panelTheme">
                 <div class="alert" *ngFor="let alert of alerts">{{ alert }}</div>
             </div>
         </div>
 
         <div class="rightSide">
-            <div class="mediaPanel">
+            <div class="mediaPanel" [ngClass]="panelTheme">
                 <div class="radio">96.7 MHz</div>
                 <div class="statusText">Radio Veseljak - Čebelice</div>
+                <div class="volume">Glasnost: ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>
             </div>
 
-            <div class="warnings">
+            <div class="warnings" [ngClass]="panelTheme">
                 <div class="alert" *ngFor="let warning of warnings">{{ warning }}</div>
             </div>
 
-            <div class="climateControl">
-                <div class="leftTemp">19.5°</div>
+            <div class="climateControl" [ngClass]="panelTheme">
+                <div class="leftTemp">Moč Pihanja: 3</div>
                 <div class="rightTemp">21.5°</div>
-            </div>
-            <div class="icons">
-                <span>🎵</span>
-                <span>📱</span>
-                <span>🏠</span>
             </div>
         </div>
     </div>
