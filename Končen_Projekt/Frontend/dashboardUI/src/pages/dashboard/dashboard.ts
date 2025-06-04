@@ -123,4 +123,27 @@ export class Dashboard {
   setNormalTheme(): void {
     this.dashboardTheme = 'normal';
   }
+  public triggerRandomGesture(): void {
+    const randomIndex = Math.floor(Math.random() * this.gestureDataMap.length);
+    const selectedGesture = this.gestureDataMap[randomIndex];
+    const alertMessage = this.translateFunctionalityToAlert(selectedGesture.functionality);
+
+    this.alerts.length = 0;
+    this.alerts.push(alertMessage);
+  }
+
+  private translateFunctionalityToAlert(func: GestureFunction): string {
+    const map: Record<GestureFunction, string> = {
+      odpri_levo_okno_spredaj: 'Odpiranje sprednjega levega okna!',
+      zapri_levo_okno_spredaj: 'Zapiranje sprednjega levega okna!',
+      odpri_desno_okno_spredaj: 'Odpiranje sprednjega desnega okna!',
+      zapri_desno_okno_spredaj: 'Zapiranje sprednjega desnega okna!',
+      odpri_levo_okno_zadaj: 'Odpiranje zadnjega levega okna!',
+      zapri_levo_okno_zadaj: 'Zapiranje zadnjega levega okna!',
+      odpri_desno_okno_zadaj: 'Odpiranje zadnjega desnega okna!',
+      zapri_desno_okno_zadaj: 'Zapiranje zadnjega desnega okna!',
+    };
+
+    return map[func];
+  }
 }
