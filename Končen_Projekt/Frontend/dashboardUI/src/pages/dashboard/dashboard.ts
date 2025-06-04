@@ -3,10 +3,23 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 type WeatherType = 'dan' | 'noč' | 'jasno' | 'deževno' | 'megleno';
+type GestureType = 'leva_roka_gor_odprto' | 'leva_roka_dol_odprto' | 'desna_roka_gor_odprto' | 'desna_roka_dol_odprto' |
+                    'leva_roka_gor_zaprto' | 'leva_roka_dol_zaprto' | 'desna_roka_gor_zaprto' | 'desna_roka_dol_zaprto' |
+                    'dvig_roke' | 'spust_roke' | 'horizontalno_desno' | 'horizontalno_levo' | 'stisnjena_pest' |
+                    'gib_prstov_levo' | 'gib_prstov_desno';
+
+type GestureFunction = 'zapri_levo_okno_spredaj' | 'odpri_levo_okno_spredaj' | 'zapri_desno_okno_spredaj' | 'odpri_desno_okno_spredaj' |
+                    'zapri_levo_okno_zadaj' | 'odpri_levo_okno_zadaj' | 'zapri_desno_okno_zadaj' | 'odpri_desno_okno_zadaj' |
+                    'glasnost_gor' | 'glasnost_dol' | 'radio_postaja_prev' | 'radio_postaja_next' | 'vklop_radio' |
+                    'nastavi_kot_levo_ogledalo' | 'nastavi_kot_desno_ogledalo';
 
 interface WeatherData {
   type: WeatherType;
   imageUrl: string;
+}
+interface GestureData {
+  type: GestureType;
+  functionality: GestureFunction;
 }
 
 @Component({
@@ -17,6 +30,7 @@ interface WeatherData {
 })
 export class Dashboard {
   weather?: WeatherData;
+  gesture?: GestureData;
   isModalOpen = false;
   alerts: string[] = [];
   warnings: string[] = [];
@@ -29,6 +43,19 @@ export class Dashboard {
     { type: 'deževno', imageUrl: 'MockWeather/mock_rainy.jpg' },
     { type: 'megleno', imageUrl: 'MockWeather/mock_foggy.png' },
   ];
+
+  private isDriverExhausted: boolean = false;
+
+  private gestureDataMap: GestureData[] = [
+  { type: 'leva_roka_gor_odprto', functionality: 'zapri_levo_okno_spredaj' },
+  { type: 'leva_roka_dol_odprto', functionality: 'odpri_levo_okno_spredaj' },
+  { type: 'desna_roka_gor_odprto', functionality: 'zapri_desno_okno_spredaj' },
+  { type: 'desna_roka_dol_odprto', functionality: 'odpri_desno_okno_spredaj' },
+  { type: 'leva_roka_gor_zaprto', functionality: 'zapri_levo_okno_zadaj' },
+  { type: 'leva_roka_dol_zaprto', functionality: 'odpri_levo_okno_zadaj' },
+  { type: 'desna_roka_gor_zaprto', functionality: 'zapri_desno_okno_zadaj' },
+  { type: 'desna_roka_dol_zaprto', functionality: 'odpri_desno_okno_zadaj' },
+];
 
   private weatherResponses: Record<
     string,
@@ -100,4 +127,36 @@ export class Dashboard {
   setNormalTheme(): void {
     this.dashboardTheme = 'normal';
   }
+  public triggerRandomGesture(): void {
+    const randomIndex = Math.floor(Math.random() * this.gestureDataMap.length);
+    const selectedGesture = this.gestureDataMap[randomIndex];
+    const alertMessage = this.translateFunctionalityToAlert(selectedGesture.functionality);
+
+    console.log('Selected Gesture:\n' + selectedGesture.type + '\nFunction:\n' + selectedGesture.functionality);
+
+    this.alerts.length = 0;
+    this.alerts.push(alertMessage);
+  }
+
+  private translateFunctionalityToAlert(func: GestureFunction): string {
+  const map: Record<GestureFunction, string> = {
+    odpri_levo_okno_spredaj: 'Odpiranje sprednjega levega okna!',
+    zapri_levo_okno_spredaj: 'Zapiranje sprednjega levega okna!',
+    odpri_desno_okno_spredaj: 'Odpiranje sprednjega desnega okna!',
+    zapri_desno_okno_spredaj: 'Zapiranje sprednjega desnega okna!',
+    odpri_levo_okno_zadaj: 'Odpiranje zadnjega levega okna!',
+    zapri_levo_okno_zadaj: 'Zapiranje zadnjega levega okna!',
+    odpri_desno_okno_zadaj: 'Odpiranje zadnjega desnega okna!',
+    zapri_desno_okno_zadaj: 'Zapiranje zadnjega desnega okna!',
+    glasnost_gor: 'Povečevanje glasnosti!',
+    glasnost_dol: 'Zmanjševanje glasnosti!',
+    radio_postaja_prev: 'Preklop na prejšnjo radijsko postajo!',
+    radio_postaja_next: 'Preklop na naslednjo radijsko postajo!',
+    vklop_radio: 'Vklop radia!',
+    nastavi_kot_levo_ogledalo: 'Nastavljanje kota levega ogledala!',
+    nastavi_kot_desno_ogledalo: 'Nastavljanje kota desnega ogledala!',
+  };
+
+  return map[func];
+}
 }
