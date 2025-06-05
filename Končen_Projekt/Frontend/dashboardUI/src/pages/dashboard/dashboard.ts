@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { MqttService } from '../../app/dashboard/mqtt.service';
 
 type WeatherType = 'dan' | 'noč' | 'jasno' | 'deževno' | 'megleno';
 type GestureType =
@@ -63,6 +64,7 @@ interface RadioStation {
 @Component({
   selector: 'app-dashboard',
   imports: [RouterLink, CommonModule],
+  providers: [MqttService],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -323,4 +325,23 @@ export class Dashboard {
       }, duration);
     }
   }
+
+  constructor(private mqttService: MqttService) {
+  this.mqttService.connect(); // vzpostavi povezavo takoj
+  }
+    public triggerUtrujenostDemo(): void {
+  const mockPayload = {
+    model: 'model2',
+    status: 'drowsy',
+    message: 'Utrujenost zaznana – priporočamo odmor!',
+    timestamp: new Date().toISOString()
+  };
+
+   // Prikaži sporočilo na zaslonu
+  this.alerts = ['Zaznana utrujenost voznika! Priporočamo odmor.'];
+  this.flashTopIcon('alert', 5000);
+
+  this.mqttService.publish('model/utrujenost', mockPayload);
+  }
 }
+
