@@ -1,0 +1,12 @@
+mediapipe==0.10.11
+opencv-python==4.9.0.80
+tensorflow==2.17.0
+keras==3.5.0
+numpy==1.26.4
+paho-mqtt==2.0.0
+prometheus-client==0.20.0
+pillow==10.3.0
+matplotlib==3.8.4
+psutil==5.9.8
+torch==2.3.0
+torchvision==0.18.0
