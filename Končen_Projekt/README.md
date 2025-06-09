@@ -38,3 +38,13 @@ foggy ->    Auto-activate fog lights
 rainy ->    Auto-enable wipers (animated visualization)
             Display "Wet Road" warning
             Suggest slower speed (e.g., "Recommended: 60 km/h")
+
+
+----------------------------------------------------------------------------------------------------------
+
+RUN BACKEND:
+cd Backend
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+python 'ime_skripte'

@@ -1,0 +1,9 @@
+torch
+torchvision
+tensorflow
+mediapipe
+opencv-python
+pillow
+matplotlib
+numpy
+python-dotenv
