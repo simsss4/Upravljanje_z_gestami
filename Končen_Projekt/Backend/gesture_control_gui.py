@@ -8,21 +8,20 @@ from PIL import Image, ImageTk
 import matplotlib.pyplot as plt
 import sys
 
-# Prisilimo utf-8 za standardni izhod
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Inicializacija
+# Initialize MediaPipe Hands
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mp_drawing = mp.solutions.drawing_utils
 
-# Nalaganje modelov
+# Load models
 mirrors_model = tf.keras.models.load_model('Models/mirrors_model.keras')
 windows_model = tf.keras.models.load_model('Models/windows_model.keras')
 radio_model = tf.keras.models.load_model('Models/radio_model.keras')
 climate_model = tf.keras.models.load_model('Models/climate_model.keras')
 
-# Povprečje in standardni odklon
+# Mean and standard deviation for normalization
 MIRRORS_MEAN = 0.32715722213633686
 MIRRORS_STD = 0.3050974859034138
 WINDOWS_MEAN = 0.3218953795343205
@@ -32,7 +31,7 @@ RADIO_STD = 0.2894906092020188
 CLIMATE_MEAN = 0.20537318328833137
 CLIMATE_STD = 0.2955649804045277
 
-# Seznam razredov
+# Class labels
 MIRRORS_CLASSES = ['close_rm', 'down_rm', 'left_rm', 'open_rm', 'right_rm', 'up_rm']
 WINDOWS_CLASSES = ['close_back_left_window', 'close_back_right_window', 'close_front_left_window', 'close_front_right_window', 'open_back_left_window', 'open_back_right_window', 'open_front_left_window', 'open_front_right_window']
 RADIO_CLASSES = ['next_station', 'previous_station', 'turn_off_radio', 'turn_on_radio', 'volume_down', 'volume_up']
@@ -68,7 +67,7 @@ class GestureGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Prepoznava Gest")
-        self.root.geometry("450x700")  # Povečano za vertikalno postavitev
+        self.root.geometry("450x700")
         self.root.configure(bg="#B1CACF")
         self.root.resizable(False, False)
 
@@ -85,7 +84,7 @@ class GestureGUI:
             'Klimatska naprava': {'model': climate_model, 'mean': CLIMATE_MEAN, 'std': CLIMATE_STD, 'classes': CLIMATE_CLASSES}
         }
 
-        # Uporaba teme
+        # Configure styles
         self.style = ttk.Style()
         self.style.theme_use("clam")
         self.style.configure("TButton", font=("Segoe UI", 12, "bold"), padding=10, background="#005B8D", foreground="#FFFFFF")
@@ -95,18 +94,18 @@ class GestureGUI:
         self.style.configure("TLabel", background="#B1CACF", foreground="#00378E", font=("Segoe UI", 10))
         self.style.configure("TFrame", background="#B1CACF")
 
-        # Glavni okvir
+        # Main frame
         self.main_frame = ttk.Frame(self.root, padding=15, style="TFrame")
         self.main_frame.pack(fill="both", expand=True)
 
-        # Naslov
+        # Title
         ttk.Label(self.main_frame, text="Prepoznava Gest", font=("Segoe UI", 16, "bold")).pack(pady=10)
 
-        # Video okno
+        # Video canvas
         self.video_canvas = tk.Canvas(self.main_frame, width=400, height=300, highlightthickness=1, bg="#FFFFFF")
         self.video_canvas.pack(pady=10)
 
-        # Gumbi za izbiro modelov
+        # Model selection buttons
         self.model_buttons = {}
         model_frame = ttk.Frame(self.main_frame, style="TFrame")
         model_frame.pack(pady=5)
@@ -116,7 +115,7 @@ class GestureGUI:
             btn.grid(row=i, column=0, padx=5, pady=5)
             self.model_buttons[model] = btn
 
-        # Gumbi za zajem in izhod
+        # Capture and quit buttons
         button_frame = ttk.Frame(self.main_frame, style="TFrame")
         button_frame.pack(pady=5)
         self.btn_capture = ttk.Button(button_frame, text="Zajem Gest", command=self.start_recording, width=15)
@@ -124,7 +123,7 @@ class GestureGUI:
         self.btn_quit = ttk.Button(button_frame, text="Izhod", command=self.quit, width=15)
         self.btn_quit.grid(row=0, column=1, padx=5)
 
-        # Statusna vrstica
+        # Status bar
         self.status_var = tk.StringVar()
         self.status_var.set("Izberi model in začni zajem")
         self.status_label = ttk.Label(self.main_frame, textvariable=self.status_var, anchor="center", style="TLabel", wraplength=400)
@@ -151,11 +150,73 @@ class GestureGUI:
         else:
             self.recording = False
             self.btn_capture.config(text="Zajem Gest", state="normal")
-            if self.frames:  # Obdelaj zadnje okvirje, če obstajajo
+            if self.frames:
                 self.process_gesture()
             for btn in self.model_buttons.values():
                 btn.config(state="normal" if btn.cget("text") != self.current_model else "disabled")
             self.btn_quit.config(state="normal")
+
+    def handle_gesture_action(self, gesture, handedness=None):
+        """Execute the appropriate action based on the recognized gesture."""
+        action_messages = {
+            # Windows actions
+            'close_back_left_window': "Zapiranje zadnjega levega okna",
+            'close_back_right_window': "Zapiranje zadnjega desnega okna",
+            'close_front_left_window': "Zapiranje sprednjega levega okna",
+            'close_front_right_window': "Zapiranje sprednjega desnega okna",
+            'open_back_left_window': "Odpiranje zadnjega levega okna",
+            'open_back_right_window': "Odpiranje zadnjega desnega okna",
+            'open_front_left_window': "Odpiranje sprednjega levega okna",
+            'open_front_right_window': "Odpiranje sprednjega desnega okna",
+            
+            # Mirror actions
+            'close_rm': "Zapiranje vzvratnega ogledala",
+            'open_rm': "Odpiranje vzvratnega ogledala",
+            'left_rm': "Premik kota vzvratnega ogledala v levo",
+            'right_rm': "Premik kota vzvratnega ogledala v desno",
+            'up_rm': "Premik kota vzvratnega ogledala navzgor",
+            'down_rm': "Premik kota vzvratnega ogledala navzdol",
+            
+            # Radio actions
+            'volume_up': "Zviševanje glasnosti radia",
+            'volume_down': "Zniževanje glasnosti radia",
+            'previous_station': "Menjava kanala nazaj",
+            'next_station': "Menjava kanala naprej",
+            'turn_on_radio': "Vklop radia",
+            'turn_off_radio': "Izklop radia",
+            
+            # Climate control actions
+            'fan_stronger': "Zviševanje moči pihanja klimatske naprave",
+            'fan_weaker': "Zniževanje moči pihanja klimatske naprave",
+            'climate_warmer': "Zviševanje temperature",
+            'climate_colder': "Zniževanje temperature"
+        }
+        
+        # Get the appropriate message for the gesture
+        message = action_messages.get(gesture, f"Neznana gesta: {gesture}")
+        
+        # Print to console and update status
+        print(f"Izvedba akcije: {message}", flush=True)
+        self.status_var.set(f"Akcija: {message}")
+        
+        # Here you would add the actual implementation to control the car systems
+        # For example, sending commands to the car's CAN bus or other interface
+        
+        # Example implementation (placeholder - replace with actual control code)
+        if gesture.startswith('close_'):
+            print(f"Pošiljam ukaz za zapiranje: {gesture}", flush=True)
+        elif gesture.startswith('open_'):
+            print(f"Pošiljam ukaz za odpiranje: {gesture}", flush=True)
+        elif gesture.endswith('_rm'):
+            print(f"Prilagajanje ogledala: {gesture}", flush=True)
+        elif gesture in ['volume_up', 'volume_down']:
+            print(f"Prilagajanje glasnosti: {gesture}", flush=True)
+        elif gesture in ['next_station', 'previous_station']:
+            print(f"Menjava radijskih postaj: {gesture}", flush=True)
+        elif gesture in ['fan_stronger', 'fan_weaker']:
+            print(f"Prilagajanje moči pihanja: {gesture}", flush=True)
+        elif gesture in ['climate_warmer', 'climate_colder']:
+            print(f"Prilagajanje temperature: {gesture}", flush=True)
 
     def process_gesture(self):
         if len(self.frames) == 0:
@@ -182,10 +243,23 @@ class GestureGUI:
         pred_class = np.argmax(pred, axis=1)[0]
         gesture = self.models[self.current_model]['classes'][pred_class]
 
-        display_text = f"{self.current_model}: {gesture}"
-        self.status_var.set(f"Rezultat: {display_text}")
-        print(f"Gesta: {display_text}")
+        # Get handedness (left/right hand) if available
+        handedness = None
+        if self.handedness_labels:
+            # Use the most common handedness in the recorded frames
+            handedness = max(set(self.handedness_labels), key=self.handedness_labels.count)
 
+        # Display on GUI and print to terminal immediately
+        display_text = f"{self.current_model}: {gesture}"
+        #if handedness:
+         #   display_text += f" ({handedness} roka)"
+        self.status_var.set(f"Rezultat: {display_text}")
+        print(f"Gesta: {display_text}", flush=True)
+
+        # Handle the gesture action
+        self.handle_gesture_action(gesture, handedness)
+
+        # Save gesture trajectory plot
         plt.figure(figsize=(10, 5))
         plt.plot(X[0, :, 0], label='Wrist X')
         plt.plot(X[0, :, 1], label='Wrist Y')
@@ -196,10 +270,6 @@ class GestureGUI:
         plt.legend()
         plt.savefig(f'captured_gesture_trajectory_{self.current_model.lower().replace(" ", "_")}.png')
         plt.close()
-
-        # Vrnemo rezultat za merging_gui.py
-        sys.stdout.write(display_text + "\n")
-        sys.stdout.flush()
 
     def update_video(self):
         try:
@@ -220,10 +290,9 @@ class GestureGUI:
                             handedness = results.multi_handedness[idx].classification[0].label
                             self.handedness_labels.append(handedness)
 
-                            # Obdelaj gesto, če je zbranih MAX_FRAMES
                             if len(self.frames) >= MAX_FRAMES:
                                 self.process_gesture()
-                                self.frames = []  # Ponastavi za naslednjo gesto
+                                self.frames = []
                                 self.handedness_labels = []
 
                 img = Image.fromarray(frame_rgb)
