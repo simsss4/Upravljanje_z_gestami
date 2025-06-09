@@ -10,6 +10,7 @@ import torch.nn.functional as F
 import os
 
 # Model classes
+class WeatherCNN(nn.Module):
     def __init__(self):
         super(WeatherCNN, self).__init__()
         self.conv1 = nn.Conv2d(in_channels=3, out_channels=16, kernel_size=3, padding=1)
