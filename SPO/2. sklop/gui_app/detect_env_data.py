@@ -12,10 +12,9 @@ from prometheus_client import start_http_server, Counter, Gauge, Summary
 import psutil
 import time
 import paho.mqtt.client as mqtt
-import os
 import traceback
 
-# Start metrics server on a different port
+# Start metrics server
 start_http_server(8001, addr='0.0.0.0')
 
 # Metrics
@@ -27,21 +26,18 @@ image_processing_time = Summary('image_processing_time_seconds', 'Time to proces
 
 proc = psutil.Process()
 
+# MQTT Callbacks
+def on_connect(client, userdata, flags, reason_code, properties=None):
+    print(f"Connected to MQTT Broker with result code {reason_code}")
 
-def on_connect(client, userdata, flags, rc):
-    print(f"MQTT povezan z rezultatom: {rc}")
-
-
-def on_connect(client, userdata, flags, rc):
-    print(f"Connected to MQTT Broker with result code {rc}")
+def on_log(client, userdata, level, buf):
+    print(f"MQTT log: {buf}")
 
 def on_message(client, userdata, msg):
     print(f"Received message from {msg.topic}: {msg.payload.decode()}")
 
-client = mqtt.Client()
-client.on_connect = on_connect
-client.connect("172.25.70.243", 1883, 60)
-client.loop_start()
+def on_disconnect(client, userdata, *args, **kwargs):
+    print(f"Disconnected from MQTT broker with code {args[0] if args else 'unknown'}")
 
 # Model classes
 class WeatherCNN(nn.Module):
@@ -125,33 +121,17 @@ def simulate_car_behavior(time_label, weather_label):
 
     return actions
 
-# File explorer for image selection
-root = tk.Tk()
-root.withdraw()  # Hide the main window
-print("Please select an image file...")
-img_path = filedialog.askopenfilename(
-    title="Select Image",
-    filetypes=[("Image files", "*.jpg *.jpeg *.png")]
-)
-
-if not img_path:
-    print("No image selected. Exiting...")
-    exit()
-
-
-
 # MQTT Setup
 def setup_mqtt():
     try:
-        client = mqtt.Client()
+        client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
         client.on_connect = on_connect
         client.on_log = on_log
         client.on_message = on_message
         client.on_disconnect = on_disconnect
-
-        # Hardcoded MQTT Broker IP
         mqtt_broker = "172.25.70.243"
-
+        port = 1883
+        print(f"Connecting to MQTT broker at {mqtt_broker}:{port}")
         client.connect(mqtt_broker, 1883, 60)
         client.loop_start()
         return client
@@ -163,8 +143,23 @@ def setup_mqtt():
 # Initialize MQTT Client
 mqtt_client = setup_mqtt()
 
+# File explorer for image selection
+root = tk.Tk()
+root.withdraw()
+print("Please select an image file...")
+img_path = filedialog.askopenfilename(
+    title="Select Image",
+    filetypes=[("Image files", "*.jpg *.jpeg *.png")]
+)
 
-# Update image processing
+if not img_path:
+    print("No image selected. Exiting...")
+    if mqtt_client:
+        mqtt_client.loop_stop()
+        mqtt_client.disconnect()
+    exit()
+
+# Process image
 try:
     image = Image.open(img_path).convert('RGB')
     start_time = time.time()
@@ -187,7 +182,6 @@ try:
         environment_prediction_total.labels(model_name='weather').inc()
         environment_confidence_summary.labels(model_name='weather').observe(pred_wt_conf)
 
-
     # Update system metrics
     cpu_usage_environment.set(proc.cpu_percent(interval=None))
     memory_usage_environment.set(proc.memory_info().rss)
@@ -198,18 +192,20 @@ try:
     for action in actions:
         print("🚗", action)
 
-        # Publish MQTT messages after environment analysis
+    # Publish MQTT messages
     if mqtt_client:
-        mqtt_client.publish("environment/status", f"Weather: {weather_labels[pred_wt_idx]}, Time of Day: {timeofday_labels[pred_dn_idx]}")
+        mqtt_client.publish("environment/timeofday", f"{timeofday_labels[pred_dn_idx]} ({pred_dn_conf:.2%})")
+        mqtt_client.publish("environment/weather", f"{weather_labels[pred_wt_idx]} ({pred_wt_conf:.2%})")
         mqtt_client.publish("environment/metrics", f"CPU: {proc.cpu_percent()}%, Memory: {proc.memory_info().rss} bytes")
-
-        # Send alerts for low visibility conditions
         if weather_labels[pred_wt_idx] in ["foggy", "rainy"] or timeofday_labels[pred_dn_idx] == "night":
             mqtt_client.publish("environment/alerts", "⚠️ Low visibility detected! Adjust driving speed.")
+        print("MQTT messages published")
 
 except Exception as e:
     print(f"Error processing image: {str(e)}")
+    traceback.print_exc()
 
-if mqtt_client:
-    mqtt_client.loop_stop()
-    mqtt_client.disconnect()
+finally:
+    if mqtt_client:
+        mqtt_client.loop_stop()
+        mqtt_client.disconnect()

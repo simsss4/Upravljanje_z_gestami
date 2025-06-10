@@ -6,15 +6,18 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'gesture_app'
+  - job_name: 'gesture_control'
     static_configs:
-      - targets: ['172.25.70.243:8000']
+      - targets: ['172.25.209.178:8000']
 
-  - job_name: 'cadvisor'
+  - job_name: 'environment_analysis'
     static_configs:
-      - targets: ['host.docker.internal:8080']
+      - targets: ['172.25.209.178:8001']
 
+  - job_name: 'drowsiness_detection'
+    static_configs:
+      - targets: ['172.25.209.178:8002']
 
-
-
-
+  - job_name: 'merging_gui'
+    static_configs:
+      - targets: ['172.25.209.178:8003']
