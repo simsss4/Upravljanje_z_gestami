@@ -22,8 +22,6 @@ from tkinter import ttk
 start_http_server(8000, addr='0.0.0.0')
 
 # Metrics
-cpu_usage_mqtt_docker = Gauge('cpu_usage_mqtt_docker_percent', 'CPU usage percent for MQTT/Docker application')
-memory_usage_mqtt_docker = Gauge('memory_usage_mqtt_docker_bytes', 'Memory usage bytes for MQTT/Docker application')
 mqtt_messages_per_sec = Counter('mqtt_messages_per_second', 'MQTT messages sent or received per second')
 mqtt_logs_per_sec = Counter('mqtt_logs_per_second', 'MQTT logs per second')
 processed_frames_per_sec = Gauge('processed_frames_per_second', 'Processed frames per second in gesture recognition algorithm')
@@ -51,8 +49,6 @@ def update_system_metrics():
         mem_gesture = proc.memory_info().rss
         cpu_usage_gesture_algorithm.set(cpu_gesture)
         memory_usage_gesture_algorithm.set(mem_gesture)
-        cpu_usage_mqtt_docker.set(cpu_gesture)
-        memory_usage_mqtt_docker.set(mem_gesture)
         current_message_count = processed_mqtt_messages_total._value.get()
         delta_messages = current_message_count - last_mqtt_message_count
         mqtt_messages_per_sec.inc(delta_messages)
@@ -146,13 +142,19 @@ class GestureGUI:
         self.root.configure(bg="#B1CACF")
         self.root.resizable(False, False)
 
-        self.cap = cv2.VideoCapture(0)
-        if not self.cap.isOpened():
+        self.cap = None
+        for i in range(3):  # Try indices 0, 1, 2
+            self.cap = cv2.VideoCapture(i)
+            if self.cap.isOpened():
+                print(f"Webcam opened at index {i}")
+                break
+            self.cap.release()
+            self.cap = None
+        if self.cap is None:
             print("Error: Could not open webcam")
             self.status_var = tk.StringVar()
             self.status_var.set("Napaka: Ni mogoče odpreti kamere")
             tk.Label(self.root, textvariable=self.status_var).pack()
-            sys.exit(1)
 
         self.recording = False
         self.frames = []
@@ -215,9 +217,10 @@ class GestureGUI:
             self.client.on_log = on_log
             self.client.on_message = on_message
             self.client.on_disconnect = on_disconnect
-            mqtt_broker = "172.25.70.243"  # Hardcode ZeroTier IP
-            print(f"Connecting to MQTT broker at {mqtt_broker}:1883")
-            self.client.connect(mqtt_broker, 1883, 60)
+            mqtt_broker = "172.25.70.243"
+            port = 1883  # Change to 1884 if needed
+            print(f"Connecting to MQTT broker at {mqtt_broker}:{port}")
+            self.client.connect(mqtt_broker, port, 60)
             self.client.loop_start()
             print("MQTT setup complete")
         except Exception as e:
@@ -328,10 +331,16 @@ class GestureGUI:
 
     def update_video(self):
         try:
+            if self.cap is None or not self.cap.isOpened():
+                self.status_var.set("Napaka: Kamera ni na voljo")
+                self.root.after(30, self.update_video)
+                return
+
             ret, frame = self.cap.read()
             if not ret:
                 print("Failed to capture frame from webcam")
                 self.status_var.set("Napaka: Ni mogoče zajeti slike iz kamere")
+                self.root.after(30, self.update_video)
                 return
             frame = cv2.flip(frame, 1)
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -360,7 +369,6 @@ class GestureGUI:
             self.video_canvas.image = img
         except Exception as e:
             print(f"Error in update_video: {e}")
-            import traceback
             traceback.print_exc()
             self.status_var.set(f"Napaka pri posodabljanju videa: {e}")
         self.root.after(30, self.update_video)
