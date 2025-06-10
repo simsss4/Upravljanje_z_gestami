@@ -15,6 +15,7 @@ from prometheus_client import start_http_server, Counter, Gauge, Summary
 import paho.mqtt.client as mqtt
 import psutil
 import time
+import traceback
 from tkinter import ttk
 
 # Start metrics server
@@ -134,21 +135,6 @@ def compute_finger_distances(X):
     return X_new
 
 
-def setup_mqtt(self):
-    try:
-        self.client = mqtt.Client()
-        self.client.on_connect = on_connect
-        self.client.on_log = on_log
-        self.client.on_message = on_message
-        self.client.on_disconnect = on_disconnect
-        mqtt_broker = os.getenv('MQTT_BROKER', 'mosquitto')  # Use service name
-        self.client.connect(mqtt_broker, 1883, 60)
-        self.client.loop_start()
-    except Exception as e:
-        print(f"Error in MQTT setup: {e}")
-        import traceback
-        traceback.print_exc()
-        self.client = None
 
 
 
@@ -221,6 +207,7 @@ class GestureGUI:
         self.update_metrics_periodically()
         self.update_video()
 
+
     def setup_mqtt(self):
         try:
             self.client = mqtt.Client()
@@ -228,13 +215,16 @@ class GestureGUI:
             self.client.on_log = on_log
             self.client.on_message = on_message
             self.client.on_disconnect = on_disconnect
-            self.client.connect(os.getenv('MQTT_BROKER', 'mosquitto'), 1883, 60)
+            mqtt_broker = "172.25.70.243"  # Hardcode ZeroTier IP
+            print(f"Connecting to MQTT broker at {mqtt_broker}:1883")
+            self.client.connect(mqtt_broker, 1883, 60)
             self.client.loop_start()
+            print("MQTT setup complete")
         except Exception as e:
             print(f"Error in MQTT setup: {e}")
-            import traceback
             traceback.print_exc()
             self.client = None
+
 
     def update_metrics_periodically(self):
         try:

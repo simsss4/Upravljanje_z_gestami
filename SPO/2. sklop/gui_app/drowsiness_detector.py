@@ -9,6 +9,8 @@ from tkinter import filedialog
 from prometheus_client import start_http_server, Counter, Gauge, Summary
 import psutil
 import time
+import paho.mqtt.client as mqtt
+import traceback
 
 # Start metrics server on a different port
 start_http_server(8002, addr='0.0.0.0')
@@ -21,6 +23,24 @@ drowsiness_confidence_summary = Summary('drowsiness_confidence_score', 'Confiden
 frame_processing_time = Summary('frame_processing_time_seconds', 'Time to process each video frame')
 
 proc = psutil.Process()
+
+# Define missing MQTT callbacks
+def on_connect(client, userdata, flags, rc):
+    print(f"Connected to MQTT Broker with result code {rc}")
+
+def on_message(client, userdata, msg):
+    print(f"Received message from {msg.topic}: {msg.payload.decode()}")
+
+def on_disconnect(client, userdata, rc):
+    print("Disconnected from MQTT Broker")
+
+def on_log(client, userdata, level, buf):
+    print(f"MQTT Log: {buf}")
+
+client = mqtt.Client()
+client.on_connect = on_connect
+client.connect("172.25.70.243", 1883, 60)
+client.loop_start()
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -51,6 +71,29 @@ def select_video():
     root.destroy()
     return video_path
 
+# MQTT Setup
+def setup_mqtt():
+    try:
+        client = mqtt.Client()
+        client.on_connect = on_connect
+        client.on_message = on_message
+        client.on_disconnect = on_disconnect
+        client.on_log = on_log
+
+        # Hardcoded MQTT Broker IP
+        mqtt_broker = "172.25.70.243"
+
+        client.connect(mqtt_broker, 1883, 60)
+        client.loop_start()
+        return client
+    except Exception as e:
+        print(f"Error in MQTT setup: {e}")
+        traceback.print_exc()
+        return None
+
+# Initialize MQTT Client
+mqtt_client = setup_mqtt()
+
 def analyze_drowsiness(video_path):
     try:
         if not os.path.exists(video_path):
@@ -59,10 +102,10 @@ def analyze_drowsiness(video_path):
         if not os.path.exists(MODEL_PATH):
             raise FileNotFoundError(f"Model ne obstaja: {MODEL_FILE}")
 
-        # Naloži model
+        # Load model
         model = load_model(MODEL_PATH)
 
-        # Validacija oblike vnosa
+        # Validate input shape
         expected_shape = model.input_shape[1:3]
         if (IMG_SIZE, IMG_SIZE) != expected_shape:
             raise ValueError(f"Neskladje oblike vnosa: pričakovano {expected_shape}, dobljeno ({IMG_SIZE}, {IMG_SIZE})")
@@ -80,13 +123,14 @@ def analyze_drowsiness(video_path):
         cv2.namedWindow("Prepoznavanje utrujenosti", cv2.WINDOW_NORMAL)
         cv2.resizeWindow("Prepoznavanje utrujenosti", WINDOW_WIDTH, WINDOW_HEIGHT)
 
-
         while True:
             ret, frame = cap.read()
             if not ret:
                 break
 
             frame_count += 1
+            start_time = time.time()  # Fix: Define start_time here for each frame
+
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             resized = cv2.resize(gray, (IMG_SIZE, IMG_SIZE))
             input_img = resized.astype('float32') / 255.0
@@ -95,7 +139,19 @@ def analyze_drowsiness(video_path):
             prediction = model.predict(input_img, verbose=0)[0][0]
             is_drowsy = prediction > DROWSY_THRESHOLD
             history.append(is_drowsy)
-            predictions.append(prediction)
+
+            # Determine driver state
+            current_state = "Utrujen" if is_drowsy else "Buden"
+
+            # Publish MQTT updates
+            if mqtt_client:
+                mqtt_client.publish("drowsiness/status", current_state)
+                mqtt_client.publish("drowsiness/metrics", f"CPU: {proc.cpu_percent()}%, Memory: {proc.memory_info().rss} bytes")
+
+                if is_drowsy:
+                    mqtt_client.publish("drowsiness/alert", "⚠️ Driver is drowsy! Take a break!")
+
+            print(f"🚗 MQTT Update: {current_state}")
 
             # Update metrics
             drowsiness_prediction_total.inc()
@@ -104,15 +160,14 @@ def analyze_drowsiness(video_path):
             memory_usage_drowsiness.set(proc.memory_info().rss)
             frame_processing_time.observe(time.time() - start_time)
 
-            # Določi trenutno stanje
+            # Check for state change
             if len(history) == history.maxlen and sum(history) >= HISTORY_FRACTION * len(history):
                 current_state = "Utrujen"
-                label_color = (0, 0, 255)  # Rdeča
+                label_color = (0, 0, 255)  # Red
             else:
                 current_state = "Buden"
-                label_color = (0, 255, 0)  # Zelena
+                label_color = (0, 255, 0)  # Green
 
-            # Izpiši spremembo stanja v terminal
             if current_state != last_state:
                 if current_state == "Utrujen":
                     print("Opozorilo: Voznik zaspi!", flush=True)
@@ -120,27 +175,8 @@ def analyze_drowsiness(video_path):
                     print("Voznik je buden", flush=True)
                 last_state = current_state
 
-            # Prikaz informacij na sličici
-            cv2.putText(frame, f"Stanje: {current_state}", (30, 40), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 1, label_color, 2)
-            
-            # Prikaz verjetnosti utrujenosti
-            bar_width = 200
-            bar_height = 20
-            bar_x, bar_y = 30, 80
-            drowsiness_level = min(prediction, 1.0)
-            filled_width = int(bar_width * drowsiness_level)
-            
-            # Barva glede na stanje
-            bar_color = label_color
-            
-            cv2.rectangle(frame, (bar_x, bar_y), (bar_x + bar_width, bar_y + bar_height), 
-                         (200, 200, 200), -1)  # Ozadje
-            cv2.rectangle(frame, (bar_x, bar_y), (bar_x + filled_width, bar_y + bar_height), 
-                         bar_color, -1)  # Napolnjen del
-            cv2.putText(frame, f"Verj. utrujenosti: {prediction:.2f}", 
-                       (bar_x, bar_y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
-
+            # Display state on frame
+            cv2.putText(frame, f"Stanje: {current_state}", (30, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, label_color, 2)
             cv2.imshow("Prepoznavanje utrujenosti", frame)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -148,6 +184,11 @@ def analyze_drowsiness(video_path):
 
         cap.release()
         cv2.destroyAllWindows()
+
+        # Properly close MQTT connection at script exit
+        if mqtt_client:
+            mqtt_client.loop_stop()
+            mqtt_client.disconnect()
 
     except Exception as e:
         error_message = f"Napaka pri analizi utrujenosti: {str(e)}"

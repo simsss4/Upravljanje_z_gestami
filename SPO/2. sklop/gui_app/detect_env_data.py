@@ -11,6 +11,9 @@ import os
 from prometheus_client import start_http_server, Counter, Gauge, Summary
 import psutil
 import time
+import paho.mqtt.client as mqtt
+import os
+import traceback
 
 # Start metrics server on a different port
 start_http_server(8001, addr='0.0.0.0')
@@ -25,6 +28,20 @@ image_processing_time = Summary('image_processing_time_seconds', 'Time to proces
 proc = psutil.Process()
 
 
+def on_connect(client, userdata, flags, rc):
+    print(f"MQTT povezan z rezultatom: {rc}")
+
+
+def on_connect(client, userdata, flags, rc):
+    print(f"Connected to MQTT Broker with result code {rc}")
+
+def on_message(client, userdata, msg):
+    print(f"Received message from {msg.topic}: {msg.payload.decode()}")
+
+client = mqtt.Client()
+client.on_connect = on_connect
+client.connect("172.25.70.243", 1883, 60)
+client.loop_start()
 
 # Model classes
 class WeatherCNN(nn.Module):
@@ -121,6 +138,32 @@ if not img_path:
     print("No image selected. Exiting...")
     exit()
 
+
+
+# MQTT Setup
+def setup_mqtt():
+    try:
+        client = mqtt.Client()
+        client.on_connect = on_connect
+        client.on_log = on_log
+        client.on_message = on_message
+        client.on_disconnect = on_disconnect
+
+        # Hardcoded MQTT Broker IP
+        mqtt_broker = "172.25.70.243"
+
+        client.connect(mqtt_broker, 1883, 60)
+        client.loop_start()
+        return client
+    except Exception as e:
+        print(f"Error in MQTT setup: {e}")
+        traceback.print_exc()
+        return None
+
+# Initialize MQTT Client
+mqtt_client = setup_mqtt()
+
+
 # Update image processing
 try:
     image = Image.open(img_path).convert('RGB')
@@ -144,14 +187,29 @@ try:
         environment_prediction_total.labels(model_name='weather').inc()
         environment_confidence_summary.labels(model_name='weather').observe(pred_wt_conf)
 
+
     # Update system metrics
     cpu_usage_environment.set(proc.cpu_percent(interval=None))
     memory_usage_environment.set(proc.memory_info().rss)
     image_processing_time.observe(time.time() - start_time)
 
     print(f"\nStanje okolja: {weather_labels[pred_wt_idx]} {timeofday_labels[pred_dn_idx]}")
-    actions = simulate_car_behavior(timeofDay_labels[pred_dn_idx], weather_labels[pred_wt_idx])
+    actions = simulate_car_behavior(timeofday_labels[pred_dn_idx], weather_labels[pred_wt_idx])
     for action in actions:
         print("🚗", action)
+
+        # Publish MQTT messages after environment analysis
+    if mqtt_client:
+        mqtt_client.publish("environment/status", f"Weather: {weather_labels[pred_wt_idx]}, Time of Day: {timeofday_labels[pred_dn_idx]}")
+        mqtt_client.publish("environment/metrics", f"CPU: {proc.cpu_percent()}%, Memory: {proc.memory_info().rss} bytes")
+
+        # Send alerts for low visibility conditions
+        if weather_labels[pred_wt_idx] in ["foggy", "rainy"] or timeofday_labels[pred_dn_idx] == "night":
+            mqtt_client.publish("environment/alerts", "⚠️ Low visibility detected! Adjust driving speed.")
+
 except Exception as e:
     print(f"Error processing image: {str(e)}")
+
+if mqtt_client:
+    mqtt_client.loop_stop()
+    mqtt_client.disconnect()

@@ -2,9 +2,7 @@
 from tkinter import ttk
 import subprocess
 import sys
-import os
 import threading
-import torch
 
 sys.stdout.reconfigure(encoding='utf-8')
 
