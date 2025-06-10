@@ -37,10 +37,6 @@ def on_disconnect(client, userdata, rc):
 def on_log(client, userdata, level, buf):
     print(f"MQTT Log: {buf}")
 
-client = mqtt.Client()
-client.on_connect = on_connect
-client.connect("172.25.70.243", 1883, 60)
-client.loop_start()
 
 sys.stdout.reconfigure(encoding='utf-8')
 
