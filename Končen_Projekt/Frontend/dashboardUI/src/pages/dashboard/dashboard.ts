@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MqttService } from '../../app/dashboard/mqtt.service';
+import { MqttService } from '../../app/Services/mqtt.service';
 
 type WeatherType = 'dan' | 'noč' | 'jasno' | 'deževno' | 'megleno';
 type GestureType =
@@ -35,17 +35,17 @@ type GestureFunction =
   | 'radio_postaja_prev'
   | 'radio_postaja_next'
   | 'vklop_radio';
-  // | 'izklop_radio'
-  // | 'zapiranje vzvratnega ogledala'
-  // | 'odpiranje vzvratnega ogledala'
-  // | 'premik kota vzvratnega ogledala v levo'
-  // | 'premik kota vzvratnega ogledala v desno'
-  // | 'premik kota vzvratnega ogledala navzgor'
-  // | 'premik kota vzvratnega ogledala v navzdol'
-  // | 'zviševanje moči pihanja klimatske naprave'
-  // | 'zniževanje moči pihanja klimatske naprave'
-  // | 'zviševanje nastavitve temperature'
-  // | 'zniževanje nastavitve temperature';
+// | 'izklop_radio'
+// | 'zapiranje vzvratnega ogledala'
+// | 'odpiranje vzvratnega ogledala'
+// | 'premik kota vzvratnega ogledala v levo'
+// | 'premik kota vzvratnega ogledala v desno'
+// | 'premik kota vzvratnega ogledala navzgor'
+// | 'premik kota vzvratnega ogledala v navzdol'
+// | 'zviševanje moči pihanja klimatske naprave'
+// | 'zniževanje moči pihanja klimatske naprave'
+// | 'zviševanje nastavitve temperature'
+// | 'zniževanje nastavitve temperature';
 
 interface WeatherData {
   type: WeatherType;
@@ -327,21 +327,20 @@ export class Dashboard {
   }
 
   constructor(private mqttService: MqttService) {
-  this.mqttService.connect(); // vzpostavi povezavo takoj
+    this.mqttService.connect(); // vzpostavi povezavo takoj
   }
-    public triggerUtrujenostDemo(): void {
-  const mockPayload = {
-    model: 'model2',
-    status: 'drowsy',
-    message: 'Utrujenost zaznana – priporočamo odmor!',
-    timestamp: new Date().toISOString()
-  };
+  public triggerUtrujenostDemo(): void {
+    const mockPayload = {
+      model: 'model2',
+      status: 'drowsy',
+      message: 'Utrujenost zaznana – priporočamo odmor!',
+      timestamp: new Date().toISOString(),
+    };
 
-   // Prikaži sporočilo na zaslonu
-  this.alerts = ['Zaznana utrujenost voznika! Priporočamo odmor.'];
-  this.flashTopIcon('alert', 5000);
+    // Prikaži sporočilo na zaslonu
+    this.alerts = ['Zaznana utrujenost voznika! Priporočamo odmor.'];
+    this.flashTopIcon('alert', 5000);
 
-  this.mqttService.publish('model/utrujenost', mockPayload);
+    this.mqttService.publish('model/utrujenost', mockPayload);
   }
 }
-
