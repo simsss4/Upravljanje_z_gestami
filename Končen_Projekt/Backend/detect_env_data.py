@@ -8,6 +8,36 @@ from tkinter import filedialog
 import torch.nn as nn
 import torch.nn.functional as F
 import os
+from prometheus_client import start_http_server, Counter, Gauge, Summary
+import psutil
+import time
+import paho.mqtt.client as mqtt
+import traceback
+
+# Start metrics server
+start_http_server(8001, addr='0.0.0.0')
+
+# Metrics
+cpu_usage_environment = Gauge('cpu_usage_environment_analysis_percent', 'CPU usage percent for environment analysis')
+memory_usage_environment = Gauge('memory_usage_environment_analysis_bytes', 'Memory usage bytes for environment analysis')
+environment_prediction_total = Counter('environment_prediction_total', 'Total number of environment predictions', ['model_name'])
+environment_confidence_summary = Summary('environment_confidence_score', 'Confidence scores of environment predictions', ['model_name'])
+image_processing_time = Summary('image_processing_time_seconds', 'Time to process each image')
+
+proc = psutil.Process()
+
+# MQTT Callbacks
+def on_connect(client, userdata, flags, reason_code, properties=None):
+    print(f"Connected to MQTT Broker with result code {reason_code}")
+
+def on_log(client, userdata, level, buf):
+    print(f"MQTT log: {buf}")
+
+def on_message(client, userdata, msg):
+    print(f"Received message from {msg.topic}: {msg.payload.decode()}")
+
+def on_disconnect(client, userdata, *args, **kwargs):
+    print(f"Disconnected from MQTT broker with code {args[0] if args else 'unknown'}")
 
 # Model classes
 class WeatherCNN(nn.Module):
@@ -91,9 +121,31 @@ def simulate_car_behavior(time_label, weather_label):
 
     return actions
 
+# MQTT Setup
+def setup_mqtt():
+    try:
+        client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+        client.on_connect = on_connect
+        client.on_log = on_log
+        client.on_message = on_message
+        client.on_disconnect = on_disconnect
+        mqtt_broker = "172.25.70.243"
+        port = 1883
+        print(f"Connecting to MQTT broker at {mqtt_broker}:{port}")
+        client.connect(mqtt_broker, 1883, 60)
+        client.loop_start()
+        return client
+    except Exception as e:
+        print(f"Error in MQTT setup: {e}")
+        traceback.print_exc()
+        return None
+
+# Initialize MQTT Client
+mqtt_client = setup_mqtt()
+
 # File explorer for image selection
 root = tk.Tk()
-root.withdraw()  # Hide the main window
+root.withdraw()
 print("Please select an image file...")
 img_path = filedialog.askopenfilename(
     title="Select Image",
@@ -102,23 +154,58 @@ img_path = filedialog.askopenfilename(
 
 if not img_path:
     print("No image selected. Exiting...")
+    if mqtt_client:
+        mqtt_client.loop_stop()
+        mqtt_client.disconnect()
     exit()
 
-# Process selected image
+# Process image
 try:
     image = Image.open(img_path).convert('RGB')
+    start_time = time.time()
     input_tensor = transform(image).unsqueeze(0)
 
-    # Run through models
     with torch.no_grad():
-        pred_dn = torch.argmax(daynight_model(input_tensor), dim=1).item()
-        pred_wt = torch.argmax(weather_model(input_tensor), dim=1).item()
+        # Day/night prediction
+        pred_dn = daynight_model(input_tensor)
+        pred_dn_probs = torch.softmax(pred_dn, dim=1)[0]
+        pred_dn_idx = torch.argmax(pred_dn_probs).item()
+        pred_dn_conf = pred_dn_probs[pred_dn_idx].item()
+        environment_prediction_total.labels(model_name='daynight').inc()
+        environment_confidence_summary.labels(model_name='daynight').observe(pred_dn_conf)
 
-    # Print results
-    print(f"\nStanje okolja: {weather_labels[pred_wt]} {timeofday_labels[pred_dn]}")
-    actions = simulate_car_behavior(timeofday_labels[pred_dn], weather_labels[pred_wt])
+        # Weather prediction
+        pred_wt = weather_model(input_tensor)
+        pred_wt_probs = torch.softmax(pred_wt, dim=1)[0]
+        pred_wt_idx = torch.argmax(pred_wt_probs).item()
+        pred_wt_conf = pred_wt_probs[pred_wt_idx].item()
+        environment_prediction_total.labels(model_name='weather').inc()
+        environment_confidence_summary.labels(model_name='weather').observe(pred_wt_conf)
+
+    # Update system metrics
+    cpu_usage_environment.set(proc.cpu_percent(interval=None))
+    memory_usage_environment.set(proc.memory_info().rss)
+    image_processing_time.observe(time.time() - start_time)
+
+    print(f"\nStanje okolja: {weather_labels[pred_wt_idx]} {timeofday_labels[pred_dn_idx]}")
+    actions = simulate_car_behavior(timeofday_labels[pred_dn_idx], weather_labels[pred_wt_idx])
     for action in actions:
         print("🚗", action)
 
+    # Publish MQTT messages
+    if mqtt_client:
+        mqtt_client.publish("environment/timeofday", f"{timeofday_labels[pred_dn_idx]} ({pred_dn_conf:.2%})")
+        mqtt_client.publish("environment/weather", f"{weather_labels[pred_wt_idx]} ({pred_wt_conf:.2%})")
+        mqtt_client.publish("environment/metrics", f"CPU: {proc.cpu_percent()}%, Memory: {proc.memory_info().rss} bytes")
+        if weather_labels[pred_wt_idx] in ["foggy", "rainy"] or timeofday_labels[pred_dn_idx] == "night":
+            mqtt_client.publish("environment/alerts", "⚠️ Low visibility detected! Adjust driving speed.")
+        print("MQTT messages published")
+
 except Exception as e:
     print(f"Error processing image: {str(e)}")
+    traceback.print_exc()
+
+finally:
+    if mqtt_client:
+        mqtt_client.loop_stop()
+        mqtt_client.disconnect()
