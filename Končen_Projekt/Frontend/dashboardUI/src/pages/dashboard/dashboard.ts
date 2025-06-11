@@ -264,13 +264,16 @@ export class Dashboard implements OnInit, OnDestroy {
       this.panelTheme = 'dim';
       this.showIconInSlot('kratke', 'bottom');
     } else if (timeType === 'dan') {
-      this.setBrightTheme();
       this.showIconInSlot('dnevne', 'bottom');
     }
 
     if (weatherType === 'megleno') {
       this.showIconInSlot('meglenkle', 'bottom');
-    } else if (!['noč', 'dan', 'megleno'].includes(weatherType)) {
+    }
+    if(weatherType === 'jasno') {
+      this.setBrightTheme();
+    }
+    else if (!['noč', 'dan', 'megleno'].includes(weatherType)) {
       this.clearDashboardIcons();
     }
 
