@@ -43,7 +43,6 @@ type GestureFunction =
   | 'zviševanje_nastavitve_temperature'
   | 'zniževanje_nastavitve_temperature';
 
-
 interface GestureData {
   type: GestureType;
   functionality: GestureFunction;
@@ -91,8 +90,14 @@ export class Dashboard implements OnInit, OnDestroy {
     { type: 'horizontalno_levo', functionality: 'radio_postaja_prev' },
     { type: 'stisnjena_pest', functionality: 'vklop_radio' },
     { type: 'stisnjena_pest_izklop', functionality: 'izklop_radio' },
-    { type: 'fan_gor', functionality: 'zviševanje_moči_pihanja_klimatske_naprave' },
-    { type: 'fan_dol', functionality: 'zniževanje_moči_pihanja_klimatske_naprave' },
+    {
+      type: 'fan_gor',
+      functionality: 'zviševanje_moči_pihanja_klimatske_naprave',
+    },
+    {
+      type: 'fan_dol',
+      functionality: 'zniževanje_moči_pihanja_klimatske_naprave',
+    },
     { type: 'temp_gor', functionality: 'zviševanje_nastavitve_temperature' },
     { type: 'temp_dol', functionality: 'zniževanje_nastavitve_temperature' },
   ];
@@ -170,7 +175,10 @@ export class Dashboard implements OnInit, OnDestroy {
     premik_kota_vzvratnega_ogledala_navzdol: () => {},
   };
 
-  constructor(private mqttService: MqttService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private mqttService: MqttService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.mqttSubscription = this.mqttService.getMessages().subscribe(
@@ -197,9 +205,9 @@ export class Dashboard implements OnInit, OnDestroy {
       // case 'drowsiness':
       //   this.handleDrowsinessMessage(parts[1], payload);
       //   break;
-      // case 'gestures':
-      //   this.handleGestureMessage(parts[1], payload);
-      //   break;
+      case 'gestures':
+        this.handleGestureMessage(parts[1], payload);
+        break;
       default:
         console.warn(`⚠️ Unhandled MQTT topic: ${topic}`);
     }
@@ -207,83 +215,132 @@ export class Dashboard implements OnInit, OnDestroy {
 
   private envMessageBuffer: { timeofday?: string; weather?: string } = {};
   private handleEnvironmentMessage(subTopic: string, payload: string) {
-  if (subTopic === 'timeofday' || subTopic === 'weather') {
-    this.envMessageBuffer[subTopic] = payload;
+    if (subTopic === 'timeofday' || subTopic === 'weather') {
+      this.envMessageBuffer[subTopic] = payload;
 
-    if (this.envMessageBuffer.timeofday && this.envMessageBuffer.weather) {
-      this.processEnvironment(
-        this.envMessageBuffer.timeofday,
-        this.envMessageBuffer.weather
-      );
+      if (this.envMessageBuffer.timeofday && this.envMessageBuffer.weather) {
+        this.processEnvironment(
+          this.envMessageBuffer.timeofday,
+          this.envMessageBuffer.weather
+        );
 
-      this.envMessageBuffer = {};
-    }
-  } else if (subTopic === 'alerts') {
-    this.alerts = [payload];
-    this.flashTopIcon('alert', 5000);
-    this.cdr.detectChanges();
-  } else if (subTopic === 'metrics') {
-    console.log(`Environment metrics: ${payload}`);
-  }
-}
-  private processEnvironment(timePayload: string, weatherPayload: string) {
-  const timeLabel = this.parsePayloadLabel(timePayload);
-  const weatherLabel = this.parsePayloadLabel(weatherPayload);
-
-  const timeType = this.mapToWeatherType(timeLabel);
-  const weatherType = this.mapToWeatherType(weatherLabel);
-
-  console.log(
-    `Processing combined payloads. [Time type: ${timeType}, Weather type: ${weatherType}]`
-  );
-
-  if (weatherType) {
-    const weatherData = this.weatherResponses[weatherType];
-
-    this.alerts = [];
-    this.warnings = [];
-
-    this.alerts = [...weatherData.alerts];
-    this.warnings = [...weatherData.warnings];
-
-    console.log('Updated alerts:', this.alerts);
-    console.log('Updated warnings:', this.warnings);
-    this.panelTheme = '';
-
-    if (this.alerts.length > 0) {
+        this.envMessageBuffer = {};
+      }
+    } else if (subTopic === 'alerts') {
+      this.alerts = [payload];
       this.flashTopIcon('alert', 5000);
+      this.cdr.detectChanges();
+    } else if (subTopic === 'metrics') {
+      console.log(`Environment metrics: ${payload}`);
     }
-    if (this.warnings.length > 0) {
-      this.flashTopIcon('warning', 3000);
-    }
-
-    this.setNormalTheme();
-
-    if (timeType === 'noč') {
-      this.setDimTheme();
-      this.panelTheme = 'dim';
-      this.showIconInSlot('kratke', 'bottom');
-    } else if (timeType === 'dan') {
-      this.showIconInSlot('dnevne', 'bottom');
-    }
-
-    if (weatherType === 'megleno') {
-      this.showIconInSlot('meglenkle', 'bottom');
-    }
-    if(weatherType === 'jasno') {
-      this.setBrightTheme();
-    }
-    else if (!['noč', 'dan', 'megleno'].includes(weatherType)) {
-      this.clearDashboardIcons();
-    }
-
-    this.cdr.detectChanges();
-    
-  } else {
-    console.warn(`⚠️ Invalid weather type: ${weatherLabel}`);
   }
-}
+  private processEnvironment(timePayload: string, weatherPayload: string) {
+    const timeLabel = this.parsePayloadLabel(timePayload);
+    const weatherLabel = this.parsePayloadLabel(weatherPayload);
 
+    const timeType = this.mapToWeatherType(timeLabel);
+    const weatherType = this.mapToWeatherType(weatherLabel);
+
+    console.log(
+      `Processing combined payloads. [Time type: ${timeType}, Weather type: ${weatherType}]`
+    );
+
+    if (weatherType) {
+      const weatherData = this.weatherResponses[weatherType];
+
+      this.alerts = [];
+      this.warnings = [];
+
+      this.alerts = [...weatherData.alerts];
+      this.warnings = [...weatherData.warnings];
+
+      console.log('Updated alerts:', this.alerts);
+      console.log('Updated warnings:', this.warnings);
+      this.panelTheme = '';
+
+      if (this.alerts.length > 0) {
+        this.flashTopIcon('alert', 5000);
+      }
+      if (this.warnings.length > 0) {
+        this.flashTopIcon('warning', 3000);
+      }
+
+      this.setNormalTheme();
+
+      if (timeType === 'noč') {
+        this.setDimTheme();
+        this.panelTheme = 'dim';
+        this.showIconInSlot('kratke', 'bottom');
+      } else if (timeType === 'dan') {
+        this.showIconInSlot('dnevne', 'bottom');
+      }
+
+      if (weatherType === 'megleno') {
+        this.showIconInSlot('meglenkle', 'bottom');
+      }
+      if (weatherType === 'jasno') {
+        this.setBrightTheme();
+      } else if (!['noč', 'dan', 'megleno'].includes(weatherType)) {
+        this.clearDashboardIcons();
+      }
+
+      this.cdr.detectChanges();
+    } else {
+      console.warn(`⚠️ Invalid weather type: ${weatherLabel}`);
+    }
+  }
+
+  private handleGestureMessage(subTopic: string, payload: string) {
+    const gesture = this.parsePayloadLabel(payload);
+    const functionality = this.mapToGestureFunction(subTopic, gesture);
+    if (functionality) {
+      this.clearDashboardIcons();
+      this.warnings = [];
+      const alertMessage = this.translateFunctionalityToAlert(functionality);
+      this.alerts = [alertMessage];
+      this.flashTopIcon('alert', 5000);
+
+      const specifiedGestures: GestureFunction[] = [
+        'glasnost_gor',
+        'glasnost_dol',
+        'radio_postaja_prev',
+        'radio_postaja_next',
+        'vklop_radio',
+        'izklop_radio',
+        'zviševanje_moči_pihanja_klimatske_naprave',
+        'zniževanje_moči_pihanja_klimatske_naprave',
+        'zviševanje_nastavitve_temperature',
+        'zniževanje_nastavitve_temperature',
+      ];
+
+      if (specifiedGestures.includes(functionality)) {
+        const gestureType = this.gestureDataMap.find(
+          (g) => g.functionality === functionality
+        )?.type;
+        if (gestureType) {
+          this.gesture = { type: gestureType, functionality };
+          console.log(`Gesture: ${gestureType}, Function: ${functionality}`);
+
+          const handler = this.functionalityHandlers[functionality];
+          if (handler) {
+            handler();
+          } else {
+            console.warn(
+              `No handler defined for functionality: ${functionality}`
+            );
+          }
+        } else {
+          console.warn(
+            `No gesture type mapped for functionality: ${functionality}`
+          );
+        }
+      } else {
+        console.log(`Alert-only gesture: ${functionality}`);
+      }
+    } else {
+      console.warn(`Invalid gesture: ${gesture} for topic ${subTopic}`);
+    }
+  }
 
   private parsePayloadLabel(payload: string): string {
     return payload.split(' ')[0];
@@ -291,64 +348,63 @@ export class Dashboard implements OnInit, OnDestroy {
 
   private mapToWeatherType(label: string): WeatherType | null {
     const mapping: Record<string, WeatherType> = {
-      'day': 'dan',
-      'night': 'noč',
-      'clear': 'jasno',
-      'foggy': 'megleno',
-      'rainy': 'deževno',
+      day: 'dan',
+      night: 'noč',
+      clear: 'jasno',
+      foggy: 'megleno',
+      rainy: 'deževno',
     };
     return mapping[label] || null;
   }
 
-  private mapToGestureFunction(subTopic: string, gesture: string): GestureFunction | null {
+  private mapToGestureFunction(
+    subTopic: string,
+    gesture: string
+  ): GestureFunction | null {
     const mapping: Record<string, Record<string, GestureFunction>> = {
-      'okna': {
-        'open_front_left_window': 'odpri_levo_okno_spredaj',
-        'close_front_left_window': 'zapri_levo_okno_spredaj',
-        'open_front_right_window': 'odpri_desno_okno_spredaj',
-        'close_front_right_window': 'zapri_desno_okno_spredaj',
-        'open_back_left_window': 'odpri_levo_okno_zadaj',
-        'close_back_left_window': 'zapri_levo_okno_zadaj',
-        'open_back_right_window': 'odpri_desno_okno_zadaj',
-        'close_back_right_window': 'zapri_desno_okno_zadaj',
+      okna: {
+        open_front_left_window: 'odpri_levo_okno_spredaj',
+        close_front_left_window: 'zapri_levo_okno_spredaj',
+        open_front_right_window: 'odpri_desno_okno_spredaj',
+        close_front_right_window: 'zapri_desno_okno_spredaj',
+        open_back_left_window: 'odpri_levo_okno_zadaj',
+        close_back_left_window: 'zapri_levo_okno_zadaj',
+        open_back_right_window: 'odpri_desno_okno_zadaj',
+        close_back_right_window: 'zapri_desno_okno_zadaj',
       },
-      'radio': {
-        'turn_on_radio': 'vklop_radio',
-        'turn_off_radio': 'izklop_radio',
-        'next_station': 'radio_postaja_next',
-        'previous_station': 'radio_postaja_prev',
-        'volume_up': 'glasnost_gor',
-        'volume_down': 'glasnost_dol',
+      radio: {
+        turn_on_radio: 'vklop_radio',
+        turn_off_radio: 'izklop_radio',
+        next_station: 'radio_postaja_next',
+        previous_station: 'radio_postaja_prev',
+        volume_up: 'glasnost_gor',
+        volume_down: 'glasnost_dol',
       },
-      'vzvratna_ogledala': {
-        'close_rm': 'zapiranje_vzvratnega_ogledala',
-        'open_rm': 'odpiranje_vzvratnega_ogledala',
-        'left_rm': 'premik_kota_vzvratnega_ogledala_v_levo',
-        'right_rm': 'premik_kota_vzvratnega_ogledala_v_desno',
-        'up_rm': 'premik_kota_vzvratnega_ogledala_navzgor',
-        'down_rm': 'premik_kota_vzvratnega_ogledala_navzdol',
+      vzvratna_ogledala: {
+        close_rm: 'zapiranje_vzvratnega_ogledala',
+        open_rm: 'odpiranje_vzvratnega_ogledala',
+        left_rm: 'premik_kota_vzvratnega_ogledala_v_levo',
+        right_rm: 'premik_kota_vzvratnega_ogledala_v_desno',
+        up_rm: 'premik_kota_vzvratnega_ogledala_navzgor',
+        down_rm: 'premik_kota_vzvratnega_ogledala_navzdol',
       },
-      'klimatska_naprava': {
-        'climate_warmer': 'zviševanje_nastavitve_temperature',
-        'climate_colder': 'zniževanje_nastavitve_temperature',
-        'fan_stronger': 'zviševanje_moči_pihanja_klimatske_naprave',
-        'fan_weaker': 'zniževanje_moči_pihanja_klimatske_naprave',
+      klimatska_naprava: {
+        climate_warmer: 'zviševanje_nastavitve_temperature',
+        climate_colder: 'zniževanje_nastavitve_temperature',
+        fan_stronger: 'zviševanje_moči_pihanja_klimatske_naprave',
+        fan_weaker: 'zniževanje_moči_pihanja_klimatske_naprave',
       },
     };
     return mapping[subTopic]?.[gesture] || null;
   }
 
-  private increaseVolume() {
-  }
+  private increaseVolume() {}
 
-  private decreaseVolume() {
-  }
+  private decreaseVolume() {}
 
-  private nextRadioStation() {
-  }
+  private nextRadioStation() {}
 
-  private previousRadioStation() {
-  }
+  private previousRadioStation() {}
 
   private turnOnRadio() {
     this.radioOn = true;
@@ -358,17 +414,13 @@ export class Dashboard implements OnInit, OnDestroy {
     this.radioOn = false;
   }
 
-  private increaseFanSpeed() {
-  }
+  private increaseFanSpeed() {}
 
-  private decreaseFanSpeed() {
-  }
+  private decreaseFanSpeed() {}
 
-  private increaseTemperature() {
-  }
+  private increaseTemperature() {}
 
-  private decreaseTemperature() {
-  }
+  private decreaseTemperature() {}
 
   getRandomStation(): RadioStation {
     const randomIndex = Math.floor(Math.random() * this.stations.length);
@@ -417,12 +469,18 @@ export class Dashboard implements OnInit, OnDestroy {
       izklop_radio: 'Izklop radia!',
       zapiranje_vzvratnega_ogledala: 'Zapiranje vzvratnega ogledala!',
       odpiranje_vzvratnega_ogledala: 'Odpiranje vzvratnega ogledala!',
-      premik_kota_vzvratnega_ogledala_v_levo: 'Premik kota vzvratnega ogledala v levo!',
-      premik_kota_vzvratnega_ogledala_v_desno: 'Premik kota vzvratnega ogledala v desno!',
-      premik_kota_vzvratnega_ogledala_navzgor: 'Premik kota vzvratnega ogledala navzgor!',
-      premik_kota_vzvratnega_ogledala_navzdol: 'Premik kota vzvratnega ogledala navzdol!',
-      zviševanje_moči_pihanja_klimatske_naprave: 'Zviševanje moči pihanja klimatske naprave!',
-      zniževanje_moči_pihanja_klimatske_naprave: 'Zniževanje moči pihanja klimatske naprave!',
+      premik_kota_vzvratnega_ogledala_v_levo:
+        'Premik kota vzvratnega ogledala v levo!',
+      premik_kota_vzvratnega_ogledala_v_desno:
+        'Premik kota vzvratnega ogledala v desno!',
+      premik_kota_vzvratnega_ogledala_navzgor:
+        'Premik kota vzvratnega ogledala navzgor!',
+      premik_kota_vzvratnega_ogledala_navzdol:
+        'Premik kota vzvratnega ogledala navzdol!',
+      zviševanje_moči_pihanja_klimatske_naprave:
+        'Zviševanje moči pihanja klimatske naprave!',
+      zniževanje_moči_pihanja_klimatske_naprave:
+        'Zniževanje moči pihanja klimatske naprave!',
       zviševanje_nastavitve_temperature: 'Zviševanje nastavitve temperature!',
       zniževanje_nastavitve_temperature: 'Zniževanje nastavitve temperature!',
     };
