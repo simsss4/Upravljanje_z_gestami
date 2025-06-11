@@ -47,4 +47,8 @@ cd Backend
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
-python 'ime_skripte'
+python 'merging_gui'
+
+ZeroTier VPN
+test network id: 41d49af6c2dcb5ce
+host IP: 10.147.20.65
