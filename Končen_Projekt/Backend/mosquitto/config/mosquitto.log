@@ -8502,3 +8502,1400 @@
 1749667169: Sending PINGRESP to angular_client_1895dca4d301
 1749667229: Received PINGREQ from angular_client_1895dca4d301
 1749667229: Sending PINGRESP to angular_client_1895dca4d301
+1749667289: Received PINGREQ from angular_client_1895dca4d301
+1749667289: Sending PINGRESP to angular_client_1895dca4d301
+1749667349: Received PINGREQ from angular_client_1895dca4d301
+1749667349: Sending PINGRESP to angular_client_1895dca4d301
+1749667409: Received PINGREQ from angular_client_1895dca4d301
+1749667409: Sending PINGRESP to angular_client_1895dca4d301
+1749667469: Received PINGREQ from angular_client_1895dca4d301
+1749667469: Sending PINGRESP to angular_client_1895dca4d301
+1749667529: Received PINGREQ from angular_client_1895dca4d301
+1749667529: Sending PINGRESP to angular_client_1895dca4d301
+1749667589: Received PINGREQ from angular_client_1895dca4d301
+1749667589: Sending PINGRESP to angular_client_1895dca4d301
+1749667649: Received PINGREQ from angular_client_1895dca4d301
+1749667649: Sending PINGRESP to angular_client_1895dca4d301
+1749667709: Received PINGREQ from angular_client_1895dca4d301
+1749667709: Sending PINGRESP to angular_client_1895dca4d301
+1749667769: Received PINGREQ from angular_client_1895dca4d301
+1749667769: Sending PINGRESP to angular_client_1895dca4d301
+1749667829: Received PINGREQ from angular_client_1895dca4d301
+1749667829: Sending PINGRESP to angular_client_1895dca4d301
+1749667889: Received PINGREQ from angular_client_1895dca4d301
+1749667889: Sending PINGRESP to angular_client_1895dca4d301
+1749667935: Client angular_client_1895dca4d301 closed its connection.
+1749667936: New client connected from 10.147.20.65:53448 as angular_client_9bc3725d9162 (p2, c1, k60).
+1749667936: No will message specified.
+1749667936: Sending CONNACK to angular_client_9bc3725d9162 (0, 0)
+1749667936: Received SUBSCRIBE from angular_client_9bc3725d9162
+1749667936: 	environment/# (QoS 0)
+1749667936: angular_client_9bc3725d9162 0 environment/#
+1749667936: 	drowsiness/# (QoS 0)
+1749667936: angular_client_9bc3725d9162 0 drowsiness/#
+1749667936: 	gestures/# (QoS 0)
+1749667936: angular_client_9bc3725d9162 0 gestures/#
+1749667936: Sending SUBACK to angular_client_9bc3725d9162
+1749667947: Client angular_client_9bc3725d9162 closed its connection.
+1749667947: New client connected from 10.147.20.65:53611 as angular_client_40951bcdfbf8 (p2, c1, k60).
+1749667947: No will message specified.
+1749667947: Sending CONNACK to angular_client_40951bcdfbf8 (0, 0)
+1749667947: Received SUBSCRIBE from angular_client_40951bcdfbf8
+1749667947: 	environment/# (QoS 0)
+1749667947: angular_client_40951bcdfbf8 0 environment/#
+1749667947: 	drowsiness/# (QoS 0)
+1749667947: angular_client_40951bcdfbf8 0 drowsiness/#
+1749667947: 	gestures/# (QoS 0)
+1749667947: angular_client_40951bcdfbf8 0 gestures/#
+1749667947: Sending SUBACK to angular_client_40951bcdfbf8
+1749667987: Client angular_client_40951bcdfbf8 closed its connection.
+1749667988: New client connected from 10.147.20.65:54198 as angular_client_b8863762a872 (p2, c1, k60).
+1749667988: No will message specified.
+1749667988: Sending CONNACK to angular_client_b8863762a872 (0, 0)
+1749667988: Received SUBSCRIBE from angular_client_b8863762a872
+1749667988: 	environment/# (QoS 0)
+1749667988: angular_client_b8863762a872 0 environment/#
+1749667988: 	drowsiness/# (QoS 0)
+1749667988: angular_client_b8863762a872 0 drowsiness/#
+1749667988: 	gestures/# (QoS 0)
+1749667988: angular_client_b8863762a872 0 gestures/#
+1749667988: Sending SUBACK to angular_client_b8863762a872
+1749668048: Received PINGREQ from angular_client_b8863762a872
+1749668048: Sending PINGRESP to angular_client_b8863762a872
+1749668092: New connection from 10.147.20.65:55541 on port 1883.
+1749668093: New client connected from 10.147.20.65:55541 as auto-B7001BBB-F455-AE59-946B-26963FFFD385 (p2, c1, k60).
+1749668093: No will message specified.
+1749668093: Sending CONNACK to auto-B7001BBB-F455-AE59-946B-26963FFFD385 (0, 0)
+1749668093: Received SUBSCRIBE from auto-B7001BBB-F455-AE59-946B-26963FFFD385
+1749668093: 	environment/# (QoS 0)
+1749668093: auto-B7001BBB-F455-AE59-946B-26963FFFD385 0 environment/#
+1749668093: Sending SUBACK to auto-B7001BBB-F455-AE59-946B-26963FFFD385
+1749668093: Received SUBSCRIBE from auto-B7001BBB-F455-AE59-946B-26963FFFD385
+1749668093: 	gestures/# (QoS 0)
+1749668093: auto-B7001BBB-F455-AE59-946B-26963FFFD385 0 gestures/#
+1749668093: Sending SUBACK to auto-B7001BBB-F455-AE59-946B-26963FFFD385
+1749668093: Received SUBSCRIBE from auto-B7001BBB-F455-AE59-946B-26963FFFD385
+1749668093: 	drowsiness/# (QoS 0)
+1749668093: auto-B7001BBB-F455-AE59-946B-26963FFFD385 0 drowsiness/#
+1749668093: Sending SUBACK to auto-B7001BBB-F455-AE59-946B-26963FFFD385
+1749668098: New connection from 10.147.20.65:55613 on port 1883.
+1749668098: New client connected from 10.147.20.65:55613 as auto-44DE516A-4611-4D70-99BD-A037AF2C2EE0 (p2, c1, k60).
+1749668098: No will message specified.
+1749668098: Sending CONNACK to auto-44DE516A-4611-4D70-99BD-A037AF2C2EE0 (0, 0)
+1749668101: Received PUBLISH from auto-44DE516A-4611-4D70-99BD-A037AF2C2EE0 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749668101: Sending PUBLISH to angular_client_b8863762a872 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749668101: Sending PUBLISH to auto-B7001BBB-F455-AE59-946B-26963FFFD385 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749668101: Received PUBLISH from auto-44DE516A-4611-4D70-99BD-A037AF2C2EE0 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668101: Sending PUBLISH to angular_client_b8863762a872 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668101: Sending PUBLISH to auto-B7001BBB-F455-AE59-946B-26963FFFD385 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668101: Received PUBLISH from auto-44DE516A-4611-4D70-99BD-A037AF2C2EE0 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668101: Sending PUBLISH to angular_client_b8863762a872 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668101: Sending PUBLISH to auto-B7001BBB-F455-AE59-946B-26963FFFD385 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668102: Received DISCONNECT from auto-44DE516A-4611-4D70-99BD-A037AF2C2EE0
+1749668102: Client auto-44DE516A-4611-4D70-99BD-A037AF2C2EE0 disconnected.
+1749668108: Received PINGREQ from angular_client_b8863762a872
+1749668108: Sending PINGRESP to angular_client_b8863762a872
+1749668111: Client auto-B7001BBB-F455-AE59-946B-26963FFFD385 closed its connection.
+1749668167: Client angular_client_b8863762a872 closed its connection.
+1749668168: New client connected from 10.147.20.65:56656 as angular_client_a2ae7160f8d7 (p2, c1, k60).
+1749668168: No will message specified.
+1749668168: Sending CONNACK to angular_client_a2ae7160f8d7 (0, 0)
+1749668168: Received SUBSCRIBE from angular_client_a2ae7160f8d7
+1749668168: 	environment/# (QoS 0)
+1749668168: angular_client_a2ae7160f8d7 0 environment/#
+1749668168: 	drowsiness/# (QoS 0)
+1749668168: angular_client_a2ae7160f8d7 0 drowsiness/#
+1749668168: 	gestures/# (QoS 0)
+1749668168: angular_client_a2ae7160f8d7 0 gestures/#
+1749668168: Sending SUBACK to angular_client_a2ae7160f8d7
+1749668219: Client angular_client_a2ae7160f8d7 closed its connection.
+1749668220: New client connected from 10.147.20.65:57437 as angular_client_2b8790422b8b8 (p2, c1, k60).
+1749668220: No will message specified.
+1749668220: Sending CONNACK to angular_client_2b8790422b8b8 (0, 0)
+1749668220: Received SUBSCRIBE from angular_client_2b8790422b8b8
+1749668220: 	environment/# (QoS 0)
+1749668220: angular_client_2b8790422b8b8 0 environment/#
+1749668220: 	drowsiness/# (QoS 0)
+1749668220: angular_client_2b8790422b8b8 0 drowsiness/#
+1749668220: 	gestures/# (QoS 0)
+1749668220: angular_client_2b8790422b8b8 0 gestures/#
+1749668220: Sending SUBACK to angular_client_2b8790422b8b8
+1749668234: New connection from 10.147.20.65:57637 on port 1883.
+1749668234: New client connected from 10.147.20.65:57637 as auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (p2, c1, k60).
+1749668234: No will message specified.
+1749668234: Sending CONNACK to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (0, 0)
+1749668234: Received SUBSCRIBE from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668234: 	environment/# (QoS 0)
+1749668234: auto-882A1862-CCDF-3FAB-9DFC-692228435ACF 0 environment/#
+1749668234: Sending SUBACK to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668234: Received SUBSCRIBE from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668234: 	gestures/# (QoS 0)
+1749668234: auto-882A1862-CCDF-3FAB-9DFC-692228435ACF 0 gestures/#
+1749668234: Sending SUBACK to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668234: Received SUBSCRIBE from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668234: 	drowsiness/# (QoS 0)
+1749668234: auto-882A1862-CCDF-3FAB-9DFC-692228435ACF 0 drowsiness/#
+1749668234: Sending SUBACK to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668239: New connection from 10.147.20.65:57701 on port 1883.
+1749668239: New client connected from 10.147.20.65:57701 as auto-94049FD7-3273-91C3-F65B-D265C5A9D1A1 (p2, c1, k60).
+1749668239: No will message specified.
+1749668239: Sending CONNACK to auto-94049FD7-3273-91C3-F65B-D265C5A9D1A1 (0, 0)
+1749668241: Received PUBLISH from auto-94049FD7-3273-91C3-F65B-D265C5A9D1A1 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668241: Sending PUBLISH to angular_client_2b8790422b8b8 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668241: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668241: Received PUBLISH from auto-94049FD7-3273-91C3-F65B-D265C5A9D1A1 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668241: Sending PUBLISH to angular_client_2b8790422b8b8 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668241: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668241: Received PUBLISH from auto-94049FD7-3273-91C3-F65B-D265C5A9D1A1 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668241: Sending PUBLISH to angular_client_2b8790422b8b8 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668241: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668242: Received DISCONNECT from auto-94049FD7-3273-91C3-F65B-D265C5A9D1A1
+1749668242: Client auto-94049FD7-3273-91C3-F65B-D265C5A9D1A1 disconnected.
+1749668280: Received PINGREQ from angular_client_2b8790422b8b8
+1749668280: Sending PINGRESP to angular_client_2b8790422b8b8
+1749668294: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668294: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668340: Received PINGREQ from angular_client_2b8790422b8b8
+1749668340: Sending PINGRESP to angular_client_2b8790422b8b8
+1749668355: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668355: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668400: Received PINGREQ from angular_client_2b8790422b8b8
+1749668400: Sending PINGRESP to angular_client_2b8790422b8b8
+1749668415: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668415: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668460: Received PINGREQ from angular_client_2b8790422b8b8
+1749668460: Sending PINGRESP to angular_client_2b8790422b8b8
+1749668476: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668476: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668490: Client angular_client_2b8790422b8b8 closed its connection.
+1749668491: New client connected from 10.147.20.65:61026 as angular_client_2c66681a406c8 (p2, c1, k60).
+1749668491: No will message specified.
+1749668491: Sending CONNACK to angular_client_2c66681a406c8 (0, 0)
+1749668491: Received SUBSCRIBE from angular_client_2c66681a406c8
+1749668491: 	environment/# (QoS 0)
+1749668491: angular_client_2c66681a406c8 0 environment/#
+1749668491: 	drowsiness/# (QoS 0)
+1749668491: angular_client_2c66681a406c8 0 drowsiness/#
+1749668491: 	gestures/# (QoS 0)
+1749668491: angular_client_2c66681a406c8 0 gestures/#
+1749668491: Sending SUBACK to angular_client_2c66681a406c8
+1749668498: New connection from 10.147.20.65:61123 on port 1883.
+1749668498: New client connected from 10.147.20.65:61123 as auto-55F8FFEB-6233-05DA-A0F4-B64E516B7BF3 (p2, c1, k60).
+1749668498: No will message specified.
+1749668498: Sending CONNACK to auto-55F8FFEB-6233-05DA-A0F4-B64E516B7BF3 (0, 0)
+1749668500: Received PUBLISH from auto-55F8FFEB-6233-05DA-A0F4-B64E516B7BF3 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668500: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668500: Sending PUBLISH to angular_client_2c66681a406c8 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668500: Received PUBLISH from auto-55F8FFEB-6233-05DA-A0F4-B64E516B7BF3 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668500: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668500: Sending PUBLISH to angular_client_2c66681a406c8 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668500: Received PUBLISH from auto-55F8FFEB-6233-05DA-A0F4-B64E516B7BF3 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668500: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668500: Sending PUBLISH to angular_client_2c66681a406c8 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668501: Received DISCONNECT from auto-55F8FFEB-6233-05DA-A0F4-B64E516B7BF3
+1749668501: Client auto-55F8FFEB-6233-05DA-A0F4-B64E516B7BF3 disconnected.
+1749668508: Client angular_client_2c66681a406c8 closed its connection.
+1749668509: New client connected from 10.147.20.65:61264 as angular_client_0662b9db29ec8 (p2, c1, k60).
+1749668509: No will message specified.
+1749668509: Sending CONNACK to angular_client_0662b9db29ec8 (0, 0)
+1749668509: Received SUBSCRIBE from angular_client_0662b9db29ec8
+1749668509: 	environment/# (QoS 0)
+1749668509: angular_client_0662b9db29ec8 0 environment/#
+1749668509: 	drowsiness/# (QoS 0)
+1749668509: angular_client_0662b9db29ec8 0 drowsiness/#
+1749668509: 	gestures/# (QoS 0)
+1749668509: angular_client_0662b9db29ec8 0 gestures/#
+1749668509: Sending SUBACK to angular_client_0662b9db29ec8
+1749668517: New connection from 10.147.20.65:61364 on port 1883.
+1749668517: New client connected from 10.147.20.65:61364 as auto-89B5FC11-621A-8D45-5227-E0EF21AB9670 (p2, c1, k60).
+1749668517: No will message specified.
+1749668517: Sending CONNACK to auto-89B5FC11-621A-8D45-5227-E0EF21AB9670 (0, 0)
+1749668518: Received PUBLISH from auto-89B5FC11-621A-8D45-5227-E0EF21AB9670 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668518: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668518: Sending PUBLISH to angular_client_0662b9db29ec8 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668518: Received PUBLISH from auto-89B5FC11-621A-8D45-5227-E0EF21AB9670 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668518: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668518: Sending PUBLISH to angular_client_0662b9db29ec8 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668518: Received PUBLISH from auto-89B5FC11-621A-8D45-5227-E0EF21AB9670 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668518: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668518: Sending PUBLISH to angular_client_0662b9db29ec8 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668519: Received DISCONNECT from auto-89B5FC11-621A-8D45-5227-E0EF21AB9670
+1749668519: Client auto-89B5FC11-621A-8D45-5227-E0EF21AB9670 disconnected.
+1749668535: Client angular_client_0662b9db29ec8 closed its connection.
+1749668536: New client connected from 10.147.20.65:61635 as angular_client_28c871a54c008 (p2, c1, k60).
+1749668536: No will message specified.
+1749668536: Sending CONNACK to angular_client_28c871a54c008 (0, 0)
+1749668536: Received SUBSCRIBE from angular_client_28c871a54c008
+1749668536: 	environment/# (QoS 0)
+1749668536: angular_client_28c871a54c008 0 environment/#
+1749668536: 	drowsiness/# (QoS 0)
+1749668536: angular_client_28c871a54c008 0 drowsiness/#
+1749668536: 	gestures/# (QoS 0)
+1749668536: angular_client_28c871a54c008 0 gestures/#
+1749668536: Sending SUBACK to angular_client_28c871a54c008
+1749668536: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668536: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668545: New connection from 10.147.20.65:61768 on port 1883.
+1749668545: New client connected from 10.147.20.65:61768 as auto-9EF84C7A-282E-59AF-DC2C-50F922D6C059 (p2, c1, k60).
+1749668545: No will message specified.
+1749668545: Sending CONNACK to auto-9EF84C7A-282E-59AF-DC2C-50F922D6C059 (0, 0)
+1749668548: Received PUBLISH from auto-9EF84C7A-282E-59AF-DC2C-50F922D6C059 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749668548: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749668548: Sending PUBLISH to angular_client_28c871a54c008 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749668548: Received PUBLISH from auto-9EF84C7A-282E-59AF-DC2C-50F922D6C059 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668548: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668548: Sending PUBLISH to angular_client_28c871a54c008 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668548: Received PUBLISH from auto-9EF84C7A-282E-59AF-DC2C-50F922D6C059 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668548: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668548: Sending PUBLISH to angular_client_28c871a54c008 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668549: Received DISCONNECT from auto-9EF84C7A-282E-59AF-DC2C-50F922D6C059
+1749668549: Client auto-9EF84C7A-282E-59AF-DC2C-50F922D6C059 disconnected.
+1749668596: Received PINGREQ from angular_client_28c871a54c008
+1749668596: Sending PINGRESP to angular_client_28c871a54c008
+1749668597: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668597: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668656: Received PINGREQ from angular_client_28c871a54c008
+1749668656: Sending PINGRESP to angular_client_28c871a54c008
+1749668657: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668657: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668716: Received PINGREQ from angular_client_28c871a54c008
+1749668716: Sending PINGRESP to angular_client_28c871a54c008
+1749668718: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668718: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668739: Client angular_client_28c871a54c008 closed its connection.
+1749668740: New client connected from 10.147.20.65:64345 as angular_client_eb3a77dd34638 (p2, c1, k60).
+1749668740: No will message specified.
+1749668740: Sending CONNACK to angular_client_eb3a77dd34638 (0, 0)
+1749668740: Received SUBSCRIBE from angular_client_eb3a77dd34638
+1749668740: 	environment/# (QoS 0)
+1749668740: angular_client_eb3a77dd34638 0 environment/#
+1749668740: 	drowsiness/# (QoS 0)
+1749668740: angular_client_eb3a77dd34638 0 drowsiness/#
+1749668740: 	gestures/# (QoS 0)
+1749668740: angular_client_eb3a77dd34638 0 gestures/#
+1749668740: Sending SUBACK to angular_client_eb3a77dd34638
+1749668778: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668778: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668800: Received PINGREQ from angular_client_eb3a77dd34638
+1749668800: Sending PINGRESP to angular_client_eb3a77dd34638
+1749668819: Client angular_client_eb3a77dd34638 closed its connection.
+1749668820: New client connected from 10.147.20.65:65518 as angular_client_8328d8dc412f (p2, c1, k60).
+1749668820: No will message specified.
+1749668820: Sending CONNACK to angular_client_8328d8dc412f (0, 0)
+1749668820: Received SUBSCRIBE from angular_client_8328d8dc412f
+1749668820: 	environment/# (QoS 0)
+1749668820: angular_client_8328d8dc412f 0 environment/#
+1749668820: 	drowsiness/# (QoS 0)
+1749668820: angular_client_8328d8dc412f 0 drowsiness/#
+1749668820: 	gestures/# (QoS 0)
+1749668820: angular_client_8328d8dc412f 0 gestures/#
+1749668820: Sending SUBACK to angular_client_8328d8dc412f
+1749668839: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668839: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668861: Client angular_client_8328d8dc412f closed its connection.
+1749668862: New client connected from 10.147.20.65:49732 as angular_client_af9895b159d48 (p2, c1, k60).
+1749668862: No will message specified.
+1749668862: Sending CONNACK to angular_client_af9895b159d48 (0, 0)
+1749668862: Received SUBSCRIBE from angular_client_af9895b159d48
+1749668862: 	environment/# (QoS 0)
+1749668862: angular_client_af9895b159d48 0 environment/#
+1749668862: 	drowsiness/# (QoS 0)
+1749668862: angular_client_af9895b159d48 0 drowsiness/#
+1749668862: 	gestures/# (QoS 0)
+1749668862: angular_client_af9895b159d48 0 gestures/#
+1749668862: Sending SUBACK to angular_client_af9895b159d48
+1749668868: New connection from 10.147.20.65:49813 on port 1883.
+1749668868: New client connected from 10.147.20.65:49813 as auto-91E6AFC5-E543-B349-7F8D-C53419F85D61 (p2, c1, k60).
+1749668868: No will message specified.
+1749668868: Sending CONNACK to auto-91E6AFC5-E543-B349-7F8D-C53419F85D61 (0, 0)
+1749668870: Received PUBLISH from auto-91E6AFC5-E543-B349-7F8D-C53419F85D61 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668870: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668870: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668870: Received PUBLISH from auto-91E6AFC5-E543-B349-7F8D-C53419F85D61 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668870: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668870: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668870: Received PUBLISH from auto-91E6AFC5-E543-B349-7F8D-C53419F85D61 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668870: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668870: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668871: Received DISCONNECT from auto-91E6AFC5-E543-B349-7F8D-C53419F85D61
+1749668871: Client auto-91E6AFC5-E543-B349-7F8D-C53419F85D61 disconnected.
+1749668894: New connection from 10.147.20.65:50210 on port 1883.
+1749668894: New client connected from 10.147.20.65:50210 as auto-9F064EE6-A1F6-68B9-167E-59EF4E058013 (p2, c1, k60).
+1749668894: No will message specified.
+1749668894: Sending CONNACK to auto-9F064EE6-A1F6-68B9-167E-59EF4E058013 (0, 0)
+1749668896: Received PUBLISH from auto-9F064EE6-A1F6-68B9-167E-59EF4E058013 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668896: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668896: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668896: Received PUBLISH from auto-9F064EE6-A1F6-68B9-167E-59EF4E058013 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668896: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668896: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749668896: Received PUBLISH from auto-9F064EE6-A1F6-68B9-167E-59EF4E058013 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668896: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668896: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668897: Received DISCONNECT from auto-9F064EE6-A1F6-68B9-167E-59EF4E058013
+1749668897: Client auto-9F064EE6-A1F6-68B9-167E-59EF4E058013 disconnected.
+1749668900: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668900: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668912: New connection from 10.147.20.65:50446 on port 1883.
+1749668912: New client connected from 10.147.20.65:50446 as auto-6B6B1A24-91FE-E718-625C-B102F765F940 (p2, c1, k60).
+1749668912: No will message specified.
+1749668912: Sending CONNACK to auto-6B6B1A24-91FE-E718-625C-B102F765F940 (0, 0)
+1749668915: Received PUBLISH from auto-6B6B1A24-91FE-E718-625C-B102F765F940 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668915: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668915: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668915: Received PUBLISH from auto-6B6B1A24-91FE-E718-625C-B102F765F940 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668915: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668915: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668915: Received PUBLISH from auto-6B6B1A24-91FE-E718-625C-B102F765F940 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668915: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668915: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668916: Received DISCONNECT from auto-6B6B1A24-91FE-E718-625C-B102F765F940
+1749668916: Client auto-6B6B1A24-91FE-E718-625C-B102F765F940 disconnected.
+1749668921: New connection from 10.147.20.65:50558 on port 1883.
+1749668921: New client connected from 10.147.20.65:50558 as auto-659C7107-F9A9-49A6-EDBA-A227DA98BDB3 (p2, c1, k60).
+1749668921: No will message specified.
+1749668921: Sending CONNACK to auto-659C7107-F9A9-49A6-EDBA-A227DA98BDB3 (0, 0)
+1749668922: Received PINGREQ from angular_client_af9895b159d48
+1749668922: Sending PINGRESP to angular_client_af9895b159d48
+1749668923: Received PUBLISH from auto-659C7107-F9A9-49A6-EDBA-A227DA98BDB3 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749668923: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749668923: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749668923: Received PUBLISH from auto-659C7107-F9A9-49A6-EDBA-A227DA98BDB3 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668923: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668923: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668923: Received PUBLISH from auto-659C7107-F9A9-49A6-EDBA-A227DA98BDB3 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668923: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668923: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668924: Received DISCONNECT from auto-659C7107-F9A9-49A6-EDBA-A227DA98BDB3
+1749668924: Client auto-659C7107-F9A9-49A6-EDBA-A227DA98BDB3 disconnected.
+1749668934: New connection from 10.147.20.65:50716 on port 1883.
+1749668934: New client connected from 10.147.20.65:50716 as auto-C68C9FB4-5406-19A5-6C07-FD06E03115AC (p2, c1, k60).
+1749668934: No will message specified.
+1749668934: Sending CONNACK to auto-C68C9FB4-5406-19A5-6C07-FD06E03115AC (0, 0)
+1749668939: Received PUBLISH from auto-C68C9FB4-5406-19A5-6C07-FD06E03115AC (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668939: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668939: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749668939: Received PUBLISH from auto-C68C9FB4-5406-19A5-6C07-FD06E03115AC (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668939: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668939: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749668939: Received PUBLISH from auto-C68C9FB4-5406-19A5-6C07-FD06E03115AC (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668939: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668939: Sending PUBLISH to angular_client_af9895b159d48 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749668940: Received DISCONNECT from auto-C68C9FB4-5406-19A5-6C07-FD06E03115AC
+1749668940: Client auto-C68C9FB4-5406-19A5-6C07-FD06E03115AC disconnected.
+1749668947: Client angular_client_af9895b159d48 closed its connection.
+1749668947: New client connected from 10.147.20.65:50897 as angular_client_cbd04684999b (p2, c1, k60).
+1749668947: No will message specified.
+1749668947: Sending CONNACK to angular_client_cbd04684999b (0, 0)
+1749668947: Received SUBSCRIBE from angular_client_cbd04684999b
+1749668947: 	environment/# (QoS 0)
+1749668947: angular_client_cbd04684999b 0 environment/#
+1749668947: 	drowsiness/# (QoS 0)
+1749668947: angular_client_cbd04684999b 0 drowsiness/#
+1749668947: 	gestures/# (QoS 0)
+1749668947: angular_client_cbd04684999b 0 gestures/#
+1749668947: Sending SUBACK to angular_client_cbd04684999b
+1749668960: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749668960: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669008: Received PINGREQ from angular_client_cbd04684999b
+1749669008: Sending PINGRESP to angular_client_cbd04684999b
+1749669021: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669021: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669068: Received PINGREQ from angular_client_cbd04684999b
+1749669068: Sending PINGRESP to angular_client_cbd04684999b
+1749669081: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669081: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669102: Client angular_client_cbd04684999b closed its connection.
+1749669103: New client connected from 10.147.20.65:52902 as angular_client_edead4f96cb2 (p2, c1, k60).
+1749669103: No will message specified.
+1749669103: Sending CONNACK to angular_client_edead4f96cb2 (0, 0)
+1749669103: Received SUBSCRIBE from angular_client_edead4f96cb2
+1749669103: 	environment/# (QoS 0)
+1749669103: angular_client_edead4f96cb2 0 environment/#
+1749669103: 	drowsiness/# (QoS 0)
+1749669103: angular_client_edead4f96cb2 0 drowsiness/#
+1749669103: 	gestures/# (QoS 0)
+1749669103: angular_client_edead4f96cb2 0 gestures/#
+1749669103: Sending SUBACK to angular_client_edead4f96cb2
+1749669120: Client angular_client_edead4f96cb2 closed its connection.
+1749669121: New client connected from 10.147.20.65:53257 as angular_client_e9c65423a024 (p2, c1, k60).
+1749669121: No will message specified.
+1749669121: Sending CONNACK to angular_client_e9c65423a024 (0, 0)
+1749669121: Received SUBSCRIBE from angular_client_e9c65423a024
+1749669121: 	environment/# (QoS 0)
+1749669121: angular_client_e9c65423a024 0 environment/#
+1749669121: 	drowsiness/# (QoS 0)
+1749669121: angular_client_e9c65423a024 0 drowsiness/#
+1749669121: 	gestures/# (QoS 0)
+1749669121: angular_client_e9c65423a024 0 gestures/#
+1749669121: Sending SUBACK to angular_client_e9c65423a024
+1749669142: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669142: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669181: Received PINGREQ from angular_client_e9c65423a024
+1749669181: Sending PINGRESP to angular_client_e9c65423a024
+1749669202: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669202: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669228: Client angular_client_e9c65423a024 closed its connection.
+1749669228: New client connected from 10.147.20.65:54883 as angular_client_606e30aed9988 (p2, c1, k60).
+1749669228: No will message specified.
+1749669228: Sending CONNACK to angular_client_606e30aed9988 (0, 0)
+1749669228: Received SUBSCRIBE from angular_client_606e30aed9988
+1749669228: 	environment/# (QoS 0)
+1749669228: angular_client_606e30aed9988 0 environment/#
+1749669228: 	drowsiness/# (QoS 0)
+1749669228: angular_client_606e30aed9988 0 drowsiness/#
+1749669228: 	gestures/# (QoS 0)
+1749669228: angular_client_606e30aed9988 0 gestures/#
+1749669228: Sending SUBACK to angular_client_606e30aed9988
+1749669263: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669263: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669277: New connection from 10.147.20.65:55520 on port 1883.
+1749669277: New client connected from 10.147.20.65:55520 as auto-E245A054-0AC8-3BD0-11D8-946F4C91BA92 (p2, c1, k60).
+1749669277: No will message specified.
+1749669277: Sending CONNACK to auto-E245A054-0AC8-3BD0-11D8-946F4C91BA92 (0, 0)
+1749669285: Received PUBLISH from auto-E245A054-0AC8-3BD0-11D8-946F4C91BA92 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669285: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669285: Sending PUBLISH to angular_client_606e30aed9988 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669285: Received PUBLISH from auto-E245A054-0AC8-3BD0-11D8-946F4C91BA92 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749669285: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749669285: Sending PUBLISH to angular_client_606e30aed9988 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749669285: Received PUBLISH from auto-E245A054-0AC8-3BD0-11D8-946F4C91BA92 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669285: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669285: Sending PUBLISH to angular_client_606e30aed9988 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669286: Received DISCONNECT from auto-E245A054-0AC8-3BD0-11D8-946F4C91BA92
+1749669286: Client auto-E245A054-0AC8-3BD0-11D8-946F4C91BA92 disconnected.
+1749669288: Received PINGREQ from angular_client_606e30aed9988
+1749669288: Sending PINGRESP to angular_client_606e30aed9988
+1749669323: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669323: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669348: Received PINGREQ from angular_client_606e30aed9988
+1749669348: Sending PINGRESP to angular_client_606e30aed9988
+1749669357: Client angular_client_606e30aed9988 closed its connection.
+1749669358: New client connected from 10.147.20.65:56642 as angular_client_488a301f31518 (p2, c1, k60).
+1749669358: No will message specified.
+1749669358: Sending CONNACK to angular_client_488a301f31518 (0, 0)
+1749669358: Received SUBSCRIBE from angular_client_488a301f31518
+1749669358: 	environment/# (QoS 0)
+1749669358: angular_client_488a301f31518 0 environment/#
+1749669358: 	drowsiness/# (QoS 0)
+1749669358: angular_client_488a301f31518 0 drowsiness/#
+1749669358: 	gestures/# (QoS 0)
+1749669358: angular_client_488a301f31518 0 gestures/#
+1749669358: Sending SUBACK to angular_client_488a301f31518
+1749669362: New connection from 10.147.20.65:56696 on port 1883.
+1749669362: New client connected from 10.147.20.65:56696 as auto-FDFEBEA2-2ECA-F97B-F92D-5CFA030D5DE6 (p2, c1, k60).
+1749669362: No will message specified.
+1749669362: Sending CONNACK to auto-FDFEBEA2-2ECA-F97B-F92D-5CFA030D5DE6 (0, 0)
+1749669365: Received PUBLISH from auto-FDFEBEA2-2ECA-F97B-F92D-5CFA030D5DE6 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669365: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669365: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669365: Received PUBLISH from auto-FDFEBEA2-2ECA-F97B-F92D-5CFA030D5DE6 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749669365: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749669365: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749669365: Received PUBLISH from auto-FDFEBEA2-2ECA-F97B-F92D-5CFA030D5DE6 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669365: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669365: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669366: Received DISCONNECT from auto-FDFEBEA2-2ECA-F97B-F92D-5CFA030D5DE6
+1749669366: Client auto-FDFEBEA2-2ECA-F97B-F92D-5CFA030D5DE6 disconnected.
+1749669384: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669384: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669405: New connection from 10.147.20.65:57235 on port 1883.
+1749669405: New client connected from 10.147.20.65:57235 as auto-AA423CE0-8F2B-098F-76C7-BE5DA4270049 (p2, c1, k60).
+1749669405: No will message specified.
+1749669405: Sending CONNACK to auto-AA423CE0-8F2B-098F-76C7-BE5DA4270049 (0, 0)
+1749669407: Received PUBLISH from auto-AA423CE0-8F2B-098F-76C7-BE5DA4270049 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669407: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669407: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669407: Received PUBLISH from auto-AA423CE0-8F2B-098F-76C7-BE5DA4270049 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749669407: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749669407: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749669407: Received PUBLISH from auto-AA423CE0-8F2B-098F-76C7-BE5DA4270049 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669407: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669407: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669408: Received DISCONNECT from auto-AA423CE0-8F2B-098F-76C7-BE5DA4270049
+1749669408: Client auto-AA423CE0-8F2B-098F-76C7-BE5DA4270049 disconnected.
+1749669417: New connection from 10.147.20.65:57383 on port 1883.
+1749669417: New client connected from 10.147.20.65:57383 as auto-C8C3BD80-E6A7-4573-B974-B8AF9CDB2516 (p2, c1, k60).
+1749669417: No will message specified.
+1749669417: Sending CONNACK to auto-C8C3BD80-E6A7-4573-B974-B8AF9CDB2516 (0, 0)
+1749669418: Received PINGREQ from angular_client_488a301f31518
+1749669418: Sending PINGRESP to angular_client_488a301f31518
+1749669419: Received PUBLISH from auto-C8C3BD80-E6A7-4573-B974-B8AF9CDB2516 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749669419: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749669419: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749669419: Received PUBLISH from auto-C8C3BD80-E6A7-4573-B974-B8AF9CDB2516 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749669419: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749669419: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749669419: Received PUBLISH from auto-C8C3BD80-E6A7-4573-B974-B8AF9CDB2516 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669419: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669419: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669420: Received DISCONNECT from auto-C8C3BD80-E6A7-4573-B974-B8AF9CDB2516
+1749669420: Client auto-C8C3BD80-E6A7-4573-B974-B8AF9CDB2516 disconnected.
+1749669424: New connection from 10.147.20.65:57475 on port 1883.
+1749669424: New client connected from 10.147.20.65:57475 as auto-989C4A33-3A36-76B0-5C2A-7FE89B0B7D69 (p2, c1, k60).
+1749669424: No will message specified.
+1749669424: Sending CONNACK to auto-989C4A33-3A36-76B0-5C2A-7FE89B0B7D69 (0, 0)
+1749669444: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669444: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669446: Received PUBLISH from auto-989C4A33-3A36-76B0-5C2A-7FE89B0B7D69 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669446: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669446: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749669446: Received PUBLISH from auto-989C4A33-3A36-76B0-5C2A-7FE89B0B7D69 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749669446: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749669446: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/weather', ... (15 bytes))
+1749669446: Received PUBLISH from auto-989C4A33-3A36-76B0-5C2A-7FE89B0B7D69 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669446: Sending PUBLISH to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669446: Sending PUBLISH to angular_client_488a301f31518 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749669447: Received DISCONNECT from auto-989C4A33-3A36-76B0-5C2A-7FE89B0B7D69
+1749669447: Client auto-989C4A33-3A36-76B0-5C2A-7FE89B0B7D69 disconnected.
+1749669458: Client angular_client_488a301f31518 closed its connection.
+1749669459: New client connected from 10.147.20.65:57941 as angular_client_703c06ae6f868 (p2, c1, k60).
+1749669459: No will message specified.
+1749669459: Sending CONNACK to angular_client_703c06ae6f868 (0, 0)
+1749669459: Received SUBSCRIBE from angular_client_703c06ae6f868
+1749669459: 	environment/# (QoS 0)
+1749669459: angular_client_703c06ae6f868 0 environment/#
+1749669459: 	drowsiness/# (QoS 0)
+1749669459: angular_client_703c06ae6f868 0 drowsiness/#
+1749669459: 	gestures/# (QoS 0)
+1749669459: angular_client_703c06ae6f868 0 gestures/#
+1749669459: Sending SUBACK to angular_client_703c06ae6f868
+1749669505: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669505: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669519: Received PINGREQ from angular_client_703c06ae6f868
+1749669519: Sending PINGRESP to angular_client_703c06ae6f868
+1749669553: Client angular_client_703c06ae6f868 closed its connection.
+1749669554: New client connected from 10.147.20.65:59194 as angular_client_1e18274ed461 (p2, c1, k60).
+1749669554: No will message specified.
+1749669554: Sending CONNACK to angular_client_1e18274ed461 (0, 0)
+1749669554: Received SUBSCRIBE from angular_client_1e18274ed461
+1749669554: 	environment/# (QoS 0)
+1749669554: angular_client_1e18274ed461 0 environment/#
+1749669554: 	drowsiness/# (QoS 0)
+1749669554: angular_client_1e18274ed461 0 drowsiness/#
+1749669554: 	gestures/# (QoS 0)
+1749669554: angular_client_1e18274ed461 0 gestures/#
+1749669554: Sending SUBACK to angular_client_1e18274ed461
+1749669565: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669565: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669587: Client angular_client_1e18274ed461 closed its connection.
+1749669588: New client connected from 10.147.20.65:59704 as angular_client_226cb4817ae48 (p2, c1, k60).
+1749669588: No will message specified.
+1749669588: Sending CONNACK to angular_client_226cb4817ae48 (0, 0)
+1749669588: Received SUBSCRIBE from angular_client_226cb4817ae48
+1749669588: 	environment/# (QoS 0)
+1749669588: angular_client_226cb4817ae48 0 environment/#
+1749669588: 	drowsiness/# (QoS 0)
+1749669588: angular_client_226cb4817ae48 0 drowsiness/#
+1749669588: 	gestures/# (QoS 0)
+1749669588: angular_client_226cb4817ae48 0 gestures/#
+1749669588: Sending SUBACK to angular_client_226cb4817ae48
+1749669626: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669626: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669648: Received PINGREQ from angular_client_226cb4817ae48
+1749669648: Sending PINGRESP to angular_client_226cb4817ae48
+1749669686: Received PINGREQ from auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669686: Sending PINGRESP to auto-882A1862-CCDF-3FAB-9DFC-692228435ACF
+1749669704: Client auto-882A1862-CCDF-3FAB-9DFC-692228435ACF closed its connection.
+1749669708: Received PINGREQ from angular_client_226cb4817ae48
+1749669708: Sending PINGRESP to angular_client_226cb4817ae48
+1749669768: Received PINGREQ from angular_client_226cb4817ae48
+1749669768: Sending PINGRESP to angular_client_226cb4817ae48
+1749669828: Received PINGREQ from angular_client_226cb4817ae48
+1749669828: Sending PINGRESP to angular_client_226cb4817ae48
+1749669888: Received PINGREQ from angular_client_226cb4817ae48
+1749669888: Sending PINGRESP to angular_client_226cb4817ae48
+1749669948: Received PINGREQ from angular_client_226cb4817ae48
+1749669948: Sending PINGRESP to angular_client_226cb4817ae48
+1749670008: Received PINGREQ from angular_client_226cb4817ae48
+1749670008: Sending PINGRESP to angular_client_226cb4817ae48
+1749670068: Received PINGREQ from angular_client_226cb4817ae48
+1749670068: Sending PINGRESP to angular_client_226cb4817ae48
+1749670128: Received PINGREQ from angular_client_226cb4817ae48
+1749670128: Sending PINGRESP to angular_client_226cb4817ae48
+1749670188: Received PINGREQ from angular_client_226cb4817ae48
+1749670188: Sending PINGRESP to angular_client_226cb4817ae48
+1749670248: Received PINGREQ from angular_client_226cb4817ae48
+1749670248: Sending PINGRESP to angular_client_226cb4817ae48
+1749670308: Received PINGREQ from angular_client_226cb4817ae48
+1749670308: Sending PINGRESP to angular_client_226cb4817ae48
+1749670368: Received PINGREQ from angular_client_226cb4817ae48
+1749670368: Sending PINGRESP to angular_client_226cb4817ae48
+1749670428: Received PINGREQ from angular_client_226cb4817ae48
+1749670428: Sending PINGRESP to angular_client_226cb4817ae48
+1749670488: Received PINGREQ from angular_client_226cb4817ae48
+1749670488: Sending PINGRESP to angular_client_226cb4817ae48
+1749670548: Received PINGREQ from angular_client_226cb4817ae48
+1749670548: Sending PINGRESP to angular_client_226cb4817ae48
+1749670608: Received PINGREQ from angular_client_226cb4817ae48
+1749670608: Sending PINGRESP to angular_client_226cb4817ae48
+1749670668: Received PINGREQ from angular_client_226cb4817ae48
+1749670668: Sending PINGRESP to angular_client_226cb4817ae48
+1749670728: Received PINGREQ from angular_client_226cb4817ae48
+1749670728: Sending PINGRESP to angular_client_226cb4817ae48
+1749670788: Received PINGREQ from angular_client_226cb4817ae48
+1749670788: Sending PINGRESP to angular_client_226cb4817ae48
+1749670848: Received PINGREQ from angular_client_226cb4817ae48
+1749670848: Sending PINGRESP to angular_client_226cb4817ae48
+1749670908: Received PINGREQ from angular_client_226cb4817ae48
+1749670908: Sending PINGRESP to angular_client_226cb4817ae48
+1749670968: Received PINGREQ from angular_client_226cb4817ae48
+1749670968: Sending PINGRESP to angular_client_226cb4817ae48
+1749671028: Received PINGREQ from angular_client_226cb4817ae48
+1749671028: Sending PINGRESP to angular_client_226cb4817ae48
+1749671088: Received PINGREQ from angular_client_226cb4817ae48
+1749671088: Sending PINGRESP to angular_client_226cb4817ae48
+1749671148: Received PINGREQ from angular_client_226cb4817ae48
+1749671148: Sending PINGRESP to angular_client_226cb4817ae48
+1749671202: Client angular_client_226cb4817ae48 closed its connection.
+1749671203: New client connected from 10.147.20.65:63788 as angular_client_5162126a2f71 (p2, c1, k60).
+1749671203: No will message specified.
+1749671203: Sending CONNACK to angular_client_5162126a2f71 (0, 0)
+1749671203: Received SUBSCRIBE from angular_client_5162126a2f71
+1749671203: 	environment/# (QoS 0)
+1749671203: angular_client_5162126a2f71 0 environment/#
+1749671203: 	drowsiness/# (QoS 0)
+1749671203: angular_client_5162126a2f71 0 drowsiness/#
+1749671203: 	gestures/# (QoS 0)
+1749671203: angular_client_5162126a2f71 0 gestures/#
+1749671203: Sending SUBACK to angular_client_5162126a2f71
+1749671237: Client angular_client_5162126a2f71 closed its connection.
+1749671238: New client connected from 10.147.20.65:64265 as angular_client_27a70932aef88 (p2, c1, k60).
+1749671238: No will message specified.
+1749671238: Sending CONNACK to angular_client_27a70932aef88 (0, 0)
+1749671238: Received SUBSCRIBE from angular_client_27a70932aef88
+1749671238: 	environment/# (QoS 0)
+1749671238: angular_client_27a70932aef88 0 environment/#
+1749671238: 	drowsiness/# (QoS 0)
+1749671238: angular_client_27a70932aef88 0 drowsiness/#
+1749671238: 	gestures/# (QoS 0)
+1749671238: angular_client_27a70932aef88 0 gestures/#
+1749671238: Sending SUBACK to angular_client_27a70932aef88
+1749671244: Client angular_client_27a70932aef88 closed its connection.
+1749671245: New client connected from 10.147.20.65:64381 as angular_client_c4273eaa5eff (p2, c1, k60).
+1749671245: No will message specified.
+1749671245: Sending CONNACK to angular_client_c4273eaa5eff (0, 0)
+1749671245: Received SUBSCRIBE from angular_client_c4273eaa5eff
+1749671245: 	environment/# (QoS 0)
+1749671245: angular_client_c4273eaa5eff 0 environment/#
+1749671245: 	drowsiness/# (QoS 0)
+1749671245: angular_client_c4273eaa5eff 0 drowsiness/#
+1749671245: 	gestures/# (QoS 0)
+1749671245: angular_client_c4273eaa5eff 0 gestures/#
+1749671245: Sending SUBACK to angular_client_c4273eaa5eff
+1749671260: Client angular_client_c4273eaa5eff closed its connection.
+1749671261: New client connected from 10.147.20.65:64612 as angular_client_9134e18788218 (p2, c1, k60).
+1749671261: No will message specified.
+1749671261: Sending CONNACK to angular_client_9134e18788218 (0, 0)
+1749671261: Received SUBSCRIBE from angular_client_9134e18788218
+1749671261: 	environment/# (QoS 0)
+1749671261: angular_client_9134e18788218 0 environment/#
+1749671261: 	drowsiness/# (QoS 0)
+1749671261: angular_client_9134e18788218 0 drowsiness/#
+1749671261: 	gestures/# (QoS 0)
+1749671261: angular_client_9134e18788218 0 gestures/#
+1749671261: Sending SUBACK to angular_client_9134e18788218
+1749671275: Client angular_client_9134e18788218 closed its connection.
+1749671276: New client connected from 10.147.20.65:64832 as angular_client_8d77e84b2ee28 (p2, c1, k60).
+1749671276: No will message specified.
+1749671276: Sending CONNACK to angular_client_8d77e84b2ee28 (0, 0)
+1749671276: Received SUBSCRIBE from angular_client_8d77e84b2ee28
+1749671276: 	environment/# (QoS 0)
+1749671276: angular_client_8d77e84b2ee28 0 environment/#
+1749671276: 	drowsiness/# (QoS 0)
+1749671276: angular_client_8d77e84b2ee28 0 drowsiness/#
+1749671276: 	gestures/# (QoS 0)
+1749671276: angular_client_8d77e84b2ee28 0 gestures/#
+1749671276: Sending SUBACK to angular_client_8d77e84b2ee28
+1749671313: Client angular_client_8d77e84b2ee28 closed its connection.
+1749671314: New client connected from 10.147.20.65:65384 as angular_client_2089c448e83c8 (p2, c1, k60).
+1749671314: No will message specified.
+1749671314: Sending CONNACK to angular_client_2089c448e83c8 (0, 0)
+1749671314: Received SUBSCRIBE from angular_client_2089c448e83c8
+1749671314: 	environment/# (QoS 0)
+1749671314: angular_client_2089c448e83c8 0 environment/#
+1749671314: 	drowsiness/# (QoS 0)
+1749671314: angular_client_2089c448e83c8 0 drowsiness/#
+1749671314: 	gestures/# (QoS 0)
+1749671314: angular_client_2089c448e83c8 0 gestures/#
+1749671314: Sending SUBACK to angular_client_2089c448e83c8
+1749671374: Received PINGREQ from angular_client_2089c448e83c8
+1749671374: Sending PINGRESP to angular_client_2089c448e83c8
+1749671384: Client angular_client_2089c448e83c8 closed its connection.
+1749671385: New client connected from 10.147.20.65:50095 as angular_client_26f9dc6d4643 (p2, c1, k60).
+1749671385: No will message specified.
+1749671385: Sending CONNACK to angular_client_26f9dc6d4643 (0, 0)
+1749671385: Received SUBSCRIBE from angular_client_26f9dc6d4643
+1749671385: 	environment/# (QoS 0)
+1749671385: angular_client_26f9dc6d4643 0 environment/#
+1749671385: 	drowsiness/# (QoS 0)
+1749671385: angular_client_26f9dc6d4643 0 drowsiness/#
+1749671385: 	gestures/# (QoS 0)
+1749671385: angular_client_26f9dc6d4643 0 gestures/#
+1749671385: Sending SUBACK to angular_client_26f9dc6d4643
+1749671438: Client angular_client_26f9dc6d4643 closed its connection.
+1749671439: New client connected from 10.147.20.65:50863 as angular_client_987f2c2108ff (p2, c1, k60).
+1749671439: No will message specified.
+1749671439: Sending CONNACK to angular_client_987f2c2108ff (0, 0)
+1749671439: Received SUBSCRIBE from angular_client_987f2c2108ff
+1749671439: 	environment/# (QoS 0)
+1749671439: angular_client_987f2c2108ff 0 environment/#
+1749671439: 	drowsiness/# (QoS 0)
+1749671439: angular_client_987f2c2108ff 0 drowsiness/#
+1749671439: 	gestures/# (QoS 0)
+1749671439: angular_client_987f2c2108ff 0 gestures/#
+1749671439: Sending SUBACK to angular_client_987f2c2108ff
+1749671499: Received PINGREQ from angular_client_987f2c2108ff
+1749671499: Sending PINGRESP to angular_client_987f2c2108ff
+1749671559: Received PINGREQ from angular_client_987f2c2108ff
+1749671559: Sending PINGRESP to angular_client_987f2c2108ff
+1749671608: Client angular_client_987f2c2108ff closed its connection.
+1749671609: New client connected from 10.147.20.65:53162 as angular_client_f33389762bea (p2, c1, k60).
+1749671609: No will message specified.
+1749671609: Sending CONNACK to angular_client_f33389762bea (0, 0)
+1749671609: Received SUBSCRIBE from angular_client_f33389762bea
+1749671609: 	environment/# (QoS 0)
+1749671609: angular_client_f33389762bea 0 environment/#
+1749671609: 	drowsiness/# (QoS 0)
+1749671609: angular_client_f33389762bea 0 drowsiness/#
+1749671609: 	gestures/# (QoS 0)
+1749671609: angular_client_f33389762bea 0 gestures/#
+1749671609: Sending SUBACK to angular_client_f33389762bea
+1749671669: Received PINGREQ from angular_client_f33389762bea
+1749671669: Sending PINGRESP to angular_client_f33389762bea
+1749671729: Received PINGREQ from angular_client_f33389762bea
+1749671729: Sending PINGRESP to angular_client_f33389762bea
+1749671740: New connection from 10.147.20.65:54913 on port 1883.
+1749671740: New client connected from 10.147.20.65:54913 as auto-1B7D47CA-9E15-7AC1-62A9-860C57BC1A23 (p2, c1, k60).
+1749671740: No will message specified.
+1749671740: Sending CONNACK to auto-1B7D47CA-9E15-7AC1-62A9-860C57BC1A23 (0, 0)
+1749671740: Received PUBLISH from auto-1B7D47CA-9E15-7AC1-62A9-860C57BC1A23 (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671740: Sending PUBLISH to angular_client_f33389762bea (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671740: Received DISCONNECT from auto-1B7D47CA-9E15-7AC1-62A9-860C57BC1A23
+1749671740: Client auto-1B7D47CA-9E15-7AC1-62A9-860C57BC1A23 disconnected.
+1749671776: Client angular_client_f33389762bea closed its connection.
+1749671777: New client connected from 10.147.20.65:55467 as angular_client_4b0eb771747f (p2, c1, k60).
+1749671777: No will message specified.
+1749671777: Sending CONNACK to angular_client_4b0eb771747f (0, 0)
+1749671777: Received SUBSCRIBE from angular_client_4b0eb771747f
+1749671777: 	environment/# (QoS 0)
+1749671777: angular_client_4b0eb771747f 0 environment/#
+1749671777: 	drowsiness/# (QoS 0)
+1749671777: angular_client_4b0eb771747f 0 drowsiness/#
+1749671777: 	gestures/# (QoS 0)
+1749671777: angular_client_4b0eb771747f 0 gestures/#
+1749671777: Sending SUBACK to angular_client_4b0eb771747f
+1749671778: New connection from 10.147.20.65:55490 on port 1883.
+1749671778: New client connected from 10.147.20.65:55490 as auto-2A9512CB-60ED-5D77-6B02-1328E748847F (p2, c1, k60).
+1749671778: No will message specified.
+1749671778: Sending CONNACK to auto-2A9512CB-60ED-5D77-6B02-1328E748847F (0, 0)
+1749671778: Received PUBLISH from auto-2A9512CB-60ED-5D77-6B02-1328E748847F (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671778: Sending PUBLISH to angular_client_4b0eb771747f (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671778: Received DISCONNECT from auto-2A9512CB-60ED-5D77-6B02-1328E748847F
+1749671778: Client auto-2A9512CB-60ED-5D77-6B02-1328E748847F disconnected.
+1749671786: New connection from 10.147.20.65:55595 on port 1883.
+1749671786: New client connected from 10.147.20.65:55595 as auto-645BDE93-E1F1-C593-F2DE-1C223257706E (p2, c1, k60).
+1749671786: No will message specified.
+1749671786: Sending CONNACK to auto-645BDE93-E1F1-C593-F2DE-1C223257706E (0, 0)
+1749671786: Received PUBLISH from auto-645BDE93-E1F1-C593-F2DE-1C223257706E (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671786: Sending PUBLISH to angular_client_4b0eb771747f (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671786: Received DISCONNECT from auto-645BDE93-E1F1-C593-F2DE-1C223257706E
+1749671786: Client auto-645BDE93-E1F1-C593-F2DE-1C223257706E disconnected.
+1749671838: Received PINGREQ from angular_client_4b0eb771747f
+1749671838: Sending PINGRESP to angular_client_4b0eb771747f
+1749671841: Client angular_client_4b0eb771747f closed its connection.
+1749671842: New client connected from 10.147.20.65:56380 as angular_client_ee4f71a1e3c7 (p2, c1, k60).
+1749671842: No will message specified.
+1749671842: Sending CONNACK to angular_client_ee4f71a1e3c7 (0, 0)
+1749671842: Received SUBSCRIBE from angular_client_ee4f71a1e3c7
+1749671842: 	environment/# (QoS 0)
+1749671842: angular_client_ee4f71a1e3c7 0 environment/#
+1749671842: 	drowsiness/# (QoS 0)
+1749671842: angular_client_ee4f71a1e3c7 0 drowsiness/#
+1749671842: 	gestures/# (QoS 0)
+1749671842: angular_client_ee4f71a1e3c7 0 gestures/#
+1749671842: Sending SUBACK to angular_client_ee4f71a1e3c7
+1749671843: New connection from 10.147.20.65:56401 on port 1883.
+1749671843: New client connected from 10.147.20.65:56401 as auto-020208AB-37EE-6A21-FC2B-F10DCD26C901 (p2, c1, k60).
+1749671843: No will message specified.
+1749671843: Sending CONNACK to auto-020208AB-37EE-6A21-FC2B-F10DCD26C901 (0, 0)
+1749671843: Received PUBLISH from auto-020208AB-37EE-6A21-FC2B-F10DCD26C901 (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671843: Sending PUBLISH to angular_client_ee4f71a1e3c7 (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671843: Received DISCONNECT from auto-020208AB-37EE-6A21-FC2B-F10DCD26C901
+1749671843: Client auto-020208AB-37EE-6A21-FC2B-F10DCD26C901 disconnected.
+1749671846: New connection from 10.147.20.65:56443 on port 1883.
+1749671846: New client connected from 10.147.20.65:56443 as auto-2C6020A8-A1C7-9660-9FF6-F2E82EEE00AC (p2, c1, k60).
+1749671846: No will message specified.
+1749671846: Sending CONNACK to auto-2C6020A8-A1C7-9660-9FF6-F2E82EEE00AC (0, 0)
+1749671846: Received PUBLISH from auto-2C6020A8-A1C7-9660-9FF6-F2E82EEE00AC (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671846: Sending PUBLISH to angular_client_ee4f71a1e3c7 (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671846: Received DISCONNECT from auto-2C6020A8-A1C7-9660-9FF6-F2E82EEE00AC
+1749671846: Client auto-2C6020A8-A1C7-9660-9FF6-F2E82EEE00AC disconnected.
+1749671854: Client angular_client_ee4f71a1e3c7 closed its connection.
+1749671854: New client connected from 10.147.20.65:56566 as angular_client_b5db43a87547 (p2, c1, k60).
+1749671854: No will message specified.
+1749671854: Sending CONNACK to angular_client_b5db43a87547 (0, 0)
+1749671854: Received SUBSCRIBE from angular_client_b5db43a87547
+1749671854: 	environment/# (QoS 0)
+1749671854: angular_client_b5db43a87547 0 environment/#
+1749671854: 	drowsiness/# (QoS 0)
+1749671854: angular_client_b5db43a87547 0 drowsiness/#
+1749671854: 	gestures/# (QoS 0)
+1749671854: angular_client_b5db43a87547 0 gestures/#
+1749671854: Sending SUBACK to angular_client_b5db43a87547
+1749671856: New connection from 10.147.20.65:56588 on port 1883.
+1749671856: New client connected from 10.147.20.65:56588 as auto-D9EFD3AF-DE50-11A4-D351-781051954C48 (p2, c1, k60).
+1749671856: No will message specified.
+1749671856: Sending CONNACK to auto-D9EFD3AF-DE50-11A4-D351-781051954C48 (0, 0)
+1749671856: Received PUBLISH from auto-D9EFD3AF-DE50-11A4-D351-781051954C48 (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671856: Sending PUBLISH to angular_client_b5db43a87547 (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671856: Received DISCONNECT from auto-D9EFD3AF-DE50-11A4-D351-781051954C48
+1749671856: Client auto-D9EFD3AF-DE50-11A4-D351-781051954C48 disconnected.
+1749671858: New connection from 10.147.20.65:56621 on port 1883.
+1749671858: New client connected from 10.147.20.65:56621 as auto-CFADE46E-7102-53B8-CBCC-66CC45005FCD (p2, c1, k60).
+1749671858: No will message specified.
+1749671858: Sending CONNACK to auto-CFADE46E-7102-53B8-CBCC-66CC45005FCD (0, 0)
+1749671858: Received PUBLISH from auto-CFADE46E-7102-53B8-CBCC-66CC45005FCD (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671858: Sending PUBLISH to angular_client_b5db43a87547 (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671858: Received DISCONNECT from auto-CFADE46E-7102-53B8-CBCC-66CC45005FCD
+1749671858: Client auto-CFADE46E-7102-53B8-CBCC-66CC45005FCD disconnected.
+1749671870: New connection from 10.147.20.65:56781 on port 1883.
+1749671870: New client connected from 10.147.20.65:56781 as auto-C408B715-2F7D-8F4F-6E2D-591139C5F36B (p2, c1, k60).
+1749671870: No will message specified.
+1749671870: Sending CONNACK to auto-C408B715-2F7D-8F4F-6E2D-591139C5F36B (0, 0)
+1749671870: Received PUBLISH from auto-C408B715-2F7D-8F4F-6E2D-591139C5F36B (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671870: Sending PUBLISH to angular_client_b5db43a87547 (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671870: Received DISCONNECT from auto-C408B715-2F7D-8F4F-6E2D-591139C5F36B
+1749671870: Client auto-C408B715-2F7D-8F4F-6E2D-591139C5F36B disconnected.
+1749671882: Client angular_client_b5db43a87547 closed its connection.
+1749671883: New client connected from 10.147.20.65:56993 as angular_client_87ff00b406ac (p2, c1, k60).
+1749671883: No will message specified.
+1749671883: Sending CONNACK to angular_client_87ff00b406ac (0, 0)
+1749671883: Received SUBSCRIBE from angular_client_87ff00b406ac
+1749671883: 	environment/# (QoS 0)
+1749671883: angular_client_87ff00b406ac 0 environment/#
+1749671883: 	drowsiness/# (QoS 0)
+1749671883: angular_client_87ff00b406ac 0 drowsiness/#
+1749671883: 	gestures/# (QoS 0)
+1749671883: angular_client_87ff00b406ac 0 gestures/#
+1749671883: Sending SUBACK to angular_client_87ff00b406ac
+1749671885: New connection from 10.147.20.65:57018 on port 1883.
+1749671885: New client connected from 10.147.20.65:57018 as auto-356321A2-C0B4-3ADB-D516-42DB05F7011C (p2, c1, k60).
+1749671885: No will message specified.
+1749671885: Sending CONNACK to auto-356321A2-C0B4-3ADB-D516-42DB05F7011C (0, 0)
+1749671885: Received PUBLISH from auto-356321A2-C0B4-3ADB-D516-42DB05F7011C (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671885: Sending PUBLISH to angular_client_87ff00b406ac (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671885: Received DISCONNECT from auto-356321A2-C0B4-3ADB-D516-42DB05F7011C
+1749671885: Client auto-356321A2-C0B4-3ADB-D516-42DB05F7011C disconnected.
+1749671886: New connection from 10.147.20.65:57039 on port 1883.
+1749671886: New client connected from 10.147.20.65:57039 as auto-A2B15BDC-784B-BD18-3971-3D520144940E (p2, c1, k60).
+1749671886: No will message specified.
+1749671886: Sending CONNACK to auto-A2B15BDC-784B-BD18-3971-3D520144940E (0, 0)
+1749671886: Received PUBLISH from auto-A2B15BDC-784B-BD18-3971-3D520144940E (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671886: Sending PUBLISH to angular_client_87ff00b406ac (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671886: Received DISCONNECT from auto-A2B15BDC-784B-BD18-3971-3D520144940E
+1749671886: Client auto-A2B15BDC-784B-BD18-3971-3D520144940E disconnected.
+1749671888: New connection from 10.147.20.65:57068 on port 1883.
+1749671888: New client connected from 10.147.20.65:57068 as auto-1F8A38F1-C1CB-31CC-C8C2-D1F13415C1DF (p2, c1, k60).
+1749671888: No will message specified.
+1749671888: Sending CONNACK to auto-1F8A38F1-C1CB-31CC-C8C2-D1F13415C1DF (0, 0)
+1749671888: Received PUBLISH from auto-1F8A38F1-C1CB-31CC-C8C2-D1F13415C1DF (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671888: Sending PUBLISH to angular_client_87ff00b406ac (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671888: Received DISCONNECT from auto-1F8A38F1-C1CB-31CC-C8C2-D1F13415C1DF
+1749671888: Client auto-1F8A38F1-C1CB-31CC-C8C2-D1F13415C1DF disconnected.
+1749671891: New connection from 10.147.20.65:57102 on port 1883.
+1749671891: New client connected from 10.147.20.65:57102 as auto-C0FBF75A-B750-14A2-E25A-F928CB1E5901 (p2, c1, k60).
+1749671891: No will message specified.
+1749671891: Sending CONNACK to auto-C0FBF75A-B750-14A2-E25A-F928CB1E5901 (0, 0)
+1749671891: Received PUBLISH from auto-C0FBF75A-B750-14A2-E25A-F928CB1E5901 (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671891: Sending PUBLISH to angular_client_87ff00b406ac (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671891: Received DISCONNECT from auto-C0FBF75A-B750-14A2-E25A-F928CB1E5901
+1749671891: Client auto-C0FBF75A-B750-14A2-E25A-F928CB1E5901 disconnected.
+1749671892: New connection from 10.147.20.65:57130 on port 1883.
+1749671892: New client connected from 10.147.20.65:57130 as auto-E93F65ED-4B89-013A-07A2-87FA8DC65033 (p2, c1, k60).
+1749671892: No will message specified.
+1749671892: Sending CONNACK to auto-E93F65ED-4B89-013A-07A2-87FA8DC65033 (0, 0)
+1749671892: Received PUBLISH from auto-E93F65ED-4B89-013A-07A2-87FA8DC65033 (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671892: Sending PUBLISH to angular_client_87ff00b406ac (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671892: Received DISCONNECT from auto-E93F65ED-4B89-013A-07A2-87FA8DC65033
+1749671892: Client auto-E93F65ED-4B89-013A-07A2-87FA8DC65033 disconnected.
+1749671920: Client angular_client_87ff00b406ac closed its connection.
+1749671920: New client connected from 10.147.20.65:57546 as angular_client_a3afc10fb75e (p2, c1, k60).
+1749671920: No will message specified.
+1749671920: Sending CONNACK to angular_client_a3afc10fb75e (0, 0)
+1749671920: Received SUBSCRIBE from angular_client_a3afc10fb75e
+1749671920: 	environment/# (QoS 0)
+1749671920: angular_client_a3afc10fb75e 0 environment/#
+1749671920: 	drowsiness/# (QoS 0)
+1749671920: angular_client_a3afc10fb75e 0 drowsiness/#
+1749671920: 	gestures/# (QoS 0)
+1749671920: angular_client_a3afc10fb75e 0 gestures/#
+1749671920: Sending SUBACK to angular_client_a3afc10fb75e
+1749671926: New connection from 10.147.20.65:57623 on port 1883.
+1749671926: New client connected from 10.147.20.65:57623 as auto-4285C333-77B5-C883-FFE0-9E0BCF0A57D2 (p2, c1, k60).
+1749671926: No will message specified.
+1749671926: Sending CONNACK to auto-4285C333-77B5-C883-FFE0-9E0BCF0A57D2 (0, 0)
+1749671926: Received PUBLISH from auto-4285C333-77B5-C883-FFE0-9E0BCF0A57D2 (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671926: Sending PUBLISH to angular_client_a3afc10fb75e (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671926: Received DISCONNECT from auto-4285C333-77B5-C883-FFE0-9E0BCF0A57D2
+1749671926: Client auto-4285C333-77B5-C883-FFE0-9E0BCF0A57D2 disconnected.
+1749671927: New connection from 10.147.20.65:57647 on port 1883.
+1749671927: New client connected from 10.147.20.65:57647 as auto-66530E6C-79C6-F69E-9251-026BCE35403E (p2, c1, k60).
+1749671927: No will message specified.
+1749671927: Sending CONNACK to auto-66530E6C-79C6-F69E-9251-026BCE35403E (0, 0)
+1749671927: Received PUBLISH from auto-66530E6C-79C6-F69E-9251-026BCE35403E (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671927: Sending PUBLISH to angular_client_a3afc10fb75e (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671927: Received DISCONNECT from auto-66530E6C-79C6-F69E-9251-026BCE35403E
+1749671927: Client auto-66530E6C-79C6-F69E-9251-026BCE35403E disconnected.
+1749671932: New connection from 10.147.20.65:57708 on port 1883.
+1749671932: New client connected from 10.147.20.65:57708 as auto-872A7BB1-C0F1-EBC5-5BC1-47AB27F56576 (p2, c1, k60).
+1749671932: No will message specified.
+1749671932: Sending CONNACK to auto-872A7BB1-C0F1-EBC5-5BC1-47AB27F56576 (0, 0)
+1749671932: Received PUBLISH from auto-872A7BB1-C0F1-EBC5-5BC1-47AB27F56576 (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671932: Sending PUBLISH to angular_client_a3afc10fb75e (d0, q0, r0, m0, 'drowsiness/status', ... (5 bytes))
+1749671932: Received DISCONNECT from auto-872A7BB1-C0F1-EBC5-5BC1-47AB27F56576
+1749671932: Client auto-872A7BB1-C0F1-EBC5-5BC1-47AB27F56576 disconnected.
+1749671942: New connection from 10.147.20.65:57842 on port 1883.
+1749671942: New client connected from 10.147.20.65:57842 as auto-7D383BBE-6014-2BB9-4A36-FD9A54010CFD (p2, c1, k60).
+1749671942: No will message specified.
+1749671942: Sending CONNACK to auto-7D383BBE-6014-2BB9-4A36-FD9A54010CFD (0, 0)
+1749671942: Received PUBLISH from auto-7D383BBE-6014-2BB9-4A36-FD9A54010CFD (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671942: Sending PUBLISH to angular_client_a3afc10fb75e (d0, q0, r0, m0, 'drowsiness/status', ... (7 bytes))
+1749671942: Received DISCONNECT from auto-7D383BBE-6014-2BB9-4A36-FD9A54010CFD
+1749671942: Client auto-7D383BBE-6014-2BB9-4A36-FD9A54010CFD disconnected.
+1749671980: Received PINGREQ from angular_client_a3afc10fb75e
+1749671980: Sending PINGRESP to angular_client_a3afc10fb75e
+1749672040: Received PINGREQ from angular_client_a3afc10fb75e
+1749672040: Sending PINGRESP to angular_client_a3afc10fb75e
+1749672100: Received PINGREQ from angular_client_a3afc10fb75e
+1749672100: Sending PINGRESP to angular_client_a3afc10fb75e
+1749672160: Received PINGREQ from angular_client_a3afc10fb75e
+1749672160: Sending PINGRESP to angular_client_a3afc10fb75e
+1749672198: New connection from 10.147.20.65:61085 on port 1883.
+1749672198: New client connected from 10.147.20.65:61085 as auto-72FB7758-F1F0-0BF1-43F7-264CB32D0E3B (p2, c1, k60).
+1749672198: No will message specified.
+1749672198: Sending CONNACK to auto-72FB7758-F1F0-0BF1-43F7-264CB32D0E3B (0, 0)
+1749672198: Received PUBLISH from auto-72FB7758-F1F0-0BF1-43F7-264CB32D0E3B (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (17 bytes))
+1749672198: Sending PUBLISH to angular_client_a3afc10fb75e (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (17 bytes))
+1749672198: Received DISCONNECT from auto-72FB7758-F1F0-0BF1-43F7-264CB32D0E3B
+1749672198: Client auto-72FB7758-F1F0-0BF1-43F7-264CB32D0E3B disconnected.
+1749672220: Received PINGREQ from angular_client_a3afc10fb75e
+1749672220: Sending PINGRESP to angular_client_a3afc10fb75e
+1749672257: Client angular_client_a3afc10fb75e closed its connection.
+1749672258: New client connected from 10.147.20.65:61893 as angular_client_355e17fe41cc8 (p2, c1, k60).
+1749672258: No will message specified.
+1749672258: Sending CONNACK to angular_client_355e17fe41cc8 (0, 0)
+1749672258: Received SUBSCRIBE from angular_client_355e17fe41cc8
+1749672258: 	environment/# (QoS 0)
+1749672258: angular_client_355e17fe41cc8 0 environment/#
+1749672258: 	drowsiness/# (QoS 0)
+1749672258: angular_client_355e17fe41cc8 0 drowsiness/#
+1749672258: 	gestures/# (QoS 0)
+1749672258: angular_client_355e17fe41cc8 0 gestures/#
+1749672258: Sending SUBACK to angular_client_355e17fe41cc8
+1749672262: New connection from 10.147.20.65:61955 on port 1883.
+1749672262: New client connected from 10.147.20.65:61955 as auto-6DAE661A-F438-8FC1-89DF-A1408AB24726 (p2, c1, k60).
+1749672262: No will message specified.
+1749672262: Sending CONNACK to auto-6DAE661A-F438-8FC1-89DF-A1408AB24726 (0, 0)
+1749672262: Received PUBLISH from auto-6DAE661A-F438-8FC1-89DF-A1408AB24726 (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (17 bytes))
+1749672262: Sending PUBLISH to angular_client_355e17fe41cc8 (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (17 bytes))
+1749672262: Received DISCONNECT from auto-6DAE661A-F438-8FC1-89DF-A1408AB24726
+1749672262: Client auto-6DAE661A-F438-8FC1-89DF-A1408AB24726 disconnected.
+1749672318: Received PINGREQ from angular_client_355e17fe41cc8
+1749672318: Sending PINGRESP to angular_client_355e17fe41cc8
+1749672378: Received PINGREQ from angular_client_355e17fe41cc8
+1749672378: Sending PINGRESP to angular_client_355e17fe41cc8
+1749672438: Received PINGREQ from angular_client_355e17fe41cc8
+1749672438: Sending PINGRESP to angular_client_355e17fe41cc8
+1749672498: Received PINGREQ from angular_client_355e17fe41cc8
+1749672498: Sending PINGRESP to angular_client_355e17fe41cc8
+1749672558: Received PINGREQ from angular_client_355e17fe41cc8
+1749672558: Sending PINGRESP to angular_client_355e17fe41cc8
+1749672603: Client angular_client_355e17fe41cc8 closed its connection.
+1749672604: New client connected from 10.147.20.65:49895 as angular_client_211193d148ec8 (p2, c1, k60).
+1749672604: No will message specified.
+1749672604: Sending CONNACK to angular_client_211193d148ec8 (0, 0)
+1749672604: Received SUBSCRIBE from angular_client_211193d148ec8
+1749672604: 	environment/# (QoS 0)
+1749672604: angular_client_211193d148ec8 0 environment/#
+1749672604: 	drowsiness/# (QoS 0)
+1749672604: angular_client_211193d148ec8 0 drowsiness/#
+1749672604: 	gestures/# (QoS 0)
+1749672604: angular_client_211193d148ec8 0 gestures/#
+1749672604: Sending SUBACK to angular_client_211193d148ec8
+1749672664: Received PINGREQ from angular_client_211193d148ec8
+1749672664: Sending PINGRESP to angular_client_211193d148ec8
+1749672724: Received PINGREQ from angular_client_211193d148ec8
+1749672724: Sending PINGRESP to angular_client_211193d148ec8
+1749672773: New connection from 10.147.20.65:52101 on port 1883.
+1749672773: New client connected from 10.147.20.65:52101 as auto-0FC0386A-FD44-AEBD-9D1A-482EE77B67EE (p2, c1, k60).
+1749672773: No will message specified.
+1749672773: Sending CONNACK to auto-0FC0386A-FD44-AEBD-9D1A-482EE77B67EE (0, 0)
+1749672773: Received PUBLISH from auto-0FC0386A-FD44-AEBD-9D1A-482EE77B67EE (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (16 bytes))
+1749672773: Sending PUBLISH to angular_client_211193d148ec8 (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (16 bytes))
+1749672773: Received DISCONNECT from auto-0FC0386A-FD44-AEBD-9D1A-482EE77B67EE
+1749672773: Client auto-0FC0386A-FD44-AEBD-9D1A-482EE77B67EE disconnected.
+1749672784: Received PINGREQ from angular_client_211193d148ec8
+1749672784: Sending PINGRESP to angular_client_211193d148ec8
+1749672842: Client angular_client_211193d148ec8 closed its connection.
+1749672843: New client connected from 10.147.20.65:53064 as angular_client_61dea560de76 (p2, c1, k60).
+1749672843: No will message specified.
+1749672843: Sending CONNACK to angular_client_61dea560de76 (0, 0)
+1749672843: Received SUBSCRIBE from angular_client_61dea560de76
+1749672843: 	environment/# (QoS 0)
+1749672843: angular_client_61dea560de76 0 environment/#
+1749672843: 	drowsiness/# (QoS 0)
+1749672843: angular_client_61dea560de76 0 drowsiness/#
+1749672843: 	gestures/# (QoS 0)
+1749672843: angular_client_61dea560de76 0 gestures/#
+1749672843: Sending SUBACK to angular_client_61dea560de76
+1749672893: New connection from 10.147.20.65:53713 on port 1883.
+1749672893: New client connected from 10.147.20.65:53713 as auto-FF4BD092-B406-FBEB-52FC-DCE34517F14F (p2, c1, k60).
+1749672893: No will message specified.
+1749672893: Sending CONNACK to auto-FF4BD092-B406-FBEB-52FC-DCE34517F14F (0, 0)
+1749672893: Received PUBLISH from auto-FF4BD092-B406-FBEB-52FC-DCE34517F14F (d0, q0, r0, m0, 'gestures/radio', ... (21 bytes))
+1749672893: Sending PUBLISH to angular_client_61dea560de76 (d0, q0, r0, m0, 'gestures/radio', ... (21 bytes))
+1749672893: Received DISCONNECT from auto-FF4BD092-B406-FBEB-52FC-DCE34517F14F
+1749672893: Client auto-FF4BD092-B406-FBEB-52FC-DCE34517F14F disconnected.
+1749672903: Received PINGREQ from angular_client_61dea560de76
+1749672903: Sending PINGRESP to angular_client_61dea560de76
+1749672943: New connection from 10.147.20.65:54349 on port 1883.
+1749672943: New client connected from 10.147.20.65:54349 as auto-1FE34015-C1B5-9439-FCCE-9FB3206F73B8 (p2, c1, k60).
+1749672943: No will message specified.
+1749672943: Sending CONNACK to auto-1FE34015-C1B5-9439-FCCE-9FB3206F73B8 (0, 0)
+1749672943: Received PUBLISH from auto-1FE34015-C1B5-9439-FCCE-9FB3206F73B8 (d0, q0, r0, m0, 'gestures/radio', ... (18 bytes))
+1749672943: Sending PUBLISH to angular_client_61dea560de76 (d0, q0, r0, m0, 'gestures/radio', ... (18 bytes))
+1749672943: Received DISCONNECT from auto-1FE34015-C1B5-9439-FCCE-9FB3206F73B8
+1749672943: Client auto-1FE34015-C1B5-9439-FCCE-9FB3206F73B8 disconnected.
+1749672955: New connection from 10.147.20.65:54495 on port 1883.
+1749672955: New client connected from 10.147.20.65:54495 as auto-2A125ED8-A4E7-6D20-473F-0348A4E8268F (p2, c1, k60).
+1749672955: No will message specified.
+1749672955: Sending CONNACK to auto-2A125ED8-A4E7-6D20-473F-0348A4E8268F (0, 0)
+1749672955: Received PUBLISH from auto-2A125ED8-A4E7-6D20-473F-0348A4E8268F (d0, q0, r0, m0, 'gestures/klimatska_naprava', ... (21 bytes))
+1749672955: Sending PUBLISH to angular_client_61dea560de76 (d0, q0, r0, m0, 'gestures/klimatska_naprava', ... (21 bytes))
+1749672955: Received DISCONNECT from auto-2A125ED8-A4E7-6D20-473F-0348A4E8268F
+1749672955: Client auto-2A125ED8-A4E7-6D20-473F-0348A4E8268F disconnected.
+1749672963: Received PINGREQ from angular_client_61dea560de76
+1749672963: Sending PINGRESP to angular_client_61dea560de76
+1749672978: Client angular_client_61dea560de76 closed its connection.
+1749672979: New client connected from 10.147.20.65:54804 as angular_client_337d657eea4a8 (p2, c1, k60).
+1749672979: No will message specified.
+1749672979: Sending CONNACK to angular_client_337d657eea4a8 (0, 0)
+1749672979: Received SUBSCRIBE from angular_client_337d657eea4a8
+1749672979: 	environment/# (QoS 0)
+1749672979: angular_client_337d657eea4a8 0 environment/#
+1749672979: 	drowsiness/# (QoS 0)
+1749672979: angular_client_337d657eea4a8 0 drowsiness/#
+1749672979: 	gestures/# (QoS 0)
+1749672979: angular_client_337d657eea4a8 0 gestures/#
+1749672979: Sending SUBACK to angular_client_337d657eea4a8
+1749673039: Received PINGREQ from angular_client_337d657eea4a8
+1749673039: Sending PINGRESP to angular_client_337d657eea4a8
+1749673099: Received PINGREQ from angular_client_337d657eea4a8
+1749673099: Sending PINGRESP to angular_client_337d657eea4a8
+1749673159: Received PINGREQ from angular_client_337d657eea4a8
+1749673159: Sending PINGRESP to angular_client_337d657eea4a8
+1749673184: Client angular_client_337d657eea4a8 closed its connection.
+1749673184: New client connected from 10.147.20.65:57413 as angular_client_aa6197a6e2cd (p2, c1, k60).
+1749673184: No will message specified.
+1749673184: Sending CONNACK to angular_client_aa6197a6e2cd (0, 0)
+1749673184: Received SUBSCRIBE from angular_client_aa6197a6e2cd
+1749673184: 	environment/# (QoS 0)
+1749673184: angular_client_aa6197a6e2cd 0 environment/#
+1749673184: 	drowsiness/# (QoS 0)
+1749673184: angular_client_aa6197a6e2cd 0 drowsiness/#
+1749673184: 	gestures/# (QoS 0)
+1749673184: angular_client_aa6197a6e2cd 0 gestures/#
+1749673184: Sending SUBACK to angular_client_aa6197a6e2cd
+1749673244: Received PINGREQ from angular_client_aa6197a6e2cd
+1749673244: Sending PINGRESP to angular_client_aa6197a6e2cd
+1749673304: Received PINGREQ from angular_client_aa6197a6e2cd
+1749673304: Sending PINGRESP to angular_client_aa6197a6e2cd
+1749673340: New connection from 10.147.20.128:54531 on port 1883.
+1749673340: New client connected from 10.147.20.128:54531 as auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99 (p2, c1, k60).
+1749673340: No will message specified.
+1749673340: Sending CONNACK to auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99 (0, 0)
+1749673341: Received SUBSCRIBE from auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99
+1749673341: 	environment/# (QoS 0)
+1749673341: auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99 0 environment/#
+1749673341: Sending SUBACK to auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99
+1749673342: Received SUBSCRIBE from auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99
+1749673342: 	gestures/# (QoS 0)
+1749673342: auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99 0 gestures/#
+1749673342: Sending SUBACK to auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99
+1749673342: Received SUBSCRIBE from auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99
+1749673342: 	drowsiness/# (QoS 0)
+1749673342: auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99 0 drowsiness/#
+1749673342: Sending SUBACK to auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99
+1749673364: Received PINGREQ from angular_client_aa6197a6e2cd
+1749673364: Sending PINGRESP to angular_client_aa6197a6e2cd
+1749673376: Client auto-F479687C-17D2-87C6-72DB-AD2CB0E58A99 closed its connection.
+1749673424: Received PINGREQ from angular_client_aa6197a6e2cd
+1749673424: Sending PINGRESP to angular_client_aa6197a6e2cd
+1749673436: New client connected from 10.147.20.65:60553 as angular_client_6840816b0a378 (p2, c1, k60).
+1749673436: No will message specified.
+1749673436: Sending CONNACK to angular_client_6840816b0a378 (0, 0)
+1749673436: Received SUBSCRIBE from angular_client_6840816b0a378
+1749673436: 	environment/# (QoS 0)
+1749673436: angular_client_6840816b0a378 0 environment/#
+1749673436: 	drowsiness/# (QoS 0)
+1749673436: angular_client_6840816b0a378 0 drowsiness/#
+1749673436: 	gestures/# (QoS 0)
+1749673436: angular_client_6840816b0a378 0 gestures/#
+1749673436: Sending SUBACK to angular_client_6840816b0a378
+1749673439: Client angular_client_aa6197a6e2cd closed its connection.
+1749673439: Client angular_client_6840816b0a378 closed its connection.
+1749673440: New client connected from 10.147.20.65:60600 as angular_client_13bf5dbb177a (p2, c1, k60).
+1749673440: No will message specified.
+1749673440: Sending CONNACK to angular_client_13bf5dbb177a (0, 0)
+1749673440: Received SUBSCRIBE from angular_client_13bf5dbb177a
+1749673440: 	environment/# (QoS 0)
+1749673440: angular_client_13bf5dbb177a 0 environment/#
+1749673440: 	drowsiness/# (QoS 0)
+1749673440: angular_client_13bf5dbb177a 0 drowsiness/#
+1749673440: 	gestures/# (QoS 0)
+1749673440: angular_client_13bf5dbb177a 0 gestures/#
+1749673440: Sending SUBACK to angular_client_13bf5dbb177a
+1749673500: Received PINGREQ from angular_client_13bf5dbb177a
+1749673500: Sending PINGRESP to angular_client_13bf5dbb177a
+1749673528: New connection from 10.147.20.128:54691 on port 1883.
+1749673528: New client connected from 10.147.20.128:54691 as auto-B27271BE-65D2-AE04-9576-042434CAC3A0 (p2, c1, k60).
+1749673528: No will message specified.
+1749673528: Sending CONNACK to auto-B27271BE-65D2-AE04-9576-042434CAC3A0 (0, 0)
+1749673528: Received SUBSCRIBE from auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673528: 	environment/# (QoS 0)
+1749673528: auto-B27271BE-65D2-AE04-9576-042434CAC3A0 0 environment/#
+1749673528: Sending SUBACK to auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673528: Received SUBSCRIBE from auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673528: 	gestures/# (QoS 0)
+1749673528: auto-B27271BE-65D2-AE04-9576-042434CAC3A0 0 gestures/#
+1749673528: Sending SUBACK to auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673528: Received SUBSCRIBE from auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673528: 	drowsiness/# (QoS 0)
+1749673528: auto-B27271BE-65D2-AE04-9576-042434CAC3A0 0 drowsiness/#
+1749673528: Sending SUBACK to auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673544: New connection from 10.147.20.128:54806 on port 1883.
+1749673544: New client connected from 10.147.20.128:54806 as auto-B2247974-7F1B-BA6F-C8E5-EE2F9C4926E4 (p2, c1, k60).
+1749673544: No will message specified.
+1749673544: Sending CONNACK to auto-B2247974-7F1B-BA6F-C8E5-EE2F9C4926E4 (0, 0)
+1749673560: Received PINGREQ from angular_client_13bf5dbb177a
+1749673560: Sending PINGRESP to angular_client_13bf5dbb177a
+1749673562: Received PUBLISH from auto-B2247974-7F1B-BA6F-C8E5-EE2F9C4926E4 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749673562: Sending PUBLISH to angular_client_13bf5dbb177a (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749673562: Sending PUBLISH to auto-B27271BE-65D2-AE04-9576-042434CAC3A0 (d0, q0, r0, m0, 'environment/timeofday', ... (13 bytes))
+1749673562: Received PUBLISH from auto-B2247974-7F1B-BA6F-C8E5-EE2F9C4926E4 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749673562: Sending PUBLISH to angular_client_13bf5dbb177a (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749673562: Sending PUBLISH to auto-B27271BE-65D2-AE04-9576-042434CAC3A0 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749673562: Received PUBLISH from auto-B2247974-7F1B-BA6F-C8E5-EE2F9C4926E4 (d0, q0, r0, m0, 'environment/metrics', ... (36 bytes))
+1749673562: Sending PUBLISH to angular_client_13bf5dbb177a (d0, q0, r0, m0, 'environment/metrics', ... (36 bytes))
+1749673562: Sending PUBLISH to auto-B27271BE-65D2-AE04-9576-042434CAC3A0 (d0, q0, r0, m0, 'environment/metrics', ... (36 bytes))
+1749673563: Received DISCONNECT from auto-B2247974-7F1B-BA6F-C8E5-EE2F9C4926E4
+1749673563: Client auto-B2247974-7F1B-BA6F-C8E5-EE2F9C4926E4 disconnected.
+1749673572: Client angular_client_13bf5dbb177a closed its connection.
+1749673573: New client connected from 10.147.20.65:62271 as angular_client_61c5265a1ed68 (p2, c1, k60).
+1749673573: No will message specified.
+1749673573: Sending CONNACK to angular_client_61c5265a1ed68 (0, 0)
+1749673573: Received SUBSCRIBE from angular_client_61c5265a1ed68
+1749673573: 	environment/# (QoS 0)
+1749673573: angular_client_61c5265a1ed68 0 environment/#
+1749673573: 	drowsiness/# (QoS 0)
+1749673573: angular_client_61c5265a1ed68 0 drowsiness/#
+1749673573: 	gestures/# (QoS 0)
+1749673573: angular_client_61c5265a1ed68 0 gestures/#
+1749673573: Sending SUBACK to angular_client_61c5265a1ed68
+1749673580: New connection from 10.147.20.128:54843 on port 1883.
+1749673580: New client connected from 10.147.20.128:54843 as auto-14A1BA2B-0946-53F5-EB5B-5EBDD3BD43E7 (p2, c1, k60).
+1749673580: No will message specified.
+1749673580: Sending CONNACK to auto-14A1BA2B-0946-53F5-EB5B-5EBDD3BD43E7 (0, 0)
+1749673587: Received PUBLISH from auto-14A1BA2B-0946-53F5-EB5B-5EBDD3BD43E7 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749673587: Sending PUBLISH to auto-B27271BE-65D2-AE04-9576-042434CAC3A0 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749673587: Sending PUBLISH to angular_client_61c5265a1ed68 (d0, q0, r0, m0, 'environment/timeofday', ... (15 bytes))
+1749673588: Received PINGREQ from auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673588: Sending PINGRESP to auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673588: Received PUBLISH from auto-14A1BA2B-0946-53F5-EB5B-5EBDD3BD43E7 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749673588: Sending PUBLISH to auto-B27271BE-65D2-AE04-9576-042434CAC3A0 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749673588: Sending PUBLISH to angular_client_61c5265a1ed68 (d0, q0, r0, m0, 'environment/weather', ... (14 bytes))
+1749673588: Received PUBLISH from auto-14A1BA2B-0946-53F5-EB5B-5EBDD3BD43E7 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749673588: Sending PUBLISH to auto-B27271BE-65D2-AE04-9576-042434CAC3A0 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749673588: Sending PUBLISH to angular_client_61c5265a1ed68 (d0, q0, r0, m0, 'environment/metrics', ... (34 bytes))
+1749673589: Received DISCONNECT from auto-14A1BA2B-0946-53F5-EB5B-5EBDD3BD43E7
+1749673589: Client auto-14A1BA2B-0946-53F5-EB5B-5EBDD3BD43E7 disconnected.
+1749673624: Client angular_client_61c5265a1ed68 closed its connection.
+1749673625: New client connected from 10.147.20.65:62946 as angular_client_20f4c894e0e08 (p2, c1, k60).
+1749673625: No will message specified.
+1749673625: Sending CONNACK to angular_client_20f4c894e0e08 (0, 0)
+1749673625: Received SUBSCRIBE from angular_client_20f4c894e0e08
+1749673625: 	environment/# (QoS 0)
+1749673625: angular_client_20f4c894e0e08 0 environment/#
+1749673625: 	drowsiness/# (QoS 0)
+1749673625: angular_client_20f4c894e0e08 0 drowsiness/#
+1749673625: 	gestures/# (QoS 0)
+1749673625: angular_client_20f4c894e0e08 0 gestures/#
+1749673625: Sending SUBACK to angular_client_20f4c894e0e08
+1749673649: Received PINGREQ from auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673649: Sending PINGRESP to auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673685: Received PINGREQ from angular_client_20f4c894e0e08
+1749673685: Sending PINGRESP to angular_client_20f4c894e0e08
+1749673709: Received PINGREQ from auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673709: Sending PINGRESP to auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673745: Received PINGREQ from angular_client_20f4c894e0e08
+1749673745: Sending PINGRESP to angular_client_20f4c894e0e08
+1749673769: Received PINGREQ from auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673769: Sending PINGRESP to auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673805: Received PINGREQ from angular_client_20f4c894e0e08
+1749673805: Sending PINGRESP to angular_client_20f4c894e0e08
+1749673829: Received PINGREQ from auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673829: Sending PINGRESP to auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673865: Received PINGREQ from angular_client_20f4c894e0e08
+1749673865: Sending PINGRESP to angular_client_20f4c894e0e08
+1749673889: Received PINGREQ from auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673889: Sending PINGRESP to auto-B27271BE-65D2-AE04-9576-042434CAC3A0
+1749673896: Client auto-B27271BE-65D2-AE04-9576-042434CAC3A0 closed its connection.
+1749673903: New connection from 10.147.20.128:55194 on port 1883.
+1749673903: New client connected from 10.147.20.128:55194 as auto-938D9739-B4ED-5B32-1225-9881970B55C5 (p2, c1, k60).
+1749673903: No will message specified.
+1749673903: Sending CONNACK to auto-938D9739-B4ED-5B32-1225-9881970B55C5 (0, 0)
+1749673904: Received SUBSCRIBE from auto-938D9739-B4ED-5B32-1225-9881970B55C5
+1749673904: 	environment/# (QoS 0)
+1749673904: auto-938D9739-B4ED-5B32-1225-9881970B55C5 0 environment/#
+1749673904: Sending SUBACK to auto-938D9739-B4ED-5B32-1225-9881970B55C5
+1749673904: Received SUBSCRIBE from auto-938D9739-B4ED-5B32-1225-9881970B55C5
+1749673904: 	gestures/# (QoS 0)
+1749673904: auto-938D9739-B4ED-5B32-1225-9881970B55C5 0 gestures/#
+1749673904: Sending SUBACK to auto-938D9739-B4ED-5B32-1225-9881970B55C5
+1749673904: Received SUBSCRIBE from auto-938D9739-B4ED-5B32-1225-9881970B55C5
+1749673904: 	drowsiness/# (QoS 0)
+1749673904: auto-938D9739-B4ED-5B32-1225-9881970B55C5 0 drowsiness/#
+1749673904: Sending SUBACK to auto-938D9739-B4ED-5B32-1225-9881970B55C5
+1749673925: Received PINGREQ from angular_client_20f4c894e0e08
+1749673925: Sending PINGRESP to angular_client_20f4c894e0e08
+1749673964: Received PINGREQ from auto-938D9739-B4ED-5B32-1225-9881970B55C5
+1749673964: Sending PINGRESP to auto-938D9739-B4ED-5B32-1225-9881970B55C5
+1749673985: Received PINGREQ from angular_client_20f4c894e0e08
+1749673985: Sending PINGRESP to angular_client_20f4c894e0e08
+1749673991: Client auto-938D9739-B4ED-5B32-1225-9881970B55C5 closed its connection.
+1749674045: Received PINGREQ from angular_client_20f4c894e0e08
+1749674045: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674105: Received PINGREQ from angular_client_20f4c894e0e08
+1749674105: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674165: Received PINGREQ from angular_client_20f4c894e0e08
+1749674165: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674225: Received PINGREQ from angular_client_20f4c894e0e08
+1749674225: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674252: New connection from 10.147.20.128:55552 on port 1883.
+1749674252: New client connected from 10.147.20.128:55552 as auto-2441BC38-CA4C-5706-878E-235BEE0937A8 (p2, c1, k60).
+1749674252: No will message specified.
+1749674252: Sending CONNACK to auto-2441BC38-CA4C-5706-878E-235BEE0937A8 (0, 0)
+1749674252: Received SUBSCRIBE from auto-2441BC38-CA4C-5706-878E-235BEE0937A8
+1749674252: 	environment/# (QoS 0)
+1749674252: auto-2441BC38-CA4C-5706-878E-235BEE0937A8 0 environment/#
+1749674252: Sending SUBACK to auto-2441BC38-CA4C-5706-878E-235BEE0937A8
+1749674252: Received SUBSCRIBE from auto-2441BC38-CA4C-5706-878E-235BEE0937A8
+1749674252: 	gestures/# (QoS 0)
+1749674252: auto-2441BC38-CA4C-5706-878E-235BEE0937A8 0 gestures/#
+1749674252: Sending SUBACK to auto-2441BC38-CA4C-5706-878E-235BEE0937A8
+1749674252: Received SUBSCRIBE from auto-2441BC38-CA4C-5706-878E-235BEE0937A8
+1749674252: 	drowsiness/# (QoS 0)
+1749674252: auto-2441BC38-CA4C-5706-878E-235BEE0937A8 0 drowsiness/#
+1749674252: Sending SUBACK to auto-2441BC38-CA4C-5706-878E-235BEE0937A8
+1749674285: Received PINGREQ from angular_client_20f4c894e0e08
+1749674285: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674310: Client auto-2441BC38-CA4C-5706-878E-235BEE0937A8 closed its connection.
+1749674316: New connection from 10.147.20.128:55614 on port 1883.
+1749674316: New client connected from 10.147.20.128:55614 as auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (p2, c1, k60).
+1749674316: No will message specified.
+1749674316: Sending CONNACK to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (0, 0)
+1749674316: Received SUBSCRIBE from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674316: 	environment/# (QoS 0)
+1749674316: auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 0 environment/#
+1749674316: Sending SUBACK to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674317: Received SUBSCRIBE from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674317: 	gestures/# (QoS 0)
+1749674317: auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 0 gestures/#
+1749674317: Sending SUBACK to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674317: Received SUBSCRIBE from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674317: 	drowsiness/# (QoS 0)
+1749674317: auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 0 drowsiness/#
+1749674317: Sending SUBACK to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674345: Received PINGREQ from angular_client_20f4c894e0e08
+1749674345: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674364: New connection from 10.147.20.128:55656 on port 1883.
+1749674364: New client connected from 10.147.20.128:55656 as auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (p2, c1, k60).
+1749674364: No will message specified.
+1749674364: Sending CONNACK to auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (0, 0)
+1749674377: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674377: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674401: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/radio', ... (21 bytes))
+1749674401: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/radio', ... (21 bytes))
+1749674401: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/radio', ... (21 bytes))
+1749674405: Received PINGREQ from angular_client_20f4c894e0e08
+1749674405: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674414: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/radio', ... (23 bytes))
+1749674414: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/radio', ... (23 bytes))
+1749674414: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/radio', ... (23 bytes))
+1749674422: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/radio', ... (23 bytes))
+1749674422: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/radio', ... (23 bytes))
+1749674422: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/radio', ... (23 bytes))
+1749674424: Received PINGREQ from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4
+1749674424: Sending PINGRESP to auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4
+1749674428: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/radio', ... (22 bytes))
+1749674428: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/radio', ... (22 bytes))
+1749674428: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/radio', ... (22 bytes))
+1749674437: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674437: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674465: Received PINGREQ from angular_client_20f4c894e0e08
+1749674465: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674470: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/radio', ... (18 bytes))
+1749674470: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/radio', ... (18 bytes))
+1749674470: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/radio', ... (18 bytes))
+1749674481: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/radio', ... (20 bytes))
+1749674481: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/radio', ... (20 bytes))
+1749674481: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/radio', ... (20 bytes))
+1749674484: Received PINGREQ from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4
+1749674484: Sending PINGRESP to auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4
+1749674498: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674498: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674514: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/klimatska_naprava', ... (23 bytes))
+1749674514: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/klimatska_naprava', ... (23 bytes))
+1749674514: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/klimatska_naprava', ... (23 bytes))
+1749674525: Received PINGREQ from angular_client_20f4c894e0e08
+1749674525: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674545: Received PINGREQ from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4
+1749674545: Sending PINGRESP to auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4
+1749674558: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674558: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674572: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/klimatska_naprava', ... (23 bytes))
+1749674572: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/klimatska_naprava', ... (23 bytes))
+1749674572: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/klimatska_naprava', ... (23 bytes))
+1749674585: Received PINGREQ from angular_client_20f4c894e0e08
+1749674585: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674605: Received PINGREQ from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4
+1749674605: Sending PINGRESP to auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4
+1749674618: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674618: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674620: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/okna', ... (31 bytes))
+1749674620: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/okna', ... (31 bytes))
+1749674620: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/okna', ... (31 bytes))
+1749674638: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (17 bytes))
+1749674638: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (17 bytes))
+1749674638: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (17 bytes))
+1749674645: Received PINGREQ from angular_client_20f4c894e0e08
+1749674645: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674653: Received PUBLISH from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (16 bytes))
+1749674653: Sending PUBLISH to angular_client_20f4c894e0e08 (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (16 bytes))
+1749674653: Sending PUBLISH to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0 (d0, q0, r0, m0, 'gestures/vzvratna_ogledala', ... (16 bytes))
+1749674664: Received DISCONNECT from auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4
+1749674664: Client auto-D515763E-E133-CE11-F4C0-9C01FE8D5DE4 disconnected.
+1749674678: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674678: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674705: Received PINGREQ from angular_client_20f4c894e0e08
+1749674705: Sending PINGRESP to angular_client_20f4c894e0e08
+1749674705: Client angular_client_20f4c894e0e08 closed its connection.
+1749674738: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674738: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674799: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674799: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674859: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674859: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674920: Received PINGREQ from auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
+1749674920: Sending PINGRESP to auto-192E4D5D-FA32-3F0D-C6A4-1041E9936CA0
