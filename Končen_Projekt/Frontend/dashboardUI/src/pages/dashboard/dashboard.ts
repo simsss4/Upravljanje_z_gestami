@@ -67,11 +67,12 @@ export class Dashboard implements OnInit, OnDestroy {
   warnings: string[] = [];
   dashboardTheme = 'normal';
   panelTheme = 'normal';
-  radioOn = false;
-  currentStationIndex = 0;
-  volumeLevel = 50; // 0 to 100
-  fanSpeed = 2; // 0 to 5
-  temperature = 22; // 16 to 30°C
+
+  radioOn = true;
+  volumeLevel: number = 40;
+  currentStationIndex: number = 4;
+  fanSpeed: number = 3;
+  temperature: number = 21.5;
 
   showAlertIcon = false;
   showWarningIcon = false;
@@ -398,13 +399,36 @@ export class Dashboard implements OnInit, OnDestroy {
     return mapping[subTopic]?.[gesture] || null;
   }
 
-  private increaseVolume() {}
+  get volumeBars(): string {
+    return '|'.repeat(Math.floor(this.volumeLevel / 2));
+  }
+  private increaseVolume() {
+    if (this.volumeLevel < 100) {
+      this.volumeLevel += 10;
+    }
+  }
 
-  private decreaseVolume() {}
+  private decreaseVolume() {
+    if (this.volumeLevel > 0) {
+      this.volumeLevel -= 5;
+    }
+  }
 
-  private nextRadioStation() {}
+  get currentStation(): RadioStation {
+    return this.stations[this.currentStationIndex];
+  }
 
-  private previousRadioStation() {}
+  private nextRadioStation() {
+    if (this.currentStationIndex < this.stations.length - 1) {
+      this.currentStationIndex++;
+    }
+  }
+
+  private previousRadioStation() {
+    if (this.currentStationIndex > 0) {
+      this.currentStationIndex--;
+    }
+  }
 
   private turnOnRadio() {
     this.radioOn = true;
@@ -414,13 +438,25 @@ export class Dashboard implements OnInit, OnDestroy {
     this.radioOn = false;
   }
 
-  private increaseFanSpeed() {}
+  private increaseFanSpeed() {
+    if (this.fanSpeed < 5) {
+      this.fanSpeed++;
+    }
+  }
 
-  private decreaseFanSpeed() {}
+  private decreaseFanSpeed() {
+    if (this.fanSpeed > 1) {
+      this.fanSpeed--;
+    }
+  }
 
-  private increaseTemperature() {}
+  private increaseTemperature() {
+    this.temperature += 0.5;
+  }
 
-  private decreaseTemperature() {}
+  private decreaseTemperature() {
+    this.temperature -= 0.5;
+  }
 
   getRandomStation(): RadioStation {
     const randomIndex = Math.floor(Math.random() * this.stations.length);

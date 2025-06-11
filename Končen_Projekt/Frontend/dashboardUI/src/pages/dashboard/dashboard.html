@@ -55,9 +55,9 @@
 
         <div class="rightSide">
             <div class="mediaPanel" [ngClass]="panelTheme">
-                <div class="radio">96.7 MHz</div>
-                <div class="statusText">Radio Veseljak - Čebelice</div>
-                <div class="volume">Glasnost: ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||</div>
+                <div *ngIf="radioOn" class="radio">{{ currentStation.frequency }}</div>
+                <div *ngIf="radioOn" class="statusText">{{ currentStation.name }}</div>
+                <div class="volume">Glasnost: {{ volumeBars }}</div>
             </div>
 
             <div class="warnings" [ngClass]="panelTheme">
@@ -65,8 +65,8 @@
             </div>
 
             <div class="climateControl" [ngClass]="panelTheme">
-                <div class="leftTemp">Moč Pihanja: 3</div>
-                <div class="rightTemp">21.5°</div>
+                <div class="leftTemp">Moč Pihanja: {{ fanSpeed }}</div>
+                <div class="rightTemp">{{ temperature }}°</div>
             </div>
         </div>
     </div>
