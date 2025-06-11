@@ -59,7 +59,8 @@ def update_metrics():
     memory_usage_bytes.set(psutil.virtual_memory().used)  # Update memory usage
     root.after(5000, update_metrics)  # Schedule updates every 5 seconds
 
-
+#172.25.70.243
+zeroTierHostIP = "10.147.20.65";
 
 # Initialize MQTT client
 mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
@@ -67,7 +68,7 @@ mqtt_client.on_connect = on_connect
 mqtt_client.on_log = on_log
 mqtt_client.on_message = on_message
 mqtt_client.on_disconnect = on_disconnect
-mqtt_client.connect("172.25.70.243", 1883, 60)
+mqtt_client.connect(zeroTierHostIP, 1883, 60)
 mqtt_client.loop_start()
 
 class MainApplication:

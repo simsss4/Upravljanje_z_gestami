@@ -21,6 +21,9 @@ from tkinter import ttk
 # Start metrics server
 start_http_server(8000, addr='0.0.0.0')
 
+#172.25.70.243
+zeroTierHostIP = "10.147.20.65";
+
 # Metrics
 mqtt_messages_per_sec = Counter('mqtt_messages_per_second', 'MQTT messages sent or received per second')
 mqtt_logs_per_sec = Counter('mqtt_logs_per_second', 'MQTT logs per second')
@@ -217,7 +220,7 @@ class GestureGUI:
             self.client.on_log = on_log
             self.client.on_message = on_message
             self.client.on_disconnect = on_disconnect
-            mqtt_broker = "172.25.70.243"
+            mqtt_broker = zeroTierHostIP
             port = 1883  # Change to 1884 if needed
             print(f"Connecting to MQTT broker at {mqtt_broker}:{port}")
             self.client.connect(mqtt_broker, port, 60)

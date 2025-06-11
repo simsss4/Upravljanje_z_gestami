@@ -121,6 +121,9 @@ def simulate_car_behavior(time_label, weather_label):
 
     return actions
 
+#172.25.70.243
+zeroTierHostIP = "10.147.20.65";
+
 # MQTT Setup
 def setup_mqtt():
     try:
@@ -129,7 +132,7 @@ def setup_mqtt():
         client.on_log = on_log
         client.on_message = on_message
         client.on_disconnect = on_disconnect
-        mqtt_broker = "172.25.70.243"
+        mqtt_broker = zeroTierHostIP
         port = 1883
         print(f"Connecting to MQTT broker at {mqtt_broker}:{port}")
         client.connect(mqtt_broker, 1883, 60)

@@ -67,6 +67,9 @@ def select_video():
     root.destroy()
     return video_path
 
+#172.25.70.243
+zeroTierHostIP = "10.147.20.65";
+
 # MQTT Setup
 def setup_mqtt():
     try:
@@ -77,7 +80,7 @@ def setup_mqtt():
         client.on_log = on_log
 
         # Hardcoded MQTT Broker IP
-        mqtt_broker = "172.25.70.243"
+        mqtt_broker = zeroTierHostIP
 
         client.connect(mqtt_broker, 1883, 60)
         client.loop_start()
