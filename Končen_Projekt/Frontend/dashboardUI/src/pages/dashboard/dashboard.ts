@@ -300,6 +300,7 @@ export class Dashboard implements OnInit, OnDestroy {
       const alertMessage = this.translateFunctionalityToAlert(functionality);
       this.alerts = [alertMessage];
       this.flashTopIcon('alert', 5000);
+      this.cdr.detectChanges();
 
       const specifiedGestures: GestureFunction[] = [
         'glasnost_gor',
