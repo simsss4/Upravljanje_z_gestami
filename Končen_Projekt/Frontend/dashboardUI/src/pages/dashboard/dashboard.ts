@@ -203,9 +203,9 @@ export class Dashboard implements OnInit, OnDestroy {
       case 'environment':
         this.handleEnvironmentMessage(parts[1], payload);
         break;
-      // case 'drowsiness':
-      //   this.handleDrowsinessMessage(parts[1], payload);
-      //   break;
+      case 'drowsiness':
+        this.handleDrowsinessMessage(parts[1], payload);
+        break;
       case 'gestures':
         this.handleGestureMessage(parts[1], payload);
         break;
@@ -397,6 +397,22 @@ export class Dashboard implements OnInit, OnDestroy {
       },
     };
     return mapping[subTopic]?.[gesture] || null;
+  }
+
+  private handleDrowsinessMessage(subTopic: string, payload: string) {
+    if (subTopic === 'status' && payload === 'Utrujen') {
+      this.isDriverExhausted = true;
+      this.alerts = ['Zaznana utrujenost voznika! Priporočamo odmor.'];
+      this.flashTopIcon('alert', 5000);
+      this.cdr.detectChanges();
+    } else if (subTopic === 'status' && payload === 'Buden') {
+      this.isDriverExhausted = false;
+      this.clearDashboardIcons();
+      this.alerts = [];
+    } else if (subTopic === 'metrics') {
+      console.log(`Drowsiness metrics: ${payload}`);
+    }
+    this.cdr.detectChanges();
   }
 
   get volumeBars(): string {
