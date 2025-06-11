@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MqttService } from '../../app/Services/mqtt.service';
+import { Subscription } from 'rxjs';
 
 type WeatherType = 'dan' | 'noč' | 'jasno' | 'deževno' | 'megleno';
 type GestureType =
@@ -68,7 +69,8 @@ interface RadioStation {
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
+
+export class Dashboard implements OnInit, OnDestroy {
   weather?: WeatherData;
   gesture?: GestureData;
   isModalOpen = false;
@@ -80,16 +82,18 @@ export class Dashboard {
   showAlertIcon = false;
   showWarningIcon = false;
 
+  private mqttSubscription!: Subscription;
+
   private topSlotIcons: string[] = ['alert', 'warning'];
   private bottomSlotIcons: string[] = ['dnevne', 'kratke', 'meglenkle'];
 
-  private mockWeatherData: WeatherData[] = [
-    { type: 'dan', imageUrl: 'MockWeather/mock_day.jpg' },
-    { type: 'noč', imageUrl: 'MockWeather/mock_night.jpg' },
-    { type: 'jasno', imageUrl: 'MockWeather/mock_clear.jpg' },
-    { type: 'deževno', imageUrl: 'MockWeather/mock_rainy.jpg' },
-    { type: 'megleno', imageUrl: 'MockWeather/mock_foggy.png' },
-  ];
+  // private mockWeatherData: WeatherData[] = [
+  //   { type: 'dan', imageUrl: 'MockWeather/mock_day.jpg' },
+  //   { type: 'noč', imageUrl: 'MockWeather/mock_night.jpg' },
+  //   { type: 'jasno', imageUrl: 'MockWeather/mock_clear.jpg' },
+  //   { type: 'deževno', imageUrl: 'MockWeather/mock_rainy.jpg' },
+  //   { type: 'megleno', imageUrl: 'MockWeather/mock_foggy.png' },
+  // ];
 
   private isDriverExhausted: boolean = false;
 
@@ -165,37 +169,131 @@ export class Dashboard {
     },
   };
 
-  loadDemoImage(): void {
-    const random = Math.floor(Math.random() * this.mockWeatherData.length);
-    this.weather = this.mockWeatherData[random];
+  // loadDemoImage(): void {
+  //   const random = Math.floor(Math.random() * this.mockWeatherData.length);
+  //   this.weather = this.mockWeatherData[random];
 
-    const weatherType = this.weather.type;
-    const weatherData = this.weatherResponses[weatherType];
+  //   const weatherType = this.weather.type;
+  //   const weatherData = this.weatherResponses[weatherType];
 
-    this.alerts = weatherData.alerts;
-    this.warnings = weatherData.warnings;
-    this.panelTheme = '';
+  //   this.alerts = weatherData.alerts;
+  //   this.warnings = weatherData.warnings;
+  //   this.panelTheme = '';
 
-    if (this.alerts.length > 0) {
-      this.flashTopIcon('alert', 5);
+  //   if (this.alerts.length > 0) {
+  //     this.flashTopIcon('alert', 5);
+  //   }
+  //   if (this.warnings.length > 0) {
+  //     this.flashTopIcon('warning', 3);
+  //   }
+
+  //   if (weatherType === 'noč') {
+  //     this.setDimTheme();
+  //     this.panelTheme = 'dim';
+  //     this.showIconInSlot('kratke', 'bottom');
+  //   } else if (weatherType === 'dan') {
+  //     this.setBrightTheme();
+  //     this.showIconInSlot('dnevne', 'bottom');
+  //   } else if (weatherType === 'megleno') {
+  //     this.setNormalTheme();
+  //     this.showIconInSlot('meglenkle', 'bottom');
+  //   } else {
+  //     this.setNormalTheme();
+  //     this.clearDashboardIcons();
+  //   }
+  // }
+
+  constructor(private mqttService: MqttService) {}
+
+  ngOnInit() {
+    this.mqttSubscription = this.mqttService.getMessages().subscribe(
+      ({ topic, payload }) => this.handleMqttMessage(topic, payload),
+      (error) => console.error('❌ MQTT subscription error', error)
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.mqttSubscription) {
+      this.mqttSubscription.unsubscribe();
     }
-    if (this.warnings.length > 0) {
-      this.flashTopIcon('warning', 3);
-    }
+  }
 
-    if (weatherType === 'noč') {
-      this.setDimTheme();
-      this.panelTheme = 'dim';
-      this.showIconInSlot('kratke', 'bottom');
-    } else if (weatherType === 'dan') {
-      this.setBrightTheme();
-      this.showIconInSlot('dnevne', 'bottom');
-    } else if (weatherType === 'megleno') {
-      this.setNormalTheme();
-      this.showIconInSlot('meglenkle', 'bottom');
-    } else {
-      this.setNormalTheme();
-      this.clearDashboardIcons();
+  private handleMqttMessage(topic: string, payload: any) {
+    console.log(`Processing MQTT message: ${topic} -> ${payload}`);
+    const parts = topic.split('/');
+    const mainTopic = parts[0];
+
+    switch (mainTopic) {
+      case 'environment':
+        this.handleEnvironmentMessage(parts[1], payload);
+        break;
+      // case 'drowsiness':
+      //   this.handleDrowsinessMessage(parts[1], payload);
+      //   break;
+      // case 'gestures':
+      //   this.handleGestureMessage(parts[1], payload);
+      //   break;
+      default:
+        console.warn(`⚠️ Unhandled MQTT topic: ${topic}`);
+    }
+  }
+
+  private parsePayloadLabel(payload: string): string {
+    return payload.split(' ')[0];
+  }
+
+  private mapToWeatherType(label: string): WeatherType | null {
+    const mapping: Record<string, WeatherType> = {
+      'day': 'dan',
+      'night': 'noč',
+      'clear': 'jasno',
+      'foggy': 'megleno',
+      'rainy': 'deževno',
+    };
+    return mapping[label] || null;
+  }
+
+  private handleEnvironmentMessage(subTopic: string, payload: string) {
+    if (subTopic === 'timeofday'|| subTopic === 'weather') {
+      const label = this.parsePayloadLabel(payload);
+      const mappedType = this.mapToWeatherType(label);
+
+      if (mappedType) {
+        const weatherData = this.weatherResponses[mappedType];
+
+        this.alerts = weatherData.alerts;
+        this.warnings = weatherData.warnings;
+        this.panelTheme = '';
+
+        if (this.alerts.length > 0) {
+          this.flashTopIcon('alert', 5000);
+        }
+        if (this.warnings.length > 0) {
+          this.flashTopIcon('warning', 3000);
+        }
+
+        if (mappedType === 'noč') {
+          this.setDimTheme();
+          this.panelTheme = 'dim';
+          this.showIconInSlot('kratke', 'bottom');
+        } else if (mappedType === 'dan') {
+          this.setBrightTheme();
+          this.showIconInSlot('dnevne', 'bottom');
+        } else if (mappedType === 'megleno') {
+          this.setNormalTheme();
+          this.showIconInSlot('meglenkle', 'bottom');
+        } else {
+          this.setNormalTheme();
+          this.clearDashboardIcons();
+        }
+      } else {
+        console.warn(`⚠️ Invalid weather type: ${label}`);
+      }
+    } else if (subTopic === 'alerts') {
+      this.alerts = [payload];
+      this.flashTopIcon('alert', 5000);
+    } else if (subTopic === 'metrics') {
+      console.log(`Environment metrics: ${payload}`);
     }
   }
 
@@ -326,9 +424,7 @@ export class Dashboard {
     }
   }
 
-  constructor(private mqttService: MqttService) {
-    this.mqttService.connect(); // vzpostavi povezavo takoj
-  }
+
   public triggerUtrujenostDemo(): void {
     const mockPayload = {
       model: 'model2',

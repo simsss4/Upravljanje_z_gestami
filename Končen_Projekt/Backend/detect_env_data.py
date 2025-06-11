@@ -191,17 +191,12 @@ try:
     image_processing_time.observe(time.time() - start_time)
 
     print(f"\nStanje okolja: {weather_labels[pred_wt_idx]} {timeofday_labels[pred_dn_idx]}")
-    actions = simulate_car_behavior(timeofday_labels[pred_dn_idx], weather_labels[pred_wt_idx])
-    for action in actions:
-        print("🚗", action)
 
     # Publish MQTT messages
     if mqtt_client:
         mqtt_client.publish("environment/timeofday", f"{timeofday_labels[pred_dn_idx]} ({pred_dn_conf:.2%})")
         mqtt_client.publish("environment/weather", f"{weather_labels[pred_wt_idx]} ({pred_wt_conf:.2%})")
         mqtt_client.publish("environment/metrics", f"CPU: {proc.cpu_percent()}%, Memory: {proc.memory_info().rss} bytes")
-        if weather_labels[pred_wt_idx] in ["foggy", "rainy"] or timeofday_labels[pred_dn_idx] == "night":
-            mqtt_client.publish("environment/alerts", "⚠️ Low visibility detected! Adjust driving speed.")
         print("MQTT messages published")
 
 except Exception as e:
