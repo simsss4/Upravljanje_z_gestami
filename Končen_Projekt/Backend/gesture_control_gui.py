@@ -1,27 +1,102 @@
-﻿import numpy as np
+﻿import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress TensorFlow logs
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'  # Disable oneDNN
+os.environ['CUDA_VISIBLE_DEVICES'] = ''    # Disable GPU
+import sys
+import numpy as np
 import tensorflow as tf
 import cv2
 import mediapipe as mp
 import tkinter as tk
-from tkinter import ttk
 from PIL import Image, ImageTk
 import matplotlib.pyplot as plt
-import sys
+import queue
+from prometheus_client import start_http_server, Counter, Gauge, Summary
+import paho.mqtt.client as mqtt
+import psutil
+import time
+import traceback
+from tkinter import ttk
 
-sys.stdout.reconfigure(encoding='utf-8')
+# Start metrics server
+start_http_server(8000, addr='0.0.0.0')
 
-# Initialize MediaPipe Hands
+#172.25.70.243
+zeroTierHostIP = "10.147.20.65";
+
+# Metrics
+mqtt_messages_per_sec = Counter('mqtt_messages_per_second', 'MQTT messages sent or received per second')
+mqtt_logs_per_sec = Counter('mqtt_logs_per_second', 'MQTT logs per second')
+processed_frames_per_sec = Gauge('processed_frames_per_second', 'Processed frames per second in gesture recognition algorithm')
+cpu_usage_gesture_algorithm = Gauge('cpu_usage_gesture_algorithm_percent', 'CPU usage percent of gesture recognition algorithm')
+memory_usage_gesture_algorithm = Gauge('memory_usage_gesture_algorithm_bytes', 'Memory usage bytes of gesture recognition algorithm')
+processed_mqtt_messages_total = Counter('processed_mqtt_messages_total', 'Total number of processed MQTT messages')
+recognized_gestures = Gauge('recognized_gestures_per_frame', 'Number of recognized gestures per frame')
+model_predictions_total = Counter('gesture_model_predictions_total', 'Total number of predictions per model', ['model_name'])
+predicted_gestures_total = Counter('predicted_gestures_total', 'Total number of times a gesture was predicted', ['model_name', 'gesture'])
+gesture_confidence_summary = Summary('gesture_confidence_score', 'Confidence scores of predicted gestures', ['model_name'])
+
+proc = psutil.Process()
+last_mqtt_message_count = 0
+last_mqtt_log_count = 0
+last_time = time.time()
+
+def update_system_metrics():
+    global last_mqtt_message_count, last_mqtt_log_count, last_time
+    try:
+        now = time.time()
+        elapsed = now - last_time
+        if elapsed == 0:
+            return
+        cpu_gesture = proc.cpu_percent(interval=None)
+        mem_gesture = proc.memory_info().rss
+        cpu_usage_gesture_algorithm.set(cpu_gesture)
+        memory_usage_gesture_algorithm.set(mem_gesture)
+        current_message_count = processed_mqtt_messages_total._value.get()
+        delta_messages = current_message_count - last_mqtt_message_count
+        mqtt_messages_per_sec.inc(delta_messages)
+        last_mqtt_message_count = current_message_count
+        last_time = now
+    except Exception as e:
+        print(f"Error in update_system_metrics: {e}")
+        import traceback
+        traceback.print_exc()
+
+def on_connect(client, userdata, flags, rc):
+    print(f"MQTT povezan z rezultatom: {rc}")
+
+def on_log(client, userdata, level, buf):
+    print("MQTT log:", buf)
+    mqtt_logs_per_sec.inc()
+
+def on_message(client, userdata, msg):
+    print(f"Received message: {msg.topic} -> {msg.payload.decode()}")
+    processed_mqtt_messages_total.inc()
+
+def on_disconnect(client, userdata, rc):
+    print("Disconnected from MQTT broker")
+
+# Initialize MediaPipe
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mp_drawing = mp.solutions.drawing_utils
 
 # Load models
-mirrors_model = tf.keras.models.load_model('Models/mirrors_model.keras')
-windows_model = tf.keras.models.load_model('Models/windows_model.keras')
-radio_model = tf.keras.models.load_model('Models/radio_model.keras')
-climate_model = tf.keras.models.load_model('Models/climate_model.keras')
+try:
+    mirrors_model = tf.keras.models.load_model('Models/mirrors_model.keras')
+    windows_model = tf.keras.models.load_model('Models/windows_model.keras')
+    radio_model = tf.keras.models.load_model('Models/radio_model.keras')
+    climate_model = tf.keras.models.load_model('Models/climate_model.keras')
+    print("Models loaded successfully")
+    print("Mirrors model input shape:", mirrors_model.input_shape)
+    print("Radio model input shape:", radio_model.input_shape)
+except Exception as e:
+    print(f"Error loading models: {e}")
+    import traceback
+    traceback.print_exc()
+    sys.exit(1)
 
-# Mean and standard deviation for normalization
+# Model parameters
 MIRRORS_MEAN = 0.32715722213633686
 MIRRORS_STD = 0.3050974859034138
 WINDOWS_MEAN = 0.3218953795343205
@@ -30,8 +105,6 @@ RADIO_MEAN = 0.1824056036195469
 RADIO_STD = 0.2894906092020188
 CLIMATE_MEAN = 0.20537318328833137
 CLIMATE_STD = 0.2955649804045277
-
-# Class labels
 MIRRORS_CLASSES = ['close_rm', 'down_rm', 'left_rm', 'open_rm', 'right_rm', 'up_rm']
 WINDOWS_CLASSES = ['close_back_left_window', 'close_back_right_window', 'close_front_left_window', 'close_front_right_window', 'open_back_left_window', 'open_back_right_window', 'open_front_left_window', 'open_front_right_window']
 RADIO_CLASSES = ['next_station', 'previous_station', 'turn_off_radio', 'turn_on_radio', 'volume_down', 'volume_up']
@@ -46,7 +119,6 @@ def compute_finger_distances(X):
             X_new[f, :63] = 0
             X_new[f, 63:] = 0
             continue
-
         X_new[f, :63] = X[f]
         wrist = landmarks[0]
         fingertip_indices = [4, 8, 12, 16, 20]
@@ -54,14 +126,16 @@ def compute_finger_distances(X):
             fingertip = landmarks[idx]
             distance = np.sqrt(np.sum((fingertip - wrist) ** 2))
             X_new[f, 63 + j] = distance
-
         fingertip_pairs = [(4, 8), (8, 12), (12, 16), (16, 20)]
         for j, (idx1, idx2) in enumerate(fingertip_pairs):
             fingertip1, fingertip2 = landmarks[idx1], landmarks[idx2]
             distance = np.sqrt(np.sum((fingertip1 - fingertip2) ** 2))
             X_new[f, 63 + 5 + j] = distance
-
     return X_new
+
+
+
+
 
 class GestureGUI:
     def __init__(self, root):
@@ -71,7 +145,20 @@ class GestureGUI:
         self.root.configure(bg="#B1CACF")
         self.root.resizable(False, False)
 
-        self.cap = cv2.VideoCapture(0)
+        self.cap = None
+        for i in range(3):  # Try indices 0, 1, 2
+            self.cap = cv2.VideoCapture(i)
+            if self.cap.isOpened():
+                print(f"Webcam opened at index {i}")
+                break
+            self.cap.release()
+            self.cap = None
+        if self.cap is None:
+            print("Error: Could not open webcam")
+            self.status_var = tk.StringVar()
+            self.status_var.set("Napaka: Ni mogoče odpreti kamere")
+            tk.Label(self.root, textvariable=self.status_var).pack()
+
         self.recording = False
         self.frames = []
         self.handedness_labels = []
@@ -84,7 +171,7 @@ class GestureGUI:
             'Klimatska naprava': {'model': climate_model, 'mean': CLIMATE_MEAN, 'std': CLIMATE_STD, 'classes': CLIMATE_CLASSES}
         }
 
-        # Configure styles
+        # GUI setup
         self.style = ttk.Style()
         self.style.theme_use("clam")
         self.style.configure("TButton", font=("Segoe UI", 12, "bold"), padding=10, background="#005B8D", foreground="#FFFFFF")
@@ -94,18 +181,12 @@ class GestureGUI:
         self.style.configure("TLabel", background="#B1CACF", foreground="#00378E", font=("Segoe UI", 10))
         self.style.configure("TFrame", background="#B1CACF")
 
-        # Main frame
         self.main_frame = ttk.Frame(self.root, padding=15, style="TFrame")
         self.main_frame.pack(fill="both", expand=True)
-
-        # Title
         ttk.Label(self.main_frame, text="Prepoznava Gest", font=("Segoe UI", 16, "bold")).pack(pady=10)
-
-        # Video canvas
         self.video_canvas = tk.Canvas(self.main_frame, width=400, height=300, highlightthickness=1, bg="#FFFFFF")
         self.video_canvas.pack(pady=10)
 
-        # Model selection buttons
         self.model_buttons = {}
         model_frame = ttk.Frame(self.main_frame, style="TFrame")
         model_frame.pack(pady=5)
@@ -115,7 +196,6 @@ class GestureGUI:
             btn.grid(row=i, column=0, padx=5, pady=5)
             self.model_buttons[model] = btn
 
-        # Capture and quit buttons
         button_frame = ttk.Frame(self.main_frame, style="TFrame")
         button_frame.pack(pady=5)
         self.btn_capture = ttk.Button(button_frame, text="Zajem Gest", command=self.start_recording, width=15)
@@ -123,13 +203,43 @@ class GestureGUI:
         self.btn_quit = ttk.Button(button_frame, text="Izhod", command=self.quit, width=15)
         self.btn_quit.grid(row=0, column=1, padx=5)
 
-        # Status bar
         self.status_var = tk.StringVar()
         self.status_var.set("Izberi model in začni zajem")
         self.status_label = ttk.Label(self.main_frame, textvariable=self.status_var, anchor="center", style="TLabel", wraplength=400)
         self.status_label.pack(pady=10, fill="x")
 
+        self.setup_mqtt()
+        self.update_metrics_periodically()
         self.update_video()
+
+
+    def setup_mqtt(self):
+        try:
+            self.client = mqtt.Client()
+            self.client.on_connect = on_connect
+            self.client.on_log = on_log
+            self.client.on_message = on_message
+            self.client.on_disconnect = on_disconnect
+            mqtt_broker = zeroTierHostIP
+            port = 1883  # Change to 1884 if needed
+            print(f"Connecting to MQTT broker at {mqtt_broker}:{port}")
+            self.client.connect(mqtt_broker, port, 60)
+            self.client.loop_start()
+            print("MQTT setup complete")
+        except Exception as e:
+            print(f"Error in MQTT setup: {e}")
+            traceback.print_exc()
+            self.client = None
+
+
+    def update_metrics_periodically(self):
+        try:
+            update_system_metrics()
+        except Exception as e:
+            print(f"Error in update_metrics_periodically: {e}")
+            import traceback
+            traceback.print_exc()
+        self.root.after(1000, self.update_metrics_periodically)
 
     def switch_model(self, model_name):
         self.current_model = model_name
@@ -156,68 +266,6 @@ class GestureGUI:
                 btn.config(state="normal" if btn.cget("text") != self.current_model else "disabled")
             self.btn_quit.config(state="normal")
 
-    def handle_gesture_action(self, gesture, handedness=None):
-        """Execute the appropriate action based on the recognized gesture."""
-        action_messages = {
-            # Windows actions
-            'close_back_left_window': "Zapiranje zadnjega levega okna",
-            'close_back_right_window': "Zapiranje zadnjega desnega okna",
-            'close_front_left_window': "Zapiranje sprednjega levega okna",
-            'close_front_right_window': "Zapiranje sprednjega desnega okna",
-            'open_back_left_window': "Odpiranje zadnjega levega okna",
-            'open_back_right_window': "Odpiranje zadnjega desnega okna",
-            'open_front_left_window': "Odpiranje sprednjega levega okna",
-            'open_front_right_window': "Odpiranje sprednjega desnega okna",
-            
-            # Mirror actions
-            'close_rm': "Zapiranje vzvratnega ogledala",
-            'open_rm': "Odpiranje vzvratnega ogledala",
-            'left_rm': "Premik kota vzvratnega ogledala v levo",
-            'right_rm': "Premik kota vzvratnega ogledala v desno",
-            'up_rm': "Premik kota vzvratnega ogledala navzgor",
-            'down_rm': "Premik kota vzvratnega ogledala navzdol",
-            
-            # Radio actions
-            'volume_up': "Zviševanje glasnosti radia",
-            'volume_down': "Zniževanje glasnosti radia",
-            'previous_station': "Menjava kanala nazaj",
-            'next_station': "Menjava kanala naprej",
-            'turn_on_radio': "Vklop radia",
-            'turn_off_radio': "Izklop radia",
-            
-            # Climate control actions
-            'fan_stronger': "Zviševanje moči pihanja klimatske naprave",
-            'fan_weaker': "Zniževanje moči pihanja klimatske naprave",
-            'climate_warmer': "Zviševanje temperature",
-            'climate_colder': "Zniževanje temperature"
-        }
-        
-        # Get the appropriate message for the gesture
-        message = action_messages.get(gesture, f"Neznana gesta: {gesture}")
-        
-        # Print to console and update status
-        print(f"Izvedba akcije: {message}", flush=True)
-        self.status_var.set(f"Akcija: {message}")
-        
-        # Here you would add the actual implementation to control the car systems
-        # For example, sending commands to the car's CAN bus or other interface
-        
-        # Example implementation (placeholder - replace with actual control code)
-        if gesture.startswith('close_'):
-            print(f"Pošiljam ukaz za zapiranje: {gesture}", flush=True)
-        elif gesture.startswith('open_'):
-            print(f"Pošiljam ukaz za odpiranje: {gesture}", flush=True)
-        elif gesture.endswith('_rm'):
-            print(f"Prilagajanje ogledala: {gesture}", flush=True)
-        elif gesture in ['volume_up', 'volume_down']:
-            print(f"Prilagajanje glasnosti: {gesture}", flush=True)
-        elif gesture in ['next_station', 'previous_station']:
-            print(f"Menjava radijskih postaj: {gesture}", flush=True)
-        elif gesture in ['fan_stronger', 'fan_weaker']:
-            print(f"Prilagajanje moči pihanja: {gesture}", flush=True)
-        elif gesture in ['climate_warmer', 'climate_colder']:
-            print(f"Prilagajanje temperature: {gesture}", flush=True)
-
     def process_gesture(self):
         if len(self.frames) == 0:
             self.status_var.set("Ni zajetih okvirjev")
@@ -239,76 +287,107 @@ class GestureGUI:
         X = X[np.newaxis, ...]
 
         model = self.models[self.current_model]['model']
-        pred = model.predict(X, verbose=0)
-        pred_class = np.argmax(pred, axis=1)[0]
-        gesture = self.models[self.current_model]['classes'][pred_class]
+        try:
+            pred = model.predict(X, verbose=0)
+            pred_class = np.argmax(pred, axis=1)[0]
+            pred_conf = pred[0][pred_class]
+            gesture = self.models[self.current_model]['classes'][pred_class]
 
-        # Get handedness (left/right hand) if available
-        handedness = None
-        if self.handedness_labels:
-            # Use the most common handedness in the recorded frames
-            handedness = max(set(self.handedness_labels), key=self.handedness_labels.count)
+            model_predictions_total.labels(model_name=self.current_model).inc()
+            predicted_gestures_total.labels(model_name=self.current_model, gesture=gesture).inc()
+            gesture_confidence_summary.labels(model_name=self.current_model).observe(pred_conf)
 
-        # Display on GUI and print to terminal immediately
-        display_text = f"{self.current_model}: {gesture}"
-        #if handedness:
-         #   display_text += f" ({handedness} roka)"
-        self.status_var.set(f"Rezultat: {display_text}")
-        print(f"Gesta: {display_text}", flush=True)
+            display_text = f"{self.current_model}: {gesture} ({pred_conf:.2%})"
+            self.status_var.set(f"Rezultat: {display_text}")
+            print(f"Gesta: {display_text}")
 
-        # Handle the gesture action
-        self.handle_gesture_action(gesture, handedness)
+            if self.client:
+                topic = f"gestures/{self.current_model.lower().replace(' ', '_')}"
+                message = f"{gesture} ({pred_conf:.2%})"
+                self.client.publish(topic, message)
+                print(f"Published MQTT message: topic={topic}, message={message}")
+        except Exception as e:
+            print(f"Error during model prediction: {e}")
+            import traceback
+            traceback.print_exc()
+            self.status_var.set(f"Napaka pri obdelavi geste: {e}")
+            return
 
-        # Save gesture trajectory plot
-        plt.figure(figsize=(10, 5))
-        plt.plot(X[0, :, 0], label='Wrist X')
-        plt.plot(X[0, :, 1], label='Wrist Y')
-        plt.plot(X[0, :, 2], label='Wrist Z')
-        plt.title(f'Trajectory for {gesture} ({self.current_model})')
-        plt.xlabel('Frame')
-        plt.ylabel('Coordinate')
-        plt.legend()
-        plt.savefig(f'captured_gesture_trajectory_{self.current_model.lower().replace(" ", "_")}.png')
-        plt.close()
+        try:
+            plt.figure(figsize=(10, 5))
+            plt.plot(X[0, :, 0], label='Wrist X')
+            plt.plot(X[0, :, 1], label='Wrist Y')
+            plt.plot(X[0, :, 2], label='Wrist Z')
+            plt.title(f'Trajectory for {gesture} ({self.current_model})')
+            plt.xlabel('Frame')
+            plt.ylabel('Coordinate')
+            plt.legend()
+            plt.savefig(f'captured_gesture_trajectory_{self.current_model.lower().replace(" ", "_")}.png')
+            plt.close()
+        except Exception as e:
+            print(f"Error plotting trajectory: {e}")
+            import traceback
+            traceback.print_exc()
+
+        sys.stdout.write(display_text + "\n")
+        sys.stdout.flush()
 
     def update_video(self):
         try:
+            if self.cap is None or not self.cap.isOpened():
+                self.status_var.set("Napaka: Kamera ni na voljo")
+                self.root.after(30, self.update_video)
+                return
+
             ret, frame = self.cap.read()
-            if ret:
-                frame = cv2.flip(frame, 1)
-                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                results = hands.process(frame_rgb)
+            if not ret:
+                print("Failed to capture frame from webcam")
+                self.status_var.set("Napaka: Ni mogoče zajeti slike iz kamere")
+                self.root.after(30, self.update_video)
+                return
+            frame = cv2.flip(frame, 1)
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            results = hands.process(frame_rgb)
 
-                if results.multi_hand_landmarks:
-                    for idx, hand_landmarks in enumerate(results.multi_hand_landmarks):
-                        mp_drawing.draw_landmarks(frame_rgb, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-                        if self.recording:
-                            landmarks = np.zeros(63)
-                            for i, lm in enumerate(hand_landmarks.landmark):
-                                landmarks[i*3:i*3+3] = [lm.x, lm.y, lm.z]
-                            self.frames.append(landmarks)
-                            handedness = results.multi_handedness[idx].classification[0].label
-                            self.handedness_labels.append(handedness)
+            if results.multi_hand_landmarks:
+                for idx, hand_landmarks in enumerate(results.multi_hand_landmarks):
+                    mp_drawing.draw_landmarks(frame_rgb, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+                    if self.recording:
+                        landmarks = np.zeros(63)
+                        for i, lm in enumerate(hand_landmarks.landmark):
+                            landmarks[i*3:i*3+3] = [lm.x, lm.y, lm.z]
+                        self.frames.append(landmarks)
+                        handedness = results.multi_handedness[idx].classification[0].label
+                        self.handedness_labels.append(handedness)
 
-                            if len(self.frames) >= MAX_FRAMES:
-                                self.process_gesture()
-                                self.frames = []
-                                self.handedness_labels = []
+                        if len(self.frames) >= MAX_FRAMES:
+                            self.process_gesture()
+                            self.frames = []
+                            self.handedness_labels = []
 
-                img = Image.fromarray(frame_rgb)
-                img = img.resize((400, 300), Image.Resampling.LANCZOS)
-                img = ImageTk.PhotoImage(img)
-                self.video_canvas.create_image(0, 0, anchor=tk.NW, image=img)
-                self.video_canvas.image = img
+            img = Image.fromarray(frame_rgb)
+            img = img.resize((400, 300), Image.Resampling.LANCZOS)
+            img = ImageTk.PhotoImage(img)
+            self.video_canvas.create_image(0, 0, anchor=tk.NW, image=img)
+            self.video_canvas.image = img
         except Exception as e:
-            print(f"[ERROR in update_video]: {e}")
-
-        self.root.after(10, self.update_video)
+            print(f"Error in update_video: {e}")
+            traceback.print_exc()
+            self.status_var.set(f"Napaka pri posodabljanju videa: {e}")
+        self.root.after(30, self.update_video)
 
     def quit(self):
-        self.cap.release()
-        self.root.quit()
-        self.root.destroy()
+        try:
+            self.cap.release()
+            if self.client:
+                self.client.loop_stop()
+                self.client.disconnect()
+            self.root.quit()
+            self.root.destroy()
+        except Exception as e:
+            print(f"Error in quit: {e}")
+            import traceback
+            traceback.print_exc()
 
 if __name__ == "__main__":
     try:
@@ -316,5 +395,7 @@ if __name__ == "__main__":
         app = GestureGUI(root)
         root.mainloop()
     except Exception as e:
+        print(f"Main application error: {e}")
         import traceback
         traceback.print_exc()
+        sys.exit(1)

@@ -1,25 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MqttService } from '../../app/Services/mqtt.service';
+import { Subscription } from 'rxjs';
 
 type WeatherType = 'dan' | 'noč' | 'jasno' | 'deževno' | 'megleno';
 type GestureType =
-  | 'leva_roka_gor_odprto'
-  | 'leva_roka_dol_odprto'
-  | 'desna_roka_gor_odprto'
-  | 'desna_roka_dol_odprto'
-  | 'leva_roka_gor_zaprto'
-  | 'leva_roka_dol_zaprto'
-  | 'desna_roka_gor_zaprto'
-  | 'desna_roka_dol_zaprto'
   | 'dvig_roke'
   | 'spust_roke'
   | 'horizontalno_desno'
   | 'horizontalno_levo'
   | 'stisnjena_pest'
-  | 'gib_prstov_levo'
-  | 'gib_prstov_desno';
+  | 'stisnjena_pest_izklop'
+  | 'fan_gor'
+  | 'fan_dol'
+  | 'temp_gor'
+  | 'temp_dol';
 
 type GestureFunction =
   | 'zapri_levo_okno_spredaj'
@@ -34,23 +30,19 @@ type GestureFunction =
   | 'glasnost_dol'
   | 'radio_postaja_prev'
   | 'radio_postaja_next'
-  | 'vklop_radio';
-// | 'izklop_radio'
-// | 'zapiranje vzvratnega ogledala'
-// | 'odpiranje vzvratnega ogledala'
-// | 'premik kota vzvratnega ogledala v levo'
-// | 'premik kota vzvratnega ogledala v desno'
-// | 'premik kota vzvratnega ogledala navzgor'
-// | 'premik kota vzvratnega ogledala v navzdol'
-// | 'zviševanje moči pihanja klimatske naprave'
-// | 'zniževanje moči pihanja klimatske naprave'
-// | 'zviševanje nastavitve temperature'
-// | 'zniževanje nastavitve temperature';
+  | 'vklop_radio'
+  | 'izklop_radio'
+  | 'zapiranje_vzvratnega_ogledala'
+  | 'odpiranje_vzvratnega_ogledala'
+  | 'premik_kota_vzvratnega_ogledala_v_levo'
+  | 'premik_kota_vzvratnega_ogledala_v_desno'
+  | 'premik_kota_vzvratnega_ogledala_navzgor'
+  | 'premik_kota_vzvratnega_ogledala_navzdol'
+  | 'zviševanje_moči_pihanja_klimatske_naprave'
+  | 'zniževanje_moči_pihanja_klimatske_naprave'
+  | 'zviševanje_nastavitve_temperature'
+  | 'zniževanje_nastavitve_temperature';
 
-interface WeatherData {
-  type: WeatherType;
-  imageUrl: string;
-}
 interface GestureData {
   type: GestureType;
   functionality: GestureFunction;
@@ -68,8 +60,7 @@ interface RadioStation {
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
-  weather?: WeatherData;
+export class Dashboard implements OnInit, OnDestroy {
   gesture?: GestureData;
   isModalOpen = false;
   alerts: string[] = [];
@@ -77,42 +68,39 @@ export class Dashboard {
   dashboardTheme = 'normal';
   panelTheme = 'normal';
 
+  radioOn = true;
+  volumeLevel: number = 40;
+  currentStationIndex: number = 4;
+  fanSpeed: number = 3;
+  temperature: number = 21.5;
+
   showAlertIcon = false;
   showWarningIcon = false;
+
+  private mqttSubscription!: Subscription;
 
   private topSlotIcons: string[] = ['alert', 'warning'];
   private bottomSlotIcons: string[] = ['dnevne', 'kratke', 'meglenkle'];
 
-  private mockWeatherData: WeatherData[] = [
-    { type: 'dan', imageUrl: 'MockWeather/mock_day.jpg' },
-    { type: 'noč', imageUrl: 'MockWeather/mock_night.jpg' },
-    { type: 'jasno', imageUrl: 'MockWeather/mock_clear.jpg' },
-    { type: 'deževno', imageUrl: 'MockWeather/mock_rainy.jpg' },
-    { type: 'megleno', imageUrl: 'MockWeather/mock_foggy.png' },
-  ];
-
   private isDriverExhausted: boolean = false;
 
   private gestureDataMap: GestureData[] = [
-    { type: 'leva_roka_gor_odprto', functionality: 'zapri_levo_okno_spredaj' },
-    { type: 'leva_roka_dol_odprto', functionality: 'odpri_levo_okno_spredaj' },
-    {
-      type: 'desna_roka_gor_odprto',
-      functionality: 'zapri_desno_okno_spredaj',
-    },
-    {
-      type: 'desna_roka_dol_odprto',
-      functionality: 'odpri_desno_okno_spredaj',
-    },
-    { type: 'leva_roka_gor_zaprto', functionality: 'zapri_levo_okno_zadaj' },
-    { type: 'leva_roka_dol_zaprto', functionality: 'odpri_levo_okno_zadaj' },
-    { type: 'desna_roka_gor_zaprto', functionality: 'zapri_desno_okno_zadaj' },
-    { type: 'desna_roka_dol_zaprto', functionality: 'odpri_desno_okno_zadaj' },
     { type: 'dvig_roke', functionality: 'glasnost_gor' },
     { type: 'spust_roke', functionality: 'glasnost_dol' },
     { type: 'horizontalno_desno', functionality: 'radio_postaja_next' },
     { type: 'horizontalno_levo', functionality: 'radio_postaja_prev' },
     { type: 'stisnjena_pest', functionality: 'vklop_radio' },
+    { type: 'stisnjena_pest_izklop', functionality: 'izklop_radio' },
+    {
+      type: 'fan_gor',
+      functionality: 'zviševanje_moči_pihanja_klimatske_naprave',
+    },
+    {
+      type: 'fan_dol',
+      functionality: 'zniževanje_moči_pihanja_klimatske_naprave',
+    },
+    { type: 'temp_gor', functionality: 'zviševanje_nastavitve_temperature' },
+    { type: 'temp_dol', functionality: 'zniževanje_nastavitve_temperature' },
   ];
 
   private stations: RadioStation[] = [
@@ -127,11 +115,6 @@ export class Dashboard {
     { frequency: '104.9 MHz', name: 'Radio Maribor' },
     { frequency: '88.8 MHz', name: 'Radio Si' },
   ];
-
-  getRandomStation(): RadioStation {
-    const randomIndex = Math.floor(Math.random() * this.stations.length);
-    return this.stations[randomIndex];
-  }
 
   private weatherResponses: Record<
     string,
@@ -165,38 +148,337 @@ export class Dashboard {
     },
   };
 
-  loadDemoImage(): void {
-    const random = Math.floor(Math.random() * this.mockWeatherData.length);
-    this.weather = this.mockWeatherData[random];
+  private functionalityHandlers: Record<GestureFunction, () => void> = {
+    glasnost_gor: () => this.increaseVolume(),
+    glasnost_dol: () => this.decreaseVolume(),
+    radio_postaja_prev: () => this.previousRadioStation(),
+    radio_postaja_next: () => this.nextRadioStation(),
+    vklop_radio: () => this.turnOnRadio(),
+    izklop_radio: () => this.turnOffRadio(),
+    zviševanje_moči_pihanja_klimatske_naprave: () => this.increaseFanSpeed(),
+    zniževanje_moči_pihanja_klimatske_naprave: () => this.decreaseFanSpeed(),
+    zviševanje_nastavitve_temperature: () => this.increaseTemperature(),
+    zniževanje_nastavitve_temperature: () => this.decreaseTemperature(),
+    // Prazne izvedbe funkcij, za tiste geste ki mapirajo samo na izpise
+    odpri_levo_okno_spredaj: () => {},
+    zapri_levo_okno_spredaj: () => {},
+    odpri_desno_okno_spredaj: () => {},
+    zapri_desno_okno_spredaj: () => {},
+    odpri_levo_okno_zadaj: () => {},
+    zapri_levo_okno_zadaj: () => {},
+    odpri_desno_okno_zadaj: () => {},
+    zapri_desno_okno_zadaj: () => {},
+    zapiranje_vzvratnega_ogledala: () => {},
+    odpiranje_vzvratnega_ogledala: () => {},
+    premik_kota_vzvratnega_ogledala_v_levo: () => {},
+    premik_kota_vzvratnega_ogledala_v_desno: () => {},
+    premik_kota_vzvratnega_ogledala_navzgor: () => {},
+    premik_kota_vzvratnega_ogledala_navzdol: () => {},
+  };
 
-    const weatherType = this.weather.type;
-    const weatherData = this.weatherResponses[weatherType];
+  constructor(
+    private mqttService: MqttService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-    this.alerts = weatherData.alerts;
-    this.warnings = weatherData.warnings;
-    this.panelTheme = '';
+  ngOnInit() {
+    this.mqttSubscription = this.mqttService.getMessages().subscribe(
+      ({ topic, payload }) => this.handleMqttMessage(topic, payload),
+      (error) => console.error('❌ MQTT subscription error', error)
+    );
+  }
 
-    if (this.alerts.length > 0) {
-      this.flashTopIcon('alert', 5);
+  ngOnDestroy() {
+    if (this.mqttSubscription) {
+      this.mqttSubscription.unsubscribe();
     }
-    if (this.warnings.length > 0) {
-      this.flashTopIcon('warning', 3);
-    }
+  }
 
-    if (weatherType === 'noč') {
-      this.setDimTheme();
-      this.panelTheme = 'dim';
-      this.showIconInSlot('kratke', 'bottom');
-    } else if (weatherType === 'dan') {
-      this.setBrightTheme();
-      this.showIconInSlot('dnevne', 'bottom');
-    } else if (weatherType === 'megleno') {
+  private handleMqttMessage(topic: string, payload: any) {
+    console.log(`Processing MQTT message: ${topic} -> ${payload}`);
+    const parts = topic.split('/');
+    const mainTopic = parts[0];
+
+    switch (mainTopic) {
+      case 'environment':
+        this.handleEnvironmentMessage(parts[1], payload);
+        break;
+      case 'drowsiness':
+        this.handleDrowsinessMessage(parts[1], payload);
+        break;
+      case 'gestures':
+        this.handleGestureMessage(parts[1], payload);
+        break;
+      default:
+        console.warn(`⚠️ Unhandled MQTT topic: ${topic}`);
+    }
+  }
+
+  private envMessageBuffer: { timeofday?: string; weather?: string } = {};
+  private handleEnvironmentMessage(subTopic: string, payload: string) {
+    if (subTopic === 'timeofday' || subTopic === 'weather') {
+      this.envMessageBuffer[subTopic] = payload;
+
+      if (this.envMessageBuffer.timeofday && this.envMessageBuffer.weather) {
+        this.processEnvironment(
+          this.envMessageBuffer.timeofday,
+          this.envMessageBuffer.weather
+        );
+
+        this.envMessageBuffer = {};
+      }
+    } else if (subTopic === 'alerts') {
+      this.alerts = [payload];
+      this.flashTopIcon('alert', 5000);
+      this.cdr.detectChanges();
+    } else if (subTopic === 'metrics') {
+      console.log(`Environment metrics: ${payload}`);
+    }
+  }
+  private processEnvironment(timePayload: string, weatherPayload: string) {
+    const timeLabel = this.parsePayloadLabel(timePayload);
+    const weatherLabel = this.parsePayloadLabel(weatherPayload);
+
+    const timeType = this.mapToWeatherType(timeLabel);
+    const weatherType = this.mapToWeatherType(weatherLabel);
+
+    console.log(
+      `Processing combined payloads. [Time type: ${timeType}, Weather type: ${weatherType}]`
+    );
+
+    if (weatherType) {
+      const weatherData = this.weatherResponses[weatherType];
+
+      this.alerts = [];
+      this.warnings = [];
+
+      this.alerts = [...weatherData.alerts];
+      this.warnings = [...weatherData.warnings];
+
+      console.log('Updated alerts:', this.alerts);
+      console.log('Updated warnings:', this.warnings);
+      this.panelTheme = '';
+
+      if (this.alerts.length > 0) {
+        this.flashTopIcon('alert', 5000);
+      }
+      if (this.warnings.length > 0) {
+        this.flashTopIcon('warning', 3000);
+      }
+
       this.setNormalTheme();
-      this.showIconInSlot('meglenkle', 'bottom');
+
+      if (timeType === 'noč') {
+        this.setDimTheme();
+        this.panelTheme = 'dim';
+        this.showIconInSlot('kratke', 'bottom');
+      } else if (timeType === 'dan') {
+        this.showIconInSlot('dnevne', 'bottom');
+      }
+
+      if (weatherType === 'megleno') {
+        this.showIconInSlot('meglenkle', 'bottom');
+      }
+      if (weatherType === 'jasno') {
+        this.setBrightTheme();
+      } else if (!['noč', 'dan', 'megleno'].includes(weatherType)) {
+        this.clearDashboardIcons();
+      }
+
+      this.cdr.detectChanges();
     } else {
-      this.setNormalTheme();
-      this.clearDashboardIcons();
+      console.warn(`⚠️ Invalid weather type: ${weatherLabel}`);
     }
+  }
+
+  private handleGestureMessage(subTopic: string, payload: string) {
+    const gesture = this.parsePayloadLabel(payload);
+    const functionality = this.mapToGestureFunction(subTopic, gesture);
+    if (functionality) {
+      this.clearDashboardIcons();
+      this.warnings = [];
+      const alertMessage = this.translateFunctionalityToAlert(functionality);
+      this.alerts = [alertMessage];
+      this.flashTopIcon('alert', 5000);
+      this.cdr.detectChanges();
+
+      const specifiedGestures: GestureFunction[] = [
+        'glasnost_gor',
+        'glasnost_dol',
+        'radio_postaja_prev',
+        'radio_postaja_next',
+        'vklop_radio',
+        'izklop_radio',
+        'zviševanje_moči_pihanja_klimatske_naprave',
+        'zniževanje_moči_pihanja_klimatske_naprave',
+        'zviševanje_nastavitve_temperature',
+        'zniževanje_nastavitve_temperature',
+      ];
+
+      if (specifiedGestures.includes(functionality)) {
+        const gestureType = this.gestureDataMap.find(
+          (g) => g.functionality === functionality
+        )?.type;
+        if (gestureType) {
+          this.gesture = { type: gestureType, functionality };
+          console.log(`Gesture: ${gestureType}, Function: ${functionality}`);
+
+          const handler = this.functionalityHandlers[functionality];
+          if (handler) {
+            handler();
+          } else {
+            console.warn(
+              `No handler defined for functionality: ${functionality}`
+            );
+          }
+        } else {
+          console.warn(
+            `No gesture type mapped for functionality: ${functionality}`
+          );
+        }
+      } else {
+        console.log(`Alert-only gesture: ${functionality}`);
+      }
+    } else {
+      console.warn(`Invalid gesture: ${gesture} for topic ${subTopic}`);
+    }
+    this.cdr.detectChanges();
+  }
+
+  private parsePayloadLabel(payload: string): string {
+    return payload.split(' ')[0];
+  }
+
+  private mapToWeatherType(label: string): WeatherType | null {
+    const mapping: Record<string, WeatherType> = {
+      day: 'dan',
+      night: 'noč',
+      clear: 'jasno',
+      foggy: 'megleno',
+      rainy: 'deževno',
+    };
+    return mapping[label] || null;
+  }
+
+  private mapToGestureFunction(
+    subTopic: string,
+    gesture: string
+  ): GestureFunction | null {
+    const mapping: Record<string, Record<string, GestureFunction>> = {
+      okna: {
+        open_front_left_window: 'odpri_levo_okno_spredaj',
+        close_front_left_window: 'zapri_levo_okno_spredaj',
+        open_front_right_window: 'odpri_desno_okno_spredaj',
+        close_front_right_window: 'zapri_desno_okno_spredaj',
+        open_back_left_window: 'odpri_levo_okno_zadaj',
+        close_back_left_window: 'zapri_levo_okno_zadaj',
+        open_back_right_window: 'odpri_desno_okno_zadaj',
+        close_back_right_window: 'zapri_desno_okno_zadaj',
+      },
+      radio: {
+        turn_on_radio: 'vklop_radio',
+        turn_off_radio: 'izklop_radio',
+        next_station: 'radio_postaja_next',
+        previous_station: 'radio_postaja_prev',
+        volume_up: 'glasnost_gor',
+        volume_down: 'glasnost_dol',
+      },
+      vzvratna_ogledala: {
+        close_rm: 'zapiranje_vzvratnega_ogledala',
+        open_rm: 'odpiranje_vzvratnega_ogledala',
+        left_rm: 'premik_kota_vzvratnega_ogledala_v_levo',
+        right_rm: 'premik_kota_vzvratnega_ogledala_v_desno',
+        up_rm: 'premik_kota_vzvratnega_ogledala_navzgor',
+        down_rm: 'premik_kota_vzvratnega_ogledala_navzdol',
+      },
+      klimatska_naprava: {
+        climate_warmer: 'zviševanje_nastavitve_temperature',
+        climate_colder: 'zniževanje_nastavitve_temperature',
+        fan_stronger: 'zviševanje_moči_pihanja_klimatske_naprave',
+        fan_weaker: 'zniževanje_moči_pihanja_klimatske_naprave',
+      },
+    };
+    return mapping[subTopic]?.[gesture] || null;
+  }
+
+  private handleDrowsinessMessage(subTopic: string, payload: string) {
+    if (subTopic === 'status' && payload === 'Utrujen') {
+      this.isDriverExhausted = true;
+      this.alerts = ['Zaznana utrujenost voznika! Priporočamo odmor.'];
+      this.flashTopIcon('alert', 5000);
+      this.cdr.detectChanges();
+    } else if (subTopic === 'status' && payload === 'Buden') {
+      this.isDriverExhausted = false;
+      this.clearDashboardIcons();
+      this.alerts = [];
+    } else if (subTopic === 'metrics') {
+      console.log(`Drowsiness metrics: ${payload}`);
+    }
+    this.cdr.detectChanges();
+  }
+
+  get volumeBars(): string {
+    return '|'.repeat(Math.floor(this.volumeLevel / 2));
+  }
+  private increaseVolume() {
+    if (this.volumeLevel < 100) {
+      this.volumeLevel += 10;
+    }
+  }
+
+  private decreaseVolume() {
+    if (this.volumeLevel > 0) {
+      this.volumeLevel -= 5;
+    }
+  }
+
+  get currentStation(): RadioStation {
+    return this.stations[this.currentStationIndex];
+  }
+
+  private nextRadioStation() {
+    if (this.currentStationIndex < this.stations.length - 1) {
+      this.currentStationIndex++;
+    }
+  }
+
+  private previousRadioStation() {
+    if (this.currentStationIndex > 0) {
+      this.currentStationIndex--;
+    }
+  }
+
+  private turnOnRadio() {
+    this.radioOn = true;
+  }
+
+  private turnOffRadio() {
+    this.radioOn = false;
+  }
+
+  private increaseFanSpeed() {
+    if (this.fanSpeed < 5) {
+      this.fanSpeed++;
+    }
+  }
+
+  private decreaseFanSpeed() {
+    if (this.fanSpeed > 1) {
+      this.fanSpeed--;
+    }
+  }
+
+  private increaseTemperature() {
+    this.temperature += 0.5;
+  }
+
+  private decreaseTemperature() {
+    this.temperature -= 0.5;
+  }
+
+  getRandomStation(): RadioStation {
+    const randomIndex = Math.floor(Math.random() * this.stations.length);
+    return this.stations[randomIndex];
   }
 
   openModal() {
@@ -222,26 +504,6 @@ export class Dashboard {
   setPanelsTheme(): void {
     this.panelTheme = 'dim';
   }
-  public triggerRandomGesture(): void {
-    this.clearDashboardIcons();
-    this.warnings.length = 0;
-    const randomIndex = Math.floor(Math.random() * this.gestureDataMap.length);
-    const selectedGesture = this.gestureDataMap[randomIndex];
-    const alertMessage = this.translateFunctionalityToAlert(
-      selectedGesture.functionality
-    );
-
-    console.log(
-      'Selected Gesture:\n' +
-        selectedGesture.type +
-        '\nFunction:\n' +
-        selectedGesture.functionality
-    );
-
-    this.alerts.length = 0;
-    this.alerts.push(alertMessage);
-    this.flashTopIcon('alert', 5000);
-  }
 
   private translateFunctionalityToAlert(func: GestureFunction): string {
     const map: Record<GestureFunction, string> = {
@@ -258,29 +520,26 @@ export class Dashboard {
       radio_postaja_prev: 'Preklop na prejšnjo radijsko postajo!',
       radio_postaja_next: 'Preklop na naslednjo radijsko postajo!',
       vklop_radio: 'Vklop radia!',
+      izklop_radio: 'Izklop radia!',
+      zapiranje_vzvratnega_ogledala: 'Zapiranje vzvratnega ogledala!',
+      odpiranje_vzvratnega_ogledala: 'Odpiranje vzvratnega ogledala!',
+      premik_kota_vzvratnega_ogledala_v_levo:
+        'Premik kota vzvratnega ogledala v levo!',
+      premik_kota_vzvratnega_ogledala_v_desno:
+        'Premik kota vzvratnega ogledala v desno!',
+      premik_kota_vzvratnega_ogledala_navzgor:
+        'Premik kota vzvratnega ogledala navzgor!',
+      premik_kota_vzvratnega_ogledala_navzdol:
+        'Premik kota vzvratnega ogledala navzdol!',
+      zviševanje_moči_pihanja_klimatske_naprave:
+        'Zviševanje moči pihanja klimatske naprave!',
+      zniževanje_moči_pihanja_klimatske_naprave:
+        'Zniževanje moči pihanja klimatske naprave!',
+      zviševanje_nastavitve_temperature: 'Zviševanje nastavitve temperature!',
+      zniževanje_nastavitve_temperature: 'Zniževanje nastavitve temperature!',
     };
-
     return map[func];
   }
-
-  // private functionalityHandlers: Record<GestureFunction, () => void> = {
-  //   glasnost_gor: () => this.povecajGlasnost(),
-  //   glasnost_dol: () => this.zmanjsajGlasnost(),
-  //   radio_postaja_prev: () => this.prejsnjaPostaja(),
-  //   radio_postaja_next: () => this.naslednjaPostaja(),
-  //   vklop_radio: () => this.vklopiRadio(),
-  //   nastavi_kot_levo_ogledalo: () => this.nastaviKotLevoOgledalo(),
-  //   nastavi_kot_desno_ogledalo: () => this.nastaviKotDesnoOgledalo(),
-
-  //   odpri_levo_okno_spredaj: () => {},
-  //   zapri_levo_okno_spredaj: () => {},
-  //   odpri_desno_okno_spredaj: () => {},
-  //   zapri_desno_okno_spredaj: () => {},
-  //   odpri_levo_okno_zadaj: () => {},
-  //   zapri_levo_okno_zadaj: () => {},
-  //   odpri_desno_okno_zadaj: () => {},
-  //   zapri_desno_okno_zadaj: () => {},
-  // };
 
   private showIconInSlot(iconId: string, slot: 'top' | 'bottom') {
     const validIds = slot === 'top' ? this.topSlotIcons : this.bottomSlotIcons;
@@ -324,23 +583,5 @@ export class Dashboard {
         this.showWarningIcon = false;
       }, duration);
     }
-  }
-
-  constructor(private mqttService: MqttService) {
-    this.mqttService.connect(); // vzpostavi povezavo takoj
-  }
-  public triggerUtrujenostDemo(): void {
-    const mockPayload = {
-      model: 'model2',
-      status: 'drowsy',
-      message: 'Utrujenost zaznana – priporočamo odmor!',
-      timestamp: new Date().toISOString(),
-    };
-
-    // Prikaži sporočilo na zaslonu
-    this.alerts = ['Zaznana utrujenost voznika! Priporočamo odmor.'];
-    this.flashTopIcon('alert', 5000);
-
-    this.mqttService.publish('model/utrujenost', mockPayload);
   }
 }
