@@ -342,6 +342,7 @@ export class Dashboard implements OnInit, OnDestroy {
     } else {
       console.warn(`Invalid gesture: ${gesture} for topic ${subTopic}`);
     }
+    this.cdr.detectChanges();
   }
 
   private parsePayloadLabel(payload: string): string {
