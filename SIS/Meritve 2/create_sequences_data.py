@@ -12,7 +12,7 @@ hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_c
 cap = cv2.VideoCapture(0)
 
 # Settings
-DATA_DIR = 'Radio'
+DATA_DIR = 'klimatske_naprave'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
