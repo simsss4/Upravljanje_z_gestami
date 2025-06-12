@@ -60,7 +60,7 @@ def update_metrics():
     root.after(5000, update_metrics)  # Schedule updates every 5 seconds
 
 #172.25.70.243
-zeroTierHostIP = "10.147.20.65";
+zeroTierHostIP = "10.147.20.235";
 
 # Initialize MQTT client
 mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)

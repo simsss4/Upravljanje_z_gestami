@@ -17,7 +17,7 @@ export class MqttService {
   }
 
   connect() {
-    this.client = mqtt.connect('mqtt://10.147.20.65:9001', {
+    this.client = mqtt.connect('ws://10.147.20.235:9001', {
       reconnectPeriod: this.reconnectDelay,
       clientId: `angular_client_${Math.random().toString(16).slice(3)}`,
     });

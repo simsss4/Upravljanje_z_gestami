@@ -122,7 +122,7 @@ def simulate_car_behavior(time_label, weather_label):
     return actions
 
 #172.25.70.243
-zeroTierHostIP = "10.147.20.65";
+zeroTierHostIP = "10.147.20.235";
 
 # MQTT Setup
 def setup_mqtt():

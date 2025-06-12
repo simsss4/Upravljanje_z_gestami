@@ -22,7 +22,7 @@ from tkinter import ttk
 start_http_server(8000, addr='0.0.0.0')
 
 #172.25.70.243
-zeroTierHostIP = "10.147.20.65";
+zeroTierHostIP = "10.147.20.235";
 
 # Metrics
 mqtt_messages_per_sec = Counter('mqtt_messages_per_second', 'MQTT messages sent or received per second')
