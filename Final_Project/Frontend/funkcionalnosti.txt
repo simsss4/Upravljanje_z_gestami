@@ -1,0 +1,42 @@
+Model 1
+- zapiranje zadnjega levega okna
+- zapiranje zadnjega desnega okna
+- zapiranje sprednjega levega okna
+- zapiranje sprednjega desnega okna
+- odpiranje zadnjega levega okna
+- odpiranje zadnjega desnega okna
+- odpiranje sprednjega levega okna
+- odpiranje sprednjega desnega okna
+
+- zapiranje vzvratnega ogledala
+- odpiranje vzvratnega ogledala 
+- premik kota vzvratnega ogledala v levo
+- premik kota vzvratnega ogledala v desno
+- premik kota vzvratnega ogledala navzgor
+- premik kota vzvratnega ogledala v navzdol
+
+- zviševanje glasnosti radia
+- zniževanje glasnosti radia
+- menjava kanala nazaj
+- menjava kanala naprej
+- vklop radia
+- izklop radia
+
+- zviševanje moči pihanja klimatske naprave
+- zniževanje moči pihanja klimatske naprave
+- zviševanje nastavitve temperature
+- zniževanje nastavitve temperature
+
+Model 2
+- Zanana utrujenost: TRUE/FALSE
+
+Model 3
+- Zaznan čas dneva: Dan/Noč
+- Zaznano vreme: Jasno/Deževno/Megleno
+
+
+PLAN DELA:
+- dodati lučke na dashbaord, za funkcije Modela 3 + ikone za warning/alert
+- dodati mock podatke(samo rezultat, mapiran v funkcionalnost) za ostale modele
+- dodati funkcionalnosti ostalih modelov
+- podpreti MQTT

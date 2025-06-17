@@ -1,0 +1,54 @@
+<div class=sistem-body>
+    <mat-tab-group>
+        <mat-tab label="Obremenitev CPE">
+            <h2>Obremenitev CPE za MQTT aplikacijo</h2>
+            <div class="CPE">
+                <img src="diagnostika-sistema-slike/cpe_mqtt.png" alt="graf_zmede_radio" />
+                <p>
+                    Ta graf prikazuje simulirano obremenitev centralne procesne enote, ki se uporablja za obdelavo MQTT
+                    sporočil v Docker okolju. Meritve prikazujejo nihanja skozi čas med različnimi testi.
+                </p>
+
+            </div>
+        </mat-tab>
+        <mat-tab label="Poraba pomnilnika">
+            <h2>Poraba pomnilnika za MQTT aplikacijo</h2>
+            <div class="RAM">
+                <img src="diagnostika-sistema-slike/ram_mqtt.png" alt="graf_zmede_radio" />
+                <p>
+                    Predstavljen je potek porabe pomnilnika aplikacije MQTT znotraj simuliranega sistema. Namen grafa je
+                    prikazati stabilnost in učinkovitost porabe med obremenitvami.
+                </p>
+            </div>
+        </mat-tab>
+        <mat-tab label="Število MQTT sporočil">
+            <h2>Število MQTT sporočil (vseh vrst)</h2>
+            <div class="all_MQTT_messages">
+                <img src="diagnostika-sistema-slike/mqtt_messages_all.png" alt="graf_zmede_radio" />
+                <p>
+                    Vizualiziran je skupen pretok MQTT sporočil po različnih temah. Prikazani so izmišljeni podatki, ki
+                    ponazarjajo, kako sistem deluje pod različnimi stopnjami obremenitve.
+                </p>
+            </div>
+        </mat-tab>
+        <mat-tab label="Obdelana sporočila">
+            <h2>Obdelana sporočila z algoritmom</h2>
+            <div class="msg_alg">
+                <img src="diagnostika-sistema-slike/processed_images.png" alt="graf_zmede_radio" />
+                <p>
+                    Tukaj je prikazano, koliko vhodnih slik (npr. iz kamere) uspe algoritmična komponenta obdelati v
+                    posameznem časovnem intervalu. To vključuje zaznavo utrujenosti, gest in vremenskih razmer.
+                </p>
+            </div>
+        </mat-tab>
+        <mat-tab label="Obremenitev CPE in pomnilnika">
+            <h2>Obremenitev CPE in pomnilnika za algoritem</h2>
+            <div class="CPE_RAM">
+                <img src="diagnostika-sistema-slike/cpe_ram_algo.png" alt="graf_zmede_radio" />
+                <p>
+                    Kombinirani prikaz obremenitve procesorja in porabe pomnilnika za lasten model. Graf ponazarja, kako
+                    učinkovit je algoritem v realnem času.
+                </p>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
